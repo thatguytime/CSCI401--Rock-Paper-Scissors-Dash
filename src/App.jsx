@@ -10,7 +10,7 @@ function App() {
     <>
       <h1>Rock Paper Scissor Dash</h1>
       <div>
-        <a href='https://github.com/joannaromben/CSCI401--Rock-Paper-Scissors-Dash' target='_blank'>
+        <a href='https://github.com/paulcostanza/CSCI401--Rock-Paper-Scissors-Dash' target='_blank'>
           <button>
             <img id="github-logo" src={githubLogo} alt="github-logo" />
           </button>
