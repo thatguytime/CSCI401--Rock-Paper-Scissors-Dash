@@ -7,21 +7,70 @@ To view our current website **[click here](https://rockpaperscissorsdash.com/)**
 ## Prerequisite
 
 Make sure to have:
-- React: the frontend library that breaks up the code into *components*, allowing us to break the project up a lot easier. 
-- Vite: a build tool that helpsthe application run quickly and efficiently.
+- **Git**: version control for our project. Will track and save what you do. Required to copy (pull) and add (push) code to this repository. 
+
+```bash
+git --version
+```
+
+Download on macOS:
+```bash
+brew install git
+```
+
+Download on Linux (Ubuntu):
+```bash
+sudo apt update
+sudo apt install git
+```
+
+- **React**: the frontend library that breaks up the code into *components*, allowing us to break the project up a lot easier. 
+
+React depends on <code>Node.js</code> and <code>npm</code> (Node Package Manager), which both are needed:
+
+```bash
+node -v
+npm -v
+```
+
+Download on macOS:
+```bash 
+brew install node
+```
+
+Download on Linux (Ubuntu):
+```bash
+sudo apt update
+sudo apt install nodejs
+sudo apt install npm
+```
+
+- **Vite**: a build tool that helps the application run quickly and efficiently. It is part of the <code>npm</code>, and does not needs to be downloaded. 
+
+*Be sure* to check if the installation is successful by loading up a new terminal and checking the version. 
+
 
 ## How to download the code
 
-1. <code>fork</code> this repository (repo)
-2. clone the repo to your working environment
+*Cloning a repository*
 
-To run from your machine while coding:
+Open up terminal (change to the directory you want to save to, or not) and type:
+
+```bash
+git clone https://github.com/paulcostanza/CSCI401--Rock-Paper-Scissors-Dash
+```
+
+Change into the folder and install *dependencies*. 
+
+#### To run from your machine while coding:
 
 ```bash
 npm run dev
 ```
 
-To trigger GitHub WorkFlow:
+This will open up the webpage in a browser that will update in real time with your code. 
+
+#### To trigger GitHub WorkFlow:
 
 ```bash
 npm run build
@@ -35,7 +84,7 @@ Check the current status of what git has saved or not saved
 git status
 ```
 
-Add what you would like to *commit*
+#### Add what you would like to *commit*
 
 ```bash
 git add .
@@ -43,12 +92,12 @@ git add .
 
 The <code>.</code> represents all files. If you want to only *commit* specific files, you can list them individually. 
 
-Now commit
+#### Now commit
 ```bash
 git commit -m "whatever message you want to add to keep track of the commit"
 ```
 
-And add it to the project:
+#### And add it to the project:
 
 ```bash
 git push origin main
@@ -58,4 +107,4 @@ git push origin main
 
 # To Do
 
-- enable: **Enforce HTTPS** under <code>Settings > Pages</code> when a certificate has not yet been issued for your domain
+- the project
