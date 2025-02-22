@@ -87,9 +87,9 @@ export default function TechnicalDesign() {
                 <h3 id="version-control--cicd">Version Control &amp; CI/CD</h3>
 
                 <ul>
-                    <li>Branching Strategy: Use <strong>main</strong> for stable releases and feature branches (feature/game-mechanics).</li>
-                    <li>Git Commit Messages: Use message format (<code>feat: add score tracking</code>).</li>
-                    <li>Deployment:
+                    <li><strong>Branching Strategy</strong>: Use <strong>main</strong> for stable releases and feature branches (feature/game-mechanics).</li>
+                    <li><strong>Git Commit Messages</strong>: Use message format (<code>feat: add score tracking</code>).</li>
+                    <li><strong>Deployment</strong>:
                         <ul>
                             <li>The site is deployed via GitHub Pages</li>
                             <li>GitHub Actions is set up for CI/CD</li>

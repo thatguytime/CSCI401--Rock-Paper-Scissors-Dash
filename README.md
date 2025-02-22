@@ -105,6 +105,23 @@ git push origin main
 
 ---
 
+# Database
+
+#### Setting up Express + MongoDB
+
+High-level overview of what to do:
+
+1. Set up MongoDB
+2. Set up Express server
+3. Create a Schema for Users
+4. Create Routes for User Operations
+5. Connecting the Express Routes to the Server
+6. Update User Data
+7. Connect the Front-End
+8. Deploy
+
+Need to look into security, *especially* with password field in database
+
 # To Do
 
 - the project
