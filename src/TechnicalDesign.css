@@ -1,0 +1,15 @@
+.technical-design-page {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.technical-design-page>p,
+.technical-design-page>.center,
+.technical-design-page>ul,
+.technical-design-page>ul>li {
+    text-align: left;
+}
+
+.technical-design-page>Link:hover {
+    background: #0056b3;
+}

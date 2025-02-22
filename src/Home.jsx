@@ -18,7 +18,7 @@ export default function Home() {
                 </a>
 
                 <p>
-                    Checkout our current <Link to="/technical-design">code structure document</Link> page where we include folder structure, naming conventions, etc.
+                    Check out our current <Link to="/technical-design">technical design document</Link> page, including folder structure, naming conventions, etc.
                 </p>
             </div>
             <p className="read-the-docs">
