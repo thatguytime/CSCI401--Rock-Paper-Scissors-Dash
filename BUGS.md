@@ -3,7 +3,7 @@ These are not major things that prevent the game from working, but are little ti
 
 ## deployment
 
-- when deploying using <code>npm run deploy</code> the website name disconnects within settings>github pages...fix that!
+- when deploying using <code>npm run deploy</code> the website name disconnects within settings->github pages...fix that!
 
 ## mobile
 

@@ -20,6 +20,10 @@ export default function Home() {
                 <p>
                     Check out our current <Link to="/technical-design">technical design document</Link> page, including folder structure, naming conventions, etc.
                 </p>
+
+                <p>
+                    Current <Link to="/main-menu">Main menu</Link>
+                </p>
             </div>
             <p className="read-the-docs">
 
