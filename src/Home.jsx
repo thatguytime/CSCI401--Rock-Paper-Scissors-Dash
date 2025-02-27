@@ -21,9 +21,14 @@ export default function Home() {
                     Check out our current <Link to="/technical-design">technical design document</Link> page, including folder structure, naming conventions, etc.
                 </p>
 
-                <p>
-                    Current <Link to="/main-menu">Main menu</Link>
-                </p>
+                <div className="under-construction universal-border">
+                    <h3>Current Pages Under Construction</h3>
+                    <ul>
+                        <li><Link to="/main-menu">Main Menu</Link></li>
+                        <li><Link to="/login-screen">Login Screen</Link></li>
+                    </ul>
+                </div>
+
             </div>
             <p className="read-the-docs">
 

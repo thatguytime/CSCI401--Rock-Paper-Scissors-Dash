@@ -5,6 +5,12 @@ body {
     color: #fff;
 }
 
+/*********************************** H O M E . J S X ***********************************/
+
+.under-construction>ul>li {
+    list-style-type: none;
+}
+
 /************************************** P A G E S **************************************/
 /********************************** A L L | P A G E S **********************************/
 
@@ -15,9 +21,7 @@ body {
     font-style: normal;
 }
 
-/********************************** M A I N | M E N U **********************************/
-
-.main-menu-border {
+.universal-border {
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -28,6 +32,8 @@ body {
         rgba(255, 255, 0, 0.35) 0px -2px 6px 0px inset;
     text-transform: uppercase;
 }
+
+/********************************** M A I N | M E N U **********************************/
 
 .main-menu-button {
     box-sizing: border-box;
@@ -61,7 +67,7 @@ body {
 }
 
 /* 'a' element is detected instead of 'Link' element */
-.main-menu-border>a {
+.universal-border>a {
     text-decoration: none;
 }
 
@@ -92,7 +98,7 @@ body {
         margin: 10px auto;
     }
 
-    .main-menu-button:hover {
+    .universal-button:hover {
         transform: scale(1.2);
     }
 }

@@ -4,6 +4,7 @@ import './temp.css'
 import './Styles/main.css'
 import Home from './Home'
 import MainMenu from './pages/MainMenu'
+import LoginScreen from './pages/LoginScreen'
 import TechnicalDesign from './TechnicalDesign'
 import {
   Routes,
@@ -37,6 +38,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/technical-design" element={<TechnicalDesign />} />
         <Route path='/main-menu' element={<MainMenu />} />
+        <Route path='/login-screen' element={<LoginScreen />} />
       </Routes>
     </>
   )
