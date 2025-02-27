@@ -8,3 +8,43 @@
 .technical-design-page>Link:hover {
     background: #0056b3;
 }
+
+.technical-design-page {
+    width: 100%;
+    max-width: 800px;
+}
+
+.technical-design-page>h3 {
+    text-align: left;
+}
+
+.folder-layout {
+    max-width: 610px;
+    text-align: center;
+}
+
+.center {
+    margin: auto;
+}
+
+@media (max-width: 680px) {
+    .technical-design-page>h3 {
+        text-align: center;
+    }
+
+    .folder-layout {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 540px) {
+    .folder-layout {
+        font-size: 0.6em;
+    }
+}
+
+@media (max-width: 425px) {
+    .folder-layout {
+        font-size: 0.4em;
+    }
+}

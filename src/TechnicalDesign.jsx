@@ -8,30 +8,30 @@ export default function TechnicalDesign() {
     const folderStructure = `rock-paper-scissors-dash/
 │── .github
 │   │── workflows
-│       │── deploy.yml      # Deploy via GitHub Pages
-│── backend/                # Express & MongoDB API
-│   │── server.js           # Main API server
-│   │── models/             # Database models
-│   │── routes/             # API endpoints
-│   │── config/             # Database connection
-│   │── .env                # Secrets (MongoDB URI)
-│── dist/                   # Final prodution build is generated
-│── public/                 # Static assets (images & sounds)
+│       │── deploy.yml   # Deploy via GitHub Pages
+│── backend/             # Express & MongoDB API
+│   │── server.js        # Main API server
+│   │── models/          # Database models
+│   │── routes/          # API endpoints
+│   │── config/          # Database connection
+│   │── .env             # Secrets (MongoDB URI)
+│── dist/                # Final prodution build is generated
+│── public/              # Static assets (images & sounds)
 │── src/
-│   │── assets/             # Game assets (sprites & audio)
-│   │── components/         # Reusable UI components
-│   │── game/               # Game logic & mechanics
-│   │── hooks/              # Custom React hooks
-│   │── pages/              # Page-level components
-│   │── styles/             # Global & component-specific styles
-│   │── utils/              # Utility functions
-│   │── App.jsx             # Main React component
-│   │── main.jsx            # Entry point for React
-│── .gitignore              # Files to be ignored by Git
-│── index.html              # Main HTML file
-│── package.json            # Project dependencies & scripts
-│── README.md               # Project documentation
-│── vite.config.js          # Vite configuration`
+│   │── assets/          # Game assets (sprites & audio)
+│   │── components/      # Reusable UI components
+│   │── game/            # Game logic & mechanics
+│   │── hooks/           # Custom React hooks
+│   │── pages/           # Page-level components
+│   │── styles/          # Global & component-specific styles
+│   │── utils/           # Utility functions
+│   │── App.jsx          # Main React component
+│   │── main.jsx         # Entry point for React
+│── .gitignore           # Files to be ignored by Git
+│── index.html           # Main HTML file
+│── package.json         # Project dependencies & scripts
+│── README.md            # Project documentation
+│── vite.config.js       # Vite configuration`
     return (
         <>
             <div className="technical-design-page">
@@ -49,7 +49,7 @@ export default function TechnicalDesign() {
 
                 <p>Our project follows a React, Vite, &amp; MongoDB folder structure with some slight modifications:</p>
 
-                <div className="center">
+                <div className="center folder-layout">
                     <SyntaxHighlighter language="bash" style={tomorrow} className="center">
                         {folderStructure}
                     </SyntaxHighlighter>
