@@ -2,9 +2,11 @@
 
 To view our current website **[click here](https://rockpaperscissorsdash.com/)**
 
+🕹️ 👻 👾 👻 🚫 🚧 ⚠️ 🔥 💀 🚨 👷‍♂️ 🏗️ 🔧 
+
 ---
 
-## Prerequisite
+## Prerequisites
 
 Make sure to have:
 - **Git**: version control for our project. Will track and save what you do. Required to copy (pull) and add (push) code to this repository. 

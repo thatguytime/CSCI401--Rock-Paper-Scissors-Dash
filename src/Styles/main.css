@@ -7,8 +7,44 @@ body {
 
 /*********************************** H O M E . J S X ***********************************/
 
+.under-construction>ul {
+    width: 30%;
+    margin: auto;
+}
+
 .under-construction>ul>li {
-    list-style-type: none;
+    /* font-size: 3em;
+    padding-top: 80px; */
+    list-style-type: "🕹️";
+    text-align: left;
+    font-size: 2em;
+}
+
+.under-construction>ul>li>a {
+    color: #fff;
+    text-decoration: none;
+}
+
+@media (max-width: 885px) {
+    .under-construction>ul {
+        width: 40%;
+    }
+}
+
+@media (max-width: 680px) {
+    .under-construction>ul {
+        width: 50%;
+    }
+
+    .under-construction>ul>li {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 500px) {
+    .under-construction>ul>li {
+        font-size: 1em;
+    }
 }
 
 /************************************** P A G E S **************************************/
@@ -37,22 +73,21 @@ body {
 
 .main-menu-button {
     box-sizing: border-box;
+    border: 6px solid #1919A6;
     border-radius: 20px;
-    cursor: pointer;
     text-transform: uppercase;
-    display: block;
+    text-decoration: none;
     text-align: center;
     font-size: 2em;
-    border: 6px solid #1919A6;
-    transition: 1s ease-out;
     margin: 20px;
-    width: 50%;
     margin: 20px auto;
     padding: 7px;
-
-    text-decoration: none;
+    width: 50%;
+    display: block;
     color: #fff;
     background-color: black;
+    cursor: pointer;
+    transition: 1s ease-out;
 }
 
 /* Hover effect */
@@ -100,5 +135,30 @@ body {
 
     .universal-button:hover {
         transform: scale(1.2);
+    }
+}
+
+/******************************* L O G I N | S C R E E N *******************************/
+
+.inputField {
+    display: flex;
+    text-align: center;
+    margin: 10px;
+    justify-content: center;
+}
+
+.submit-form {
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+@media (max-width: 575px) {
+    .inputField {
+        flex-direction: column;
+    }
+
+    .inputField>input {
+        width: 280px;
+        margin: auto;
     }
 }
