@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react"
 import runCanvas from '../maps/levels.js'
+import { Link } from 'react-router-dom'
 
 export default function Canvas() {
 
@@ -11,8 +12,9 @@ export default function Canvas() {
     }, [])
 
     return (
-        <div>
-            <canvas id="myCanvas"></canvas>
-        </div>
+        <>
+            <canvas id="myCanvas" width="650" height="600"></canvas>
+            <Link to="/">Back to previous page</Link>
+        </>
     )
 }

@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import './App.css'
-import './temp.css'
 import './Styles/main.css'
 import Home from './Home'
 import MainMenu from './pages/MainMenu'
@@ -12,7 +10,7 @@ import {
 } from "react-router-dom"
 import Canvas from './components/Canvas'
 
-// for temp backgroun
+// for temp background
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 

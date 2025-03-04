@@ -97,7 +97,6 @@ function runCanvas() {
 
   newMap.forEach(b => {
     b.drawBrick()
-    console.log(b)
   })
 }
 

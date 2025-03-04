@@ -18,7 +18,10 @@ body {
     margin: 0;
     display: flex;
     place-items: center;
+
+    /* This might be messing up phone responsivness */
     min-width: 320px;
+
     min-height: 100vh;
     background-color: #202020;
     color: #fff;
@@ -53,6 +56,21 @@ h1 {
 
 * {
     border: none;
+}
+
+/* github logo */
+img {
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 30%;
+    transition: ease-in-out 0.5s;
+}
+
+img:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: ease-in-out 0.5s;
 }
 
 /*********************************** H O M E . J S X ***********************************/
@@ -211,4 +229,18 @@ h1 {
         width: 280px;
         margin: auto;
     }
+}
+
+/********************************* C A N V A S . J S X *********************************/
+
+/* #myCanvas {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    overflow: hidden;
+} */
+
+canvas {
+    margin: 0;
+    padding: 0;
 }
