@@ -10,6 +10,7 @@ import {
   Routes,
   Route
 } from "react-router-dom"
+import Canvas from './components/Canvas'
 
 // for temp backgroun
 import { useLocation } from 'react-router-dom';
@@ -39,6 +40,7 @@ function App() {
         <Route path="/technical-design" element={<TechnicalDesign />} />
         <Route path='/main-menu' element={<MainMenu />} />
         <Route path='/login-screen' element={<LoginScreen />} />
+        <Route path='/canvas' element={<Canvas />} />
       </Routes>
     </>
   )
