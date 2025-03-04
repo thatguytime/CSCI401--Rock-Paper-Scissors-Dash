@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom'
 
 export default function LoginScreen() {
-    function handleSubmit(event) {
+    function handleSubmit(e) {
 
         //prevents page from reloading when submitting form
-        event.preventDefault()
+        e.preventDefault()
         console.log("Form submitted!")
+
+        const formData = new FormData(e.currentTarget)
+        const username = formData.get("name")
+        const password = formData.get("password")
+        const email = formData.get("email")
     }
 
     return (
