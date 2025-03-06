@@ -58,21 +58,6 @@ h1 {
     border: none;
 }
 
-/* github logo */
-img {
-    width: 100px;
-    padding: 10px;
-    border: none;
-    border-radius: 30%;
-    transition: ease-in-out 0.5s;
-}
-
-img:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-    transition: ease-in-out 0.5s;
-}
-
 /*********************************** H O M E . J S X ***********************************/
 
 .under-construction>ul {
@@ -91,6 +76,21 @@ img:hover {
 .under-construction>ul>li>a {
     color: #fff;
     text-decoration: none;
+}
+
+/* github logo */
+#github-logo {
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 30%;
+    transition: ease-in-out 0.5s;
+}
+
+#github-logo:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: ease-in-out 0.5s;
 }
 
 @media (max-width: 885px) {

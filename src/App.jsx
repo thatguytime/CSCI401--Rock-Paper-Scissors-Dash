@@ -8,7 +8,7 @@ import {
   Routes,
   Route
 } from "react-router-dom"
-import Canvas from './components/Canvas'
+import Canvas from './pages/Canvas'
 
 // for temp background
 import { useLocation } from 'react-router-dom';
