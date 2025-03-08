@@ -1,41 +1,17 @@
- //Calling showTime function at every second
-setInterval(showTime, 1000);
+ var countDownTime = 10; // 5 seconds
 
-// Defining showTime funcion
-function showTime() {
-    // Getting current time and date
-    let time = new Date();
-    let hour = time.getHours();
-    let min = time.getMinutes();
-    let sec = time.getSeconds();
-    am_pm = "AM";
+ var timerElement = document.getElementById("timer"); //display it
 
-    // Setting time for 12 Hrs format
-    if (hour >= 12) {
-        if (hour > 12) hour -= 12;
-        am_pm = "PM";
-    } else if (hour == 0) {
-        hr = 12;
-        am_pm = "AM";
+ function updateTimer(){//update
+    timerElement.innerHTML = countDownTime; //show time left
+
+    if (countDownTime <= 0){ //check if is time's up
+        clearInterval(timerInterval); // to stop
+        timerElement.innerHTML = "Time's up!";
+    } else {
+        countDownTime--; //do down
     }
+ }
+var timerInterval = setInterval(updateTimer, 10000); //update every 1000 millisec
 
-    hour =
-        hour < 10 ? "0" + hour : hour;
-    min = min < 10 ? "0" + min : min;
-    sec = sec < 10 ? "0" + sec : sec;
-
-    let currentTime =
-        hour +
-        ":" +
-        min +
-        ":" +
-        sec +
-        am_pm;
-
-    // Displaying the time
-    document.getElementById(
-        "clock"
-    ).innerHTML = currentTime;
-}
-
-showTime();
+updateTimer();//initialize the timer
