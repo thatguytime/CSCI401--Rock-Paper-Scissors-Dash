@@ -55,10 +55,23 @@ function runCanvas() {
     },
     d: {
       pressed: false
+    },
+    ArrowDown: {
+      pressed: false
+    },
+    ArrowLeft: {
+      pressed: false
+    },
+    ArrowUp: {
+      pressed: false
+    },
+    ArrowRight: {
+      pressed: false
     }
   }
 
   addEventListener('keydown', ({ key }) => {
+    console.log(key)
     if (key === 'w') {
       currentlyPressedKeys.w.pressed = true
       lastKeyPressed = 'w'
@@ -71,6 +84,18 @@ function runCanvas() {
     } else if (key === 'd') {
       currentlyPressedKeys.d.pressed = true
       lastKeyPressed = 'd'
+    } else if (key === 'ArrowDown') {
+      currentlyPressedKeys.ArrowDown.pressed = true
+      lastKeyPressed = 'ArrowDown'
+    } else if (key === 'ArrowUp') {
+      currentlyPressedKeys.ArrowUp.pressed = true
+      lastKeyPressed = 'ArrowUp'
+    } else if (key === 'ArrowLeft') {
+      currentlyPressedKeys.ArrowLeft.pressed = true
+      lastKeyPressed = 'ArrowLeft'
+    } else if (key === 'ArrowRight') {
+      currentlyPressedKeys.ArrowRight.pressed = true
+      lastKeyPressed = 'ArrowRight'
     }
   })
 
@@ -83,6 +108,14 @@ function runCanvas() {
       currentlyPressedKeys.a.pressed = false
     } else if (key === 'd') {
       currentlyPressedKeys.d.pressed = false
+    } else if (key === 'ArrowDown') {
+      currentlyPressedKeys.ArrowDown.pressed = false
+    } else if (key === 'ArrowUp') {
+      currentlyPressedKeys.ArrowUp.pressed = false
+    } else if (key === 'ArrowLeft') {
+      currentlyPressedKeys.ArrowLeft.pressed = false
+    } else if (key === 'ArrowRight') {
+      currentlyPressedKeys.ArrowRight.pressed = false
     }
   })
 
@@ -110,7 +143,16 @@ function runCanvas() {
       smiles.velocity.x = -5
     } else if (currentlyPressedKeys.d.pressed && lastKeyPressed === 'd') {
       smiles.velocity.x = 5
+    } else if (currentlyPressedKeys.ArrowUp.pressed && lastKeyPressed === 'ArrowUp') {
+      smiles.velocity.y = -5
+    } else if (currentlyPressedKeys.ArrowDown.pressed && lastKeyPressed === 'ArrowDown') {
+      smiles.velocity.y = 5
+    } else if (currentlyPressedKeys.ArrowLeft.pressed && lastKeyPressed === 'ArrowLeft') {
+      smiles.velocity.x = -5
+    } else if (currentlyPressedKeys.ArrowRight.pressed && lastKeyPressed === 'ArrowRight') {
+      smiles.velocity.x = 5
     }
+
 
   }
 
