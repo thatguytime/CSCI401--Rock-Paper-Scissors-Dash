@@ -6,20 +6,26 @@ function runCanvas() {
   const canvas = document.getElementById("myCanvas");
   const ctx = canvas.getContext("2d");  /// Store the 2D rendering context // context
 
-  const mainCharacter = new Image()
-  mainCharacter.src = smileImg
-
+  const characterRadius = 15
   class Character {
     constructor({ position, velocity }) {
       this.position = position
       this.velocity = velocity
-      this.width = 40
+      this.radius = 15
     }
 
     draw() {
-      if (mainCharacter.complete) {
-        ctx.drawImage(mainCharacter, this.position.x, this.position.y, 40, 40)
-      }
+      ctx.beginPath()
+      ctx.arc(
+        this.position.x,
+        this.position.y,
+        this.radius,
+        0,
+        Math.PI * 2,
+      )
+      ctx.fillStyle = 'yellow'
+      ctx.fill()
+      ctx.closePath()
     }
 
     move() {
@@ -31,8 +37,8 @@ function runCanvas() {
 
   const smiles = new Character({
     position: {
-      x: 40,
-      y: 40
+      x: 40 + characterRadius + characterRadius / 2,
+      y: 40 + characterRadius + characterRadius / 2
     },
     velocity: {
       x: 0,
@@ -71,7 +77,6 @@ function runCanvas() {
   }
 
   addEventListener('keydown', ({ key }) => {
-    console.log(key)
     if (key === 'w') {
       currentlyPressedKeys.w.pressed = true
       lastKeyPressed = 'w'
@@ -126,15 +131,57 @@ function runCanvas() {
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    newMap.forEach(b => {
-      b.drawBrick()
+    let wasMovingUp = false
+    newMap.forEach(brick => {
+      brick.drawBrick()
+
+      // here is where we check if character is hitting the wall
+      // comapre the sides of the character with the sides of the wall
+      // if (smiles.position <= b.position.y)
+      // console.log(smiles.position.y) // 62.5
+      // console.log(b.y + b.height)
+
+      // Check if the character is about to collide with the brick from any direction
+      function circleCollidesWithBrick({ circle, rectangle }) {
+        const padding = 2;
+        return (
+          circle.position.y - circle.radius + circle.velocity.y <= rectangle.y + rectangle.height + padding &&
+          circle.position.x + circle.radius + circle.velocity.x >= rectangle.x - padding &&
+          circle.position.y + circle.radius + circle.velocity.y >= rectangle.y - padding &&
+          circle.position.x - circle.radius + circle.velocity.x <= rectangle.x + rectangle.width + padding
+        );
+      }
+
+      // Check for collision based on movement direction
+      if (
+        (smiles.velocity.y < 0 && // moving up
+          smiles.position.y - smiles.radius + smiles.velocity.y <= brick.y + brick.height &&
+          smiles.position.y - smiles.radius + smiles.velocity.y > brick.y) ||
+        (smiles.velocity.y > 0 && // moving down
+          smiles.position.y + smiles.radius + smiles.velocity.y >= brick.y &&
+          smiles.position.y + smiles.radius + smiles.velocity.y < brick.y + brick.height) ||
+        (smiles.velocity.x < 0 && // moving left
+          smiles.position.x - smiles.radius + smiles.velocity.x <= brick.x + brick.width &&
+          smiles.position.x - smiles.radius + smiles.velocity.x > brick.x) ||
+        (smiles.velocity.x > 0 && // moving right
+          smiles.position.x + smiles.radius + smiles.velocity.x >= brick.x &&
+          smiles.position.x + smiles.radius + smiles.velocity.x < brick.x + brick.width)
+      ) {
+        if (circleCollidesWithBrick({ circle: smiles, rectangle: brick })) {
+          console.log("hit");
+          smiles.velocity.x = 0;
+          smiles.velocity.y = 0;
+        }
+      }
+
+
     })
     smiles.move()
 
     // loop will always make character stop!
-    smiles.velocity.x = 0
-    smiles.velocity.y = 0
+    //where the velocity statements came from
 
+    // makes character move depending on the key that is pressed
     if (currentlyPressedKeys.w.pressed && lastKeyPressed === 'w') {
       smiles.velocity.y = -5
     } else if (currentlyPressedKeys.s.pressed && lastKeyPressed === 's') {
@@ -159,6 +206,7 @@ function runCanvas() {
   animate()
 
 
+  // creates each brick, or wall, for the map
   let brickSize = 40
   class Brick {
     constructor(x, y) {
@@ -182,7 +230,7 @@ function runCanvas() {
   mapBrick[0].forEach((row, i) => {
     row.forEach((column, j) => {
 
-      // wall
+      // wall == *, in the array
       if (column == "*") {
         let testBrick = new Brick(brickSize * j, brickSize * i)
         newMap.push(testBrick)
