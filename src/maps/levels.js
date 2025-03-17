@@ -124,15 +124,65 @@ function runCanvas() {
     }
   })
 
-  let newMap = []
+  let border = []
 
   function animate() {
 
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    let wasMovingUp = false
-    newMap.forEach(brick => {
+    // makes character move depending on the key that is pressed
+    if (currentlyPressedKeys.w.pressed && lastKeyPressed === 'w' ||
+      currentlyPressedKeys.ArrowUp.pressed && lastKeyPressed === 'ArrowUp'
+    ) {
+      for (let i = 0; i < border.length; i++) {
+        const brickPart = border[i]
+        if (characterMeetsBrick({ circle: { ...smiles, velocity: { x: 0, y: -5 } }, rectangle: brickPart })) {
+          smiles.velocity.y = 0;
+          break
+        } else {
+          smiles.velocity.y = -5
+        }
+      }
+    } else if (currentlyPressedKeys.s.pressed && lastKeyPressed === 's' ||
+      currentlyPressedKeys.ArrowDown.pressed && lastKeyPressed === 'ArrowDown'
+    ) {
+      for (let i = 0; i < border.length; i++) {
+        const brickPart = border[i]
+        if (characterMeetsBrick({ circle: { ...smiles, velocity: { x: 0, y: 5 } }, rectangle: brickPart })) {
+          smiles.velocity.y = 0
+          break
+        } else {
+          smiles.velocity.y = 5
+        }
+      }
+    } else if (currentlyPressedKeys.a.pressed && lastKeyPressed === 'a' ||
+      currentlyPressedKeys.ArrowLeft.pressed && lastKeyPressed === 'ArrowLeft'
+    ) {
+      for (let i = 0; i < border.length; i++) {
+        const brickPart = border[i]
+        if (characterMeetsBrick({ circle: { ...smiles, velocity: { x: -5, y: 0 } }, rectangle: brickPart })) {
+          smiles.velocity.x = 0
+          break
+        } else {
+          smiles.velocity.x = -5
+        }
+      }
+    } else if (currentlyPressedKeys.d.pressed && lastKeyPressed === 'd' ||
+      currentlyPressedKeys.ArrowRight.pressed && lastKeyPressed === 'ArrowRight'
+    ) {
+      for (let i = 0; i < border.length; i++) {
+        const brickPart = border[i]
+        if (characterMeetsBrick({ circle: { ...smiles, velocity: { x: 5, y: 0 } }, rectangle: brickPart })) {
+          smiles.velocity.x = 0
+          break
+        } else {
+          smiles.velocity.x = 5
+        }
+      }
+    }
+
+    border.forEach(brick => {
       brick.drawBrick()
 
       // here is where we check if character is hitting the wall
@@ -141,16 +191,7 @@ function runCanvas() {
       // console.log(smiles.position.y) // 62.5
       // console.log(b.y + b.height)
 
-      // Check if the character is about to collide with the brick from any direction
-      function circleCollidesWithBrick({ circle, rectangle }) {
-        const padding = 2;
-        return (
-          circle.position.y - circle.radius + circle.velocity.y <= rectangle.y + rectangle.height + padding &&
-          circle.position.x + circle.radius + circle.velocity.x >= rectangle.x - padding &&
-          circle.position.y + circle.radius + circle.velocity.y >= rectangle.y - padding &&
-          circle.position.x - circle.radius + circle.velocity.x <= rectangle.x + rectangle.width + padding
-        );
-      }
+
 
       // Check for collision based on movement direction
       if (
@@ -167,8 +208,7 @@ function runCanvas() {
           smiles.position.x + smiles.radius + smiles.velocity.x >= brick.x &&
           smiles.position.x + smiles.radius + smiles.velocity.x < brick.x + brick.width)
       ) {
-        if (circleCollidesWithBrick({ circle: smiles, rectangle: brick })) {
-          console.log("hit");
+        if (characterMeetsBrick({ circle: smiles, rectangle: brick })) {
           smiles.velocity.x = 0;
           smiles.velocity.y = 0;
         }
@@ -180,25 +220,6 @@ function runCanvas() {
 
     // loop will always make character stop!
     //where the velocity statements came from
-
-    // makes character move depending on the key that is pressed
-    if (currentlyPressedKeys.w.pressed && lastKeyPressed === 'w') {
-      smiles.velocity.y = -5
-    } else if (currentlyPressedKeys.s.pressed && lastKeyPressed === 's') {
-      smiles.velocity.y = 5
-    } else if (currentlyPressedKeys.a.pressed && lastKeyPressed === 'a') {
-      smiles.velocity.x = -5
-    } else if (currentlyPressedKeys.d.pressed && lastKeyPressed === 'd') {
-      smiles.velocity.x = 5
-    } else if (currentlyPressedKeys.ArrowUp.pressed && lastKeyPressed === 'ArrowUp') {
-      smiles.velocity.y = -5
-    } else if (currentlyPressedKeys.ArrowDown.pressed && lastKeyPressed === 'ArrowDown') {
-      smiles.velocity.y = 5
-    } else if (currentlyPressedKeys.ArrowLeft.pressed && lastKeyPressed === 'ArrowLeft') {
-      smiles.velocity.x = -5
-    } else if (currentlyPressedKeys.ArrowRight.pressed && lastKeyPressed === 'ArrowRight') {
-      smiles.velocity.x = 5
-    }
 
 
   }
@@ -233,12 +254,23 @@ function runCanvas() {
       // wall == *, in the array
       if (column == "*") {
         let testBrick = new Brick(brickSize * j, brickSize * i)
-        newMap.push(testBrick)
+        border.push(testBrick)
       }
     })
   })
 
 
+}
+
+// Check if the character is about to collide with the brick from any direction
+function characterMeetsBrick({ circle, rectangle }) {
+  const padding = 2;
+  return (
+    circle.position.y - circle.radius + circle.velocity.y <= rectangle.y + rectangle.height + padding &&
+    circle.position.x + circle.radius + circle.velocity.x >= rectangle.x - padding &&
+    circle.position.y + circle.radius + circle.velocity.y >= rectangle.y - padding &&
+    circle.position.x - circle.radius + circle.velocity.x <= rectangle.x + rectangle.width + padding
+  );
 }
 
 
