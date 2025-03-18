@@ -1,8 +1,61 @@
 /***************** P A G E S | C O M P O N E T S | E V E R Y T H I N G *****************/
 
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+
+    /* This might be messing up phone responsivness */
+    min-width: 320px;
+
+    min-height: 100vh;
     background-color: #202020;
     color: #fff;
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        color: #213547;
+        background-color: #ffffff;
+    }
+
+    a:hover {
+        color: #747bff;
+    }
+
+    button {
+        background-color: #f9f9f9;
+    }
+}
+
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+* {
+    border: none;
 }
 
 /*********************************** H O M E . J S X ***********************************/
@@ -23,6 +76,21 @@ body {
 .under-construction>ul>li>a {
     color: #fff;
     text-decoration: none;
+}
+
+/* github logo */
+#github-logo {
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 30%;
+    transition: ease-in-out 0.5s;
+}
+
+#github-logo:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: ease-in-out 0.5s;
 }
 
 @media (max-width: 885px) {
@@ -161,4 +229,18 @@ body {
         width: 280px;
         margin: auto;
     }
+}
+
+/********************************* C A N V A S . J S X *********************************/
+
+/* #myCanvas {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    overflow: hidden;
+} */
+
+canvas {
+    margin: 0;
+    padding: 0;
 }

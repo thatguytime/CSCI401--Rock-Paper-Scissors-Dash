@@ -26,6 +26,7 @@ export default function Home() {
                     <ul>
                         <li><Link to="/main-menu">Main Menu</Link></li>
                         <li><Link to="/login-screen">Login Screen</Link></li>
+                        <li><Link to="/canvas">Demo level</Link></li>
                     </ul>
                 </div>
 
