@@ -16,12 +16,13 @@ export default function Canvas(props) {
 
     return (
         <>
-            <div id="timer" style={{ border: "1px solid black", height: "50px", maringTop: "none" }}></div>
-            <canvas id="myCanvas" width="650" height="600"></canvas>
+            <div id="timer"></div>
+            <canvas id="myCanvas" width="600" height="600"></canvas>
 
             {/* pick demo level */}
 
             {/* <LevelSelect /> */}
+            <br />
             <Link to="/">Back to previous page</Link>
         </>
     )

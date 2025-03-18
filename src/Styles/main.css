@@ -232,15 +232,40 @@ h1 {
 }
 
 /********************************* C A N V A S . J S X *********************************/
+/********************************* C A N V A S . J S X *********************************/
 
-/* #myCanvas {
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    overflow: hidden;
-} */
+#timer {
+    border: 1px solid black;
+    height: 50px;
+    margin-top: none;
+}
+
+#myCanvas {
+    margin: 0 auto;
+    /* display: block;
+    overflow: hidden; */
+}
 
 canvas {
     margin: 0;
     padding: 0;
+}
+
+@media screen and (max-width: 750px) {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #root {
+        margin: 0;
+        padding: 0;
+    }
+
+    #myCanvas {
+        display: flex;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
 }
