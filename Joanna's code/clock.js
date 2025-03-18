@@ -12,6 +12,6 @@
         countDownTime--; //do down
     }
  }
-var timerInterval = setInterval(updateTimer, 10000); //update every 1000 millisec
+var timerInterval = setInterval(updateTimer, 1000); //update every 1000 millisec
 
 updateTimer();//initialize the timer
