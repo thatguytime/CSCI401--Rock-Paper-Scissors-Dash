@@ -46,6 +46,26 @@ function runCanvas() {
     }
   })
 
+  const pelletRadius = 15
+  class Pellet {
+    constructor(positionX, positionY) {
+      this.positionX = positionX
+      this.positionY = positionY
+      this.width = 5
+      this.height = 5
+    }
+
+    draw() {
+      ctx.beginPath()
+      ctx.rect(this.positionX, this.positionY, this.width, this.height) //need to add the this. because theyre tied to the class
+      ctx.fillStyle = "white";  // Set fill color for bricks
+      ctx.fill()
+      ctx.closePath()
+    }
+
+
+  }
+
   let lastKeyPressed = ''
 
   // allows for fluid transition of directions when using keyboard
@@ -125,6 +145,41 @@ function runCanvas() {
   })
 
   let border = []
+  let pellets = []
+
+  // creates each brick, or wall, for the map
+  let brickSize = 40
+  class Brick {
+    constructor(x, y) {
+      this.height = brickSize // pixels
+      this.width = brickSize
+      this.x = x
+      this.y = y
+    }
+
+    drawBrick() {
+      ctx.beginPath()
+      ctx.rect(this.x, this.y, this.width, this.height) //need to add the this. because theyre tied to the class
+      ctx.fillStyle = "lightgreen";  // Set fill color for bricks
+      ctx.fill()
+      ctx.closePath()
+    }
+  }
+
+  mapBrick[0].forEach((row, i) => {
+    row.forEach((column, j) => {
+
+      // wall == *, in the array
+      if (column === "*") {
+        let testBrick = new Brick(brickSize * j, brickSize * i)
+        border.push(testBrick)
+      } else if (column === " ") {
+        let testPellet = new Pellet(brickSize * j + (brickSize / 2) - 2.5, brickSize * i + (brickSize / 2) - 2.5) // 2.5: half the pellet sq size
+        pellets.push(testPellet)
+      }
+
+    })
+  })
 
   function animate() {
 
@@ -182,16 +237,13 @@ function runCanvas() {
       }
     }
 
+    // render for pellets
+    pellets.forEach(pellet => {
+      pellet.draw()
+    })
+
     border.forEach(brick => {
       brick.drawBrick()
-
-      // here is where we check if character is hitting the wall
-      // comapre the sides of the character with the sides of the wall
-      // if (smiles.position <= b.position.y)
-      // console.log(smiles.position.y) // 62.5
-      // console.log(b.y + b.height)
-
-
 
       // Check for collision based on movement direction
       if (
@@ -218,48 +270,9 @@ function runCanvas() {
     })
     smiles.move()
 
-    // loop will always make character stop!
-    //where the velocity statements came from
-
-
   }
 
   animate()
-
-
-  // creates each brick, or wall, for the map
-  let brickSize = 40
-  class Brick {
-    constructor(x, y) {
-      this.height = brickSize; // pixels
-      this.width = brickSize;
-      this.x = x;
-      this.y = y;
-    }
-
-    drawBrick() {
-      ctx.beginPath();
-      ctx.rect(this.x, this.y, this.width, this.height); //need to add the this. because theyre tied to the class
-      ctx.fillStyle = "lightgreen";  // Set fill color for bricks
-      ctx.fill();
-      ctx.closePath();
-    }
-  }
-
-
-
-  mapBrick[0].forEach((row, i) => {
-    row.forEach((column, j) => {
-
-      // wall == *, in the array
-      if (column == "*") {
-        let testBrick = new Brick(brickSize * j, brickSize * i)
-        border.push(testBrick)
-      }
-    })
-  })
-
-
 }
 
 // Check if the character is about to collide with the brick from any direction
@@ -270,9 +283,8 @@ function characterMeetsBrick({ circle, rectangle }) {
     circle.position.x + circle.radius + circle.velocity.x >= rectangle.x - padding &&
     circle.position.y + circle.radius + circle.velocity.y >= rectangle.y - padding &&
     circle.position.x - circle.radius + circle.velocity.x <= rectangle.x + rectangle.width + padding
-  );
+  )
 }
-
 
 
 
