@@ -17,6 +17,10 @@ export default function Canvas() {
         <>
             <div id="timer" style={{ border: "1px solid black", height: "50px", maringTop: "none" }}></div>
             <canvas id="myCanvas" width="650" height="600"></canvas>
+
+            {/* pick demo level */}
+
+
             <Link to="/">Back to previous page</Link>
         </>
     )

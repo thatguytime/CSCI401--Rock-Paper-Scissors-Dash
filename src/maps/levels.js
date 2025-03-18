@@ -244,8 +244,8 @@ function runCanvas() {
       // COLLISION DETECTION TEMPLATE
       // a^2 + b^2 = c^
       // subtract x's and y's to get distance
-      if (Math.hypot(pellet.positionX - smiles.position.x + pellet.positionY - smiles.position.y < 5)) {
-        console.log("hit!")
+      if (Math.hypot(smiles.position.x - pellet.positionX, smiles.position.y - pellet.positionY) < 10) {
+        pellets.splice(pellets.indexOf(pellet), 1)
       }
 
     })
