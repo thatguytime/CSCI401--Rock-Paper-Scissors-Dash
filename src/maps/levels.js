@@ -100,15 +100,19 @@ function runCanvas() {
     if (key === 'w') {
       currentlyPressedKeys.w.pressed = true
       lastKeyPressed = 'w'
+	  currentlyPressedKeys.w.pressed = false
     } else if (key === 's') {
       currentlyPressedKeys.s.pressed = true
       lastKeyPressed = 's'
+	  currentlyPressedKeys.s.pressed = false
     } else if (key === 'a') {
       currentlyPressedKeys.a.pressed = true
       lastKeyPressed = 'a'
+	  currentlyPressedKeys.a.pressed = false
     } else if (key === 'd') {
       currentlyPressedKeys.d.pressed = true
       lastKeyPressed = 'd'
+	  currentlyPressedKeys.d.pressed = false
     } else if (key === 'ArrowDown') {
       currentlyPressedKeys.ArrowDown.pressed = true
       lastKeyPressed = 'ArrowDown'
@@ -124,25 +128,6 @@ function runCanvas() {
     }
   })
 
-  addEventListener('keyup', ({ key }) => {
-    if (key === 'w') {
-      currentlyPressedKeys.w.pressed = false
-    } else if (key === 's') {
-      currentlyPressedKeys.s.pressed = false
-    } else if (key === 'a') {
-      currentlyPressedKeys.a.pressed = false
-    } else if (key === 'd') {
-      currentlyPressedKeys.d.pressed = false
-    } else if (key === 'ArrowDown') {
-      currentlyPressedKeys.ArrowDown.pressed = false
-    } else if (key === 'ArrowUp') {
-      currentlyPressedKeys.ArrowUp.pressed = false
-    } else if (key === 'ArrowLeft') {
-      currentlyPressedKeys.ArrowLeft.pressed = false
-    } else if (key === 'ArrowRight') {
-      currentlyPressedKeys.ArrowRight.pressed = false
-    }
-  })
 
   let border = []
   let pellets = []
