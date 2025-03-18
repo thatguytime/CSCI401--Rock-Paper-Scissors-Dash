@@ -2,7 +2,7 @@ import mapBrick from './moreLevels.js'
 // import Character from "../maps/characters.js"
 import smileImg from './smiles.png'
 
-function runCanvas() {
+function runCanvas(level) {
   const canvas = document.getElementById("myCanvas");
   const ctx = canvas.getContext("2d");  /// Store the 2D rendering context // context
 
@@ -166,7 +166,7 @@ function runCanvas() {
     }
   }
 
-  mapBrick[0].forEach((row, i) => {
+  mapBrick[level].forEach((row, i) => {
     row.forEach((column, j) => {
 
       // wall == *, in the array
