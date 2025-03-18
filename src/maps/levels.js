@@ -240,6 +240,14 @@ function runCanvas() {
     // render for pellets
     pellets.forEach(pellet => {
       pellet.draw()
+
+      // COLLISION DETECTION TEMPLATE
+      // a^2 + b^2 = c^
+      // subtract x's and y's to get distance
+      if (Math.hypot(pellet.positionX - smiles.position.x + pellet.positionY - smiles.position.y < 5)) {
+        console.log("hit!")
+      }
+
     })
 
     border.forEach(brick => {

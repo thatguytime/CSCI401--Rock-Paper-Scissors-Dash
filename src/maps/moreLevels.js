@@ -1,6 +1,12 @@
 // "*" = wall
 // " " = open space
 
+// how to make levels unique
+// time to complete
+// color
+// amount/types/frequency of power-ups
+// a level where there are multiple bad guys chasing you 
+
 const mapBrick = [
     //LEVEL1
     [
