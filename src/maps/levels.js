@@ -248,6 +248,13 @@ function runCanvas(level) {
         pellets.splice(pellets.indexOf(pellet), 1)
       }
 
+      // triggers next level if you collect all the pellets
+      if (pellets.length === 0) {
+        console.log('no more pellets!')
+        runCanvas(level + 1)
+
+      }
+
     })
 
     border.forEach(brick => {

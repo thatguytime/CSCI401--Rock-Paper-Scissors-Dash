@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import runCanvas from '../maps/levels.js'
 import clock from '../maps/clock.js'
 // import LevelSelect from '../maps/LevelSelect.jsx'
@@ -8,6 +8,8 @@ export default function Canvas(props) {
 
     // useRef: avoids re-render
     // const canvasRef = useRef(0)
+
+    const [mapIdx, setMapIdx] = useState(0)
 
     useEffect(() => {
         clock()
