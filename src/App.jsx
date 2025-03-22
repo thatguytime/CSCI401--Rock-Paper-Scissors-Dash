@@ -38,9 +38,6 @@ function App() {
         <Route path='/main-menu' element={<MainMenu />} />
         <Route path='/login-screen' element={<LoginScreen />} />
         <Route path='/canvas' element={<Canvas level={0} />} />
-        {/* <Route path='/canvas2' element={<Canvas level={1} />} />
-        <Route path='/canvas3' element={<Canvas level={2} />} />
-        <Route path='/canvas4' element={<Canvas level={3} />} /> */}
       </Routes>
     </>
   )
