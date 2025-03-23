@@ -8,10 +8,11 @@ function runCanvas(level) {
 
   const characterRadius = 15
   class Character {
-    constructor({ position, velocity }) {
+    constructor({ position, velocity }, color) {
       this.position = position
       this.velocity = velocity
       this.radius = 15
+      this.color = color
     }
 
     draw() {
@@ -23,7 +24,7 @@ function runCanvas(level) {
         0,
         Math.PI * 2,
       )
-      ctx.fillStyle = 'yellow'
+      ctx.fillStyle = this.color
       ctx.fill()
       ctx.closePath()
     }
@@ -44,7 +45,29 @@ function runCanvas(level) {
       x: 0,
       y: 0
     }
-  })
+  }, 'yellow')
+
+  const badGuy01 = new Character({
+    position: {
+      x: 520 + characterRadius + characterRadius / 2,
+      y: 40 + characterRadius + characterRadius / 2,
+    },
+    velocity: {
+      x: 0,
+      y: 0
+    }
+  }, 'fuchsia')
+
+  const badGuy02 = new Character({
+    position: {
+      x: 520 + characterRadius + characterRadius / 2,
+      y: 520 + characterRadius + characterRadius / 2,
+    },
+    velocity: {
+      x: 0,
+      y: 0
+    }
+  }, 'indianred')
 
   const pelletRadius = 15
   class Pellet {
@@ -142,6 +165,45 @@ function runCanvas(level) {
     } else if (key === 'ArrowRight') {
       currentlyPressedKeys.ArrowRight.pressed = false
     }
+  })
+
+  // add everthing here, then try to put in into other file
+  // add in button press for touchscreen here!
+  // just plug in the keys for when a touch event occurs
+  const up = document.getElementById('move-up')
+  const down = document.getElementById('move-down')
+  const left = document.getElementById('move-left')
+  const right = document.getElementById('move-right')
+
+  up.addEventListener('touchstart', () => {
+    currentlyPressedKeys.ArrowUp.pressed = true
+    lastKeyPressed = 'ArrowUp'
+  })
+  down.addEventListener('touchstart', () => {
+    currentlyPressedKeys.ArrowDown.pressed = true
+    lastKeyPressed = 'ArrowDown'
+  })
+  left.addEventListener('touchstart', () => {
+    currentlyPressedKeys.ArrowLeft.pressed = true
+    lastKeyPressed = 'ArrowLeft'
+  })
+  right.addEventListener('touchstart', () => {
+    currentlyPressedKeys.ArrowRight.pressed = true
+    lastKeyPressed = 'ArrowRight'
+  })
+
+  up.addEventListener('touchend', () => {
+    currentlyPressedKeys.ArrowUp.pressed = false
+    console.log('unpress up')
+  })
+  down.addEventListener('touchend', () => {
+    currentlyPressedKeys.ArrowDown.pressed = false
+  })
+  left.addEventListener('touchend', () => {
+    currentlyPressedKeys.ArrowLeft.pressed = false
+  })
+  right.addEventListener('touchend', () => {
+    currentlyPressedKeys.ArrowRight.pressed = false
   })
 
   let border = []
@@ -284,6 +346,8 @@ function runCanvas(level) {
 
     })
     smiles.move()
+    badGuy01.move()
+    badGuy02.move()
 
   }
 

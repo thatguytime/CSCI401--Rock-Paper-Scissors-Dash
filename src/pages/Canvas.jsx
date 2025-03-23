@@ -21,11 +21,17 @@ export default function Canvas(props) {
             <div id="timer"></div>
             <canvas id="myCanvas" width="600" height="600"></canvas>
 
-            {/* pick demo level */}
-
-            {/* <LevelSelect /> */}
             <br />
-            <Link to="/">Back to previous page</Link>
+            <Link to="/">Back to previous page</Link> <br />
+
+            {/* Controller: should only show if screen is small enough */}
+            <div className="d-pad">
+                <button className="d-pad-button" id="move-up">Up</button>
+                <button className="d-pad-button" id="move-left">Left</button>
+                <button className="d-pad-button" id="move-right">Right</button>
+                <button className="d-pad-button" id="move-down">Down</button>
+            </div>
+
         </>
     )
 }

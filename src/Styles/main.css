@@ -244,11 +244,63 @@ h1 {
     margin: 0 auto;
     /* display: block;
     overflow: hidden; */
+    overflow: hidden;
 }
 
 canvas {
     margin: 0;
     padding: 0;
+}
+
+.d-pad {
+    /* padding: 5px;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+    border: red solid 1px;
+}
+
+.d-pad-button {
+    background-color: #fefefe;
+    /* padding: 20px; */
+}
+
+.d-pad {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.d-pad-button {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+#move-up {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#move-right {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+#move-down {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#move-left {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
 }
 
 @media screen and (max-width: 750px) {
@@ -267,5 +319,9 @@ canvas {
         width: 100vw;
         margin: 0;
         padding: 0;
+    }
+
+    .d-pad {
+        visibility: visible;
     }
 }
