@@ -1,6 +1,7 @@
 import mapBrick from './moreLevels.js'
 // import Character from "../maps/characters.js"
-import smileImg from './smiles.png'
+import smileImg from './smile.png
+'
 
 function runCanvas() {
   const canvas = document.getElementById("myCanvas");
@@ -8,42 +9,47 @@ function runCanvas() {
 
   const characterRadius = 15
   class Character {
-    constructor({ position, velocity }) {
-      this.position = position
-      this.velocity = velocity
-      this.radius = 15
+    constructor({ position, velocity, imageSrc }) {
+      this.position = position;
+      this.velocity = velocity;
+      this.radius = 15;
+      this.image = new Image();
+      this.image.src = imageSrc;
     }
 
     draw() {
-      ctx.beginPath()
-      ctx.arc(
-        this.position.x,
-        this.position.y,
-        this.radius,
-        0,
-        Math.PI * 2,
-      )
-      ctx.fillStyle = 'yellow'
-      ctx.fill()
-      ctx.closePath()
+      ctx.drawImage(
+        this.image,
+        this.position.x - this.radius, 
+        this.position.y - this.radius,
+        this.radius * 2,
+        this.radius * 2
+      );
     }
 
     move() {
-      this.draw()
-      this.position.x += this.velocity.x
-      this.position.y += this.velocity.y
+      this.draw();
+      this.position.x += this.velocity.x;
+      this.position.y += this.velocity.y;
     }
   }
 
   const smiles = new Character({
     position: {
-      x: 40 + characterRadius + characterRadius / 2,
-      y: 40 + characterRadius + characterRadius / 2
+      x: 40 + 15 + 15 / 2,
+      y: 40 + 15 + 15 / 2
     },
     velocity: {
       x: 0,
       y: 0
-    }
+    },
+    imageSrc: smileImg
+  })
+  
+  const paper = new Character({
+	position: {
+		x: 40 + 
+	}
   })
 
   const pelletRadius = 15
@@ -240,13 +246,12 @@ function runCanvas() {
     // render for pellets
     pellets.forEach(pellet => {
       pellet.draw()
-
-      // COLLISION DETECTION TEMPLATE
-      // a^2 + b^2 = c^
-      // subtract x's and y's to get distance
-      if (Math.hypot(pellet.positionX - smiles.position.x + pellet.positionY - smiles.position.y < 5)) {
-        console.log("hit!")
-      }
+	// COLLISION DETECTION TEMPLATE
+	    // a^2 + b^2 = c^
+	    // subtract x's and y's to get distance
+	  if (Math.hypot(pellet.positionX - smiles.position.x + pellet.positionY - smiles.position.y < 5)) {
+	    console.log("hit!")
+	    }
 
     })
 
