@@ -312,7 +312,7 @@ function runCanvas(level) {
     powerUps.forEach(powerup => {
       powerup.draw()
 
-      if (Math.hypot(smiles.position.x - powerup.positionX, smiles.position.y - powerup.positionY) < 20) {
+      if (Math.hypot(paper.position.x - powerup.positionX, paper.position.y - powerup.positionY) < 20) {
         powerUps.splice(powerUps.indexOf(powerup), 1)
 
         userSpeedLimit = 7.5
