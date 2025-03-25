@@ -1,6 +1,8 @@
 import mapBrick from './moreLevels.js'
 // import Character from "../maps/characters.js"
-import smileImg from './smiles.png'
+import paperImg from './Paper0.png'
+import rockImg from './Rock0.png'
+import scissorsImg from './Scissors0.png'
 
 function runCanvas(level) {
   const canvas = document.getElementById("myCanvas");
@@ -8,25 +10,22 @@ function runCanvas(level) {
 
   const characterRadius = 15
   class Character {
-    constructor({ position, velocity }, color) {
+    constructor({ position, velocity, imageSrc }) {
       this.position = position
       this.velocity = velocity
       this.radius = 15
-      this.color = color
+      this.image = new Image()
+      this.image.src = imageSrc
     }
 
     draw() {
-      ctx.beginPath()
-      ctx.arc(
-        this.position.x,
-        this.position.y,
-        this.radius,
-        0,
-        Math.PI * 2,
-      )
-      ctx.fillStyle = this.color
-      ctx.fill()
-      ctx.closePath()
+      ctx.drawImage(
+        this.image,
+        this.position.x - this.radius,
+        this.position.y - this.radius,
+        this.radius * 2,
+        this.radius * 2
+      );
     }
 
     move() {
@@ -36,39 +35,42 @@ function runCanvas(level) {
     }
   }
 
-  const smiles = new Character({
+  const paper = new Character({
     position: {
-      x: 40 + characterRadius + characterRadius / 2,
-      y: 40 + characterRadius + characterRadius / 2
+      x: 40 + 15 + 15 / 2,
+      y: 40 + 15 + 15 / 2
     },
     velocity: {
       x: 0,
       y: 0
-    }
-  }, 'yellow')
+    },
+    imageSrc: paperImg
+  })
   let userSpeedLimit = 5
 
-  const badGuy01 = new Character({
+  const rock = new Character({
     position: {
-      x: 520 + characterRadius + characterRadius / 2,
-      y: 40 + characterRadius + characterRadius / 2,
+      x: 520 + 15 + 15 / 2,
+      y: 40 + 15 + 15 / 2
     },
     velocity: {
       x: 0,
       y: 0
-    }
-  }, 'fuchsia')
+    },
+    imageSrc: rockImg
+  })
 
-  const badGuy02 = new Character({
+  const scissors = new Character({
     position: {
-      x: 520 + characterRadius + characterRadius / 2,
-      y: 520 + characterRadius + characterRadius / 2,
+      x: 520 + 15 + 15 / 2,
+      y: 520 + 15 + 15 / 2
     },
     velocity: {
       x: 0,
       y: 0
-    }
-  }, 'indianred')
+    },
+    imageSrc: scissorsImg
+  })
 
   const pelletRadius = 15
   class Pellet {
@@ -261,11 +263,11 @@ function runCanvas(level) {
     ) {
       for (let i = 0; i < border.length; i++) {
         const brickPart = border[i]
-        if (characterMeetsBrick({ circle: { ...smiles, velocity: { x: 0, y: -5 } }, rectangle: brickPart })) {
-          smiles.velocity.y = 0;
+        if (characterMeetsBrick({ circle: { ...paper, velocity: { x: 0, y: -5 } }, rectangle: brickPart })) {
+          paper.velocity.y = 0;
           break
         } else {
-          smiles.velocity.y = -1 * userSpeedLimit
+          paper.velocity.y = -1 * userSpeedLimit
         }
       }
     } else if (currentlyPressedKeys.s.pressed && lastKeyPressed === 's' ||
@@ -273,11 +275,11 @@ function runCanvas(level) {
     ) {
       for (let i = 0; i < border.length; i++) {
         const brickPart = border[i]
-        if (characterMeetsBrick({ circle: { ...smiles, velocity: { x: 0, y: 5 } }, rectangle: brickPart })) {
-          smiles.velocity.y = 0
+        if (characterMeetsBrick({ circle: { ...paper, velocity: { x: 0, y: 5 } }, rectangle: brickPart })) {
+          paper.velocity.y = 0
           break
         } else {
-          smiles.velocity.y = userSpeedLimit
+          paper.velocity.y = userSpeedLimit
         }
       }
     } else if (currentlyPressedKeys.a.pressed && lastKeyPressed === 'a' ||
@@ -285,11 +287,11 @@ function runCanvas(level) {
     ) {
       for (let i = 0; i < border.length; i++) {
         const brickPart = border[i]
-        if (characterMeetsBrick({ circle: { ...smiles, velocity: { x: -5, y: 0 } }, rectangle: brickPart })) {
-          smiles.velocity.x = 0
+        if (characterMeetsBrick({ circle: { ...paper, velocity: { x: -5, y: 0 } }, rectangle: brickPart })) {
+          paper.velocity.x = 0
           break
         } else {
-          smiles.velocity.x = -1 * userSpeedLimit
+          paper.velocity.x = -1 * userSpeedLimit
         }
       }
     } else if (currentlyPressedKeys.d.pressed && lastKeyPressed === 'd' ||
@@ -297,11 +299,11 @@ function runCanvas(level) {
     ) {
       for (let i = 0; i < border.length; i++) {
         const brickPart = border[i]
-        if (characterMeetsBrick({ circle: { ...smiles, velocity: { x: 5, y: 0 } }, rectangle: brickPart })) {
-          smiles.velocity.x = 0
+        if (characterMeetsBrick({ circle: { ...paper, velocity: { x: 5, y: 0 } }, rectangle: brickPart })) {
+          paper.velocity.x = 0
           break
         } else {
-          smiles.velocity.x = userSpeedLimit
+          paper.velocity.x = userSpeedLimit
         }
       }
     }
@@ -335,7 +337,7 @@ function runCanvas(level) {
       // COLLISION DETECTION TEMPLATE
       // a^2 + b^2 = c^
       // subtract x's and y's to get distance
-      if (Math.hypot(smiles.position.x - pellet.positionX, smiles.position.y - pellet.positionY) < 10) {
+      if (Math.hypot(paper.position.x - pellet.positionX, paper.position.y - pellet.positionY) < 10) {
         pellets.splice(pellets.indexOf(pellet), 1)
         // score gets updated here
       }
@@ -353,29 +355,29 @@ function runCanvas(level) {
 
       // Check for collision based on movement direction
       if (
-        (smiles.velocity.y < 0 && // moving up
-          smiles.position.y - smiles.radius + smiles.velocity.y <= brick.y + brick.height &&
-          smiles.position.y - smiles.radius + smiles.velocity.y > brick.y) ||
-        (smiles.velocity.y > 0 && // moving down
-          smiles.position.y + smiles.radius + smiles.velocity.y >= brick.y &&
-          smiles.position.y + smiles.radius + smiles.velocity.y < brick.y + brick.height) ||
-        (smiles.velocity.x < 0 && // moving left
-          smiles.position.x - smiles.radius + smiles.velocity.x <= brick.x + brick.width &&
-          smiles.position.x - smiles.radius + smiles.velocity.x > brick.x) ||
-        (smiles.velocity.x > 0 && // moving right
-          smiles.position.x + smiles.radius + smiles.velocity.x >= brick.x &&
-          smiles.position.x + smiles.radius + smiles.velocity.x < brick.x + brick.width)
+        (paper.velocity.y < 0 && // moving up
+          paper.position.y - paper.radius + paper.velocity.y <= brick.y + brick.height &&
+          paper.position.y - paper.radius + paper.velocity.y > brick.y) ||
+        (paper.velocity.y > 0 && // moving down
+          paper.position.y + paper.radius + paper.velocity.y >= brick.y &&
+          paper.position.y + paper.radius + paper.velocity.y < brick.y + brick.height) ||
+        (paper.velocity.x < 0 && // moving left
+          paper.position.x - paper.radius + paper.velocity.x <= brick.x + brick.width &&
+          paper.position.x - paper.radius + paper.velocity.x > brick.x) ||
+        (paper.velocity.x > 0 && // moving right
+          paper.position.x + paper.radius + paper.velocity.x >= brick.x &&
+          paper.position.x + paper.radius + paper.velocity.x < brick.x + brick.width)
       ) {
-        if (characterMeetsBrick({ circle: smiles, rectangle: brick })) {
-          smiles.velocity.x = 0;
-          smiles.velocity.y = 0;
+        if (characterMeetsBrick({ circle: paper, rectangle: brick })) {
+          paper.velocity.x = 0;
+          paper.velocity.y = 0;
         }
       }
     })
+    paper.move()
+    rock.move()
+    scissors.move()
 
-    smiles.move()
-    badGuy01.move()
-    badGuy02.move()
 
   }
 
