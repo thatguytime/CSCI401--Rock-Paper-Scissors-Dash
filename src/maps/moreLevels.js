@@ -6,6 +6,7 @@
 // color
 // amount/types/frequency of power-ups
 // a level where there are multiple bad guys chasing you 
+// a slow-mo level where everyone moves really slow
 
 const mapBrick = [
     //LEVEL1

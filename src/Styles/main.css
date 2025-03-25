@@ -232,15 +232,96 @@ h1 {
 }
 
 /********************************* C A N V A S . J S X *********************************/
+/********************************* C A N V A S . J S X *********************************/
 
-/* #myCanvas {
-    width: 100vw;
-    height: 100vh;
-    display: block;
+#timer {
+    border: 1px solid black;
+    height: 50px;
+    margin-top: none;
+}
+
+#myCanvas {
+    margin: 0 auto;
+    /* display: block;
+    overflow: hidden; */
     overflow: hidden;
-} */
+}
 
 canvas {
     margin: 0;
     padding: 0;
+}
+
+.d-pad {
+    /* padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+    visibility: hidden;
+    border: red solid 1px;
+}
+
+.d-pad-button {
+    background-color: #fefefe;
+    /* padding: 20px; */
+}
+
+.d-pad {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.d-pad-button {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+#move-up {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#move-right {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+#move-down {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#move-left {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+@media screen and (max-width: 750px) {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #root {
+        margin: 0;
+        padding: 0;
+    }
+
+    #myCanvas {
+        display: flex;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
+
+    .d-pad {
+        visibility: visible;
+    }
 }

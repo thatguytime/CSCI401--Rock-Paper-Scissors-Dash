@@ -9,6 +9,7 @@ function runCanvas() {
 
   const characterRadius = 15
   class Character {
+<<<<<<< HEAD
     constructor({ position, velocity, imageSrc }) {
       this.position = position;
       this.velocity = velocity;
@@ -25,6 +26,27 @@ function runCanvas() {
         this.radius * 2,
         this.radius * 2
       );
+=======
+    constructor({ position, velocity }, color) {
+      this.position = position
+      this.velocity = velocity
+      this.radius = 15
+      this.color = color
+    }
+
+    draw() {
+      ctx.beginPath()
+      ctx.arc(
+        this.position.x,
+        this.position.y,
+        this.radius,
+        0,
+        Math.PI * 2,
+      )
+      ctx.fillStyle = this.color
+      ctx.fill()
+      ctx.closePath()
+>>>>>>> upstream/main
     }
 
     move() {
@@ -42,6 +64,7 @@ function runCanvas() {
     velocity: {
       x: 0,
       y: 0
+<<<<<<< HEAD
     },
     imageSrc: smileImg
   })
@@ -51,6 +74,32 @@ function runCanvas() {
 		x: 40 + 
 	}
   })
+=======
+    }
+  }, 'yellow')
+
+  const badGuy01 = new Character({
+    position: {
+      x: 520 + characterRadius + characterRadius / 2,
+      y: 40 + characterRadius + characterRadius / 2,
+    },
+    velocity: {
+      x: 0,
+      y: 0
+    }
+  }, 'fuchsia')
+
+  const badGuy02 = new Character({
+    position: {
+      x: 520 + characterRadius + characterRadius / 2,
+      y: 520 + characterRadius + characterRadius / 2,
+    },
+    velocity: {
+      x: 0,
+      y: 0
+    }
+  }, 'indianred')
+>>>>>>> upstream/main
 
   const pelletRadius = 15
   class Pellet {
@@ -150,6 +199,45 @@ function runCanvas() {
     }
   })
 
+  // add everthing here, then try to put in into other file
+  // add in button press for touchscreen here!
+  // just plug in the keys for when a touch event occurs
+  const up = document.getElementById('move-up')
+  const down = document.getElementById('move-down')
+  const left = document.getElementById('move-left')
+  const right = document.getElementById('move-right')
+
+  up.addEventListener('touchstart', () => {
+    currentlyPressedKeys.ArrowUp.pressed = true
+    lastKeyPressed = 'ArrowUp'
+  })
+  down.addEventListener('touchstart', () => {
+    currentlyPressedKeys.ArrowDown.pressed = true
+    lastKeyPressed = 'ArrowDown'
+  })
+  left.addEventListener('touchstart', () => {
+    currentlyPressedKeys.ArrowLeft.pressed = true
+    lastKeyPressed = 'ArrowLeft'
+  })
+  right.addEventListener('touchstart', () => {
+    currentlyPressedKeys.ArrowRight.pressed = true
+    lastKeyPressed = 'ArrowRight'
+  })
+
+  up.addEventListener('touchend', () => {
+    currentlyPressedKeys.ArrowUp.pressed = false
+    console.log('unpress up')
+  })
+  down.addEventListener('touchend', () => {
+    currentlyPressedKeys.ArrowDown.pressed = false
+  })
+  left.addEventListener('touchend', () => {
+    currentlyPressedKeys.ArrowLeft.pressed = false
+  })
+  right.addEventListener('touchend', () => {
+    currentlyPressedKeys.ArrowRight.pressed = false
+  })
+
   let border = []
   let pellets = []
 
@@ -246,12 +334,29 @@ function runCanvas() {
     // render for pellets
     pellets.forEach(pellet => {
       pellet.draw()
+<<<<<<< HEAD
 	// COLLISION DETECTION TEMPLATE
 	    // a^2 + b^2 = c^
 	    // subtract x's and y's to get distance
 	  if (Math.hypot(pellet.positionX - smiles.position.x + pellet.positionY - smiles.position.y < 5)) {
 	    console.log("hit!")
 	    }
+=======
+
+      // COLLISION DETECTION TEMPLATE
+      // a^2 + b^2 = c^
+      // subtract x's and y's to get distance
+      if (Math.hypot(smiles.position.x - pellet.positionX, smiles.position.y - pellet.positionY) < 10) {
+        pellets.splice(pellets.indexOf(pellet), 1)
+      }
+
+      // triggers next level if you collect all the pellets
+      if (pellets.length === 0) {
+        console.log('no more pellets!')
+        runCanvas(level + 1)
+
+      }
+>>>>>>> upstream/main
 
     })
 
@@ -282,6 +387,8 @@ function runCanvas() {
 
     })
     smiles.move()
+    badGuy01.move()
+    badGuy02.move()
 
   }
 
