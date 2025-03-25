@@ -3,7 +3,7 @@ let countDownTime = 100; // how many seconds are left
 function clock() {
 
 
-    let timerElement = document.getElementById("timer"); //display it
+    let timerElement = document.getElementById("time-left"); //display it
 
     console.log(timerElement)
 

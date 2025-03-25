@@ -340,6 +340,7 @@ function runCanvas(level) {
       if (Math.hypot(paper.position.x - pellet.positionX, paper.position.y - pellet.positionY) < 10) {
         pellets.splice(pellets.indexOf(pellet), 1)
         // score gets updated here
+        score(10)
       }
 
       // triggers next level if you collect all the pellets
@@ -393,6 +394,13 @@ function characterMeetsBrick({ circle, rectangle }) {
     circle.position.y + circle.radius + circle.velocity.y >= rectangle.y - padding &&
     circle.position.x - circle.radius + circle.velocity.x <= rectangle.x + rectangle.width + padding
   )
+}
+
+// keep track of score
+let playerScore = 0
+function score(points) {
+  playerScore += points
+  console.log("Current Points: " + playerScore)
 }
 
 

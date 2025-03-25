@@ -247,9 +247,9 @@ h1 {
     overflow: hidden;
 }
 
-body {
+/* body {
     overflow: hidden;
-}
+} */
 
 canvas {
     margin: 0;
