@@ -1,5 +1,7 @@
+let countDownTime = 100; // how many seconds are left
+
 function clock() {
-    let countDownTime = 10; // 5 seconds
+
 
     let timerElement = document.getElementById("timer"); //display it
 
@@ -15,7 +17,9 @@ function clock() {
             countDownTime--; //do down
         }
     }
-    let timerInterval = setInterval(updateTimer, 1000); //update every 1000 millisec
+
+    // timer decrements by 1 second
+    let timerInterval = setInterval(updateTimer, 1000);
 
     updateTimer();//initialize the timer
 }

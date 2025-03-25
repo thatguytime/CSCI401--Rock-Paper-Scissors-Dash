@@ -111,30 +111,14 @@ function runCanvas(level) {
 
   // allows for fluid transition of directions when using keyboard
   const currentlyPressedKeys = {
-    w: {
-      pressed: false
-    },
-    a: {
-      pressed: false
-    },
-    s: {
-      pressed: false
-    },
-    d: {
-      pressed: false
-    },
-    ArrowDown: {
-      pressed: false
-    },
-    ArrowLeft: {
-      pressed: false
-    },
-    ArrowUp: {
-      pressed: false
-    },
-    ArrowRight: {
-      pressed: false
-    }
+    w: { pressed: false },
+    a: { pressed: false },
+    s: { pressed: false },
+    d: { pressed: false },
+    ArrowDown: { pressed: false },
+    ArrowLeft: { pressed: false },
+    ArrowUp: { pressed: false },
+    ArrowRight: { pressed: false }
   }
 
   addEventListener('keydown', ({ key }) => {
@@ -212,7 +196,6 @@ function runCanvas(level) {
 
   up.addEventListener('touchend', () => {
     currentlyPressedKeys.ArrowUp.pressed = false
-    console.log('unpress up')
   })
   down.addEventListener('touchend', () => {
     currentlyPressedKeys.ArrowDown.pressed = false
@@ -257,8 +240,10 @@ function runCanvas(level) {
       } else if (column === " ") {
         let testPellet = new Pellet(brickSize * j + (brickSize / 2) - 2.5, brickSize * i + (brickSize / 2) - 2.5) // 2.5: half the pellet sq size
         pellets.push(testPellet)
+
+        // Power up - lowercase 'p'
       } else if (column === "p") {
-        let testPowerUp = new PowerUp(brickSize * j + (brickSize / 2) - 12.5, brickSize * i + (brickSize / 2) - 12.5) // 
+        let testPowerUp = new PowerUp(brickSize * j + (brickSize / 2) - 12.5, brickSize * i + (brickSize / 2) - 12.5) // 12.5: half the powerup sq size
         powerUps.push(testPowerUp)
       }
 
@@ -327,22 +312,21 @@ function runCanvas(level) {
 
       if (Math.hypot(smiles.position.x - powerup.positionX, smiles.position.y - powerup.positionY) < 20) {
         powerUps.splice(powerUps.indexOf(powerup), 1)
-        console.log('Caught a powerup!')
 
-        userSpeedLimit = 8
+        userSpeedLimit = 7.5
 
         // testing speed powerup
         setTimeout(function () {
-          console.log("END OF POWER-UP");
+
 
           // return to standard speed
           userSpeedLimit = 5
         }, 10000);
-
-
       }
 
     })
+
+
 
     // render pellets
     pellets.forEach(pellet => {
@@ -354,14 +338,12 @@ function runCanvas(level) {
       if (Math.hypot(smiles.position.x - pellet.positionX, smiles.position.y - pellet.positionY) < 10) {
         pellets.splice(pellets.indexOf(pellet), 1)
         // score gets updated here
-
       }
 
       // triggers next level if you collect all the pellets
       if (pellets.length === 0) {
         console.log('no more pellets!')
         runCanvas(level + 1)
-
       }
 
     })
@@ -389,9 +371,8 @@ function runCanvas(level) {
           smiles.velocity.y = 0;
         }
       }
-
-
     })
+
     smiles.move()
     badGuy01.move()
     badGuy02.move()

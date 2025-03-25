@@ -247,6 +247,10 @@ h1 {
     overflow: hidden;
 }
 
+body {
+    overflow: hidden;
+}
+
 canvas {
     margin: 0;
     padding: 0;
