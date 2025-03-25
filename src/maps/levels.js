@@ -1,58 +1,35 @@
 import mapBrick from './moreLevels.js'
 // import Character from "../maps/characters.js"
-import smileImg from './smile.png
-'
+import smileImg from './smiles.png'
 
-function runCanvas() {
+function runCanvas(level) {
   const canvas = document.getElementById("myCanvas");
   const ctx = canvas.getContext("2d");  /// Store the 2D rendering context // context
 
   const characterRadius = 15
   class Character {
-<<<<<<< HEAD
-    constructor({ position, velocity, imageSrc }) {
-      this.position = position;
-      this.velocity = velocity;
-      this.radius = 15;
-      this.image = new Image();
-      this.image.src = imageSrc;
-    }
+	constructor({ position, velocity, imageSrc }) {
+	  this.position = position
+	  this.velocity = velocity
+	  this.radius = 15
+	  this.image = new Image()
+	  this.image.src = imageSrc
+	}
 
     draw() {
-      ctx.drawImage(
-        this.image,
-        this.position.x - this.radius, 
-        this.position.y - this.radius,
-        this.radius * 2,
-        this.radius * 2
-      );
-=======
-    constructor({ position, velocity }, color) {
-      this.position = position
-      this.velocity = velocity
-      this.radius = 15
-      this.color = color
-    }
-
-    draw() {
-      ctx.beginPath()
-      ctx.arc(
-        this.position.x,
-        this.position.y,
-        this.radius,
-        0,
-        Math.PI * 2,
-      )
-      ctx.fillStyle = this.color
-      ctx.fill()
-      ctx.closePath()
->>>>>>> upstream/main
+		ctx.drawImage(
+		       this.image,
+		       this.position.x - this.radius, 
+		       this.position.y - this.radius,
+		       this.radius * 2,
+		       this.radius * 2
+		     );
     }
 
     move() {
-      this.draw();
-      this.position.x += this.velocity.x;
-      this.position.y += this.velocity.y;
+      this.draw()
+      this.position.x += this.velocity.x
+      this.position.y += this.velocity.y
     }
   }
 
@@ -64,42 +41,33 @@ function runCanvas() {
     velocity: {
       x: 0,
       y: 0
-<<<<<<< HEAD
     },
-    imageSrc: smileImg
+  imageSrc: smileImg
   })
-  
-  const paper = new Character({
-	position: {
-		x: 40 + 
-	}
-  })
-=======
-    }
-  }, 'yellow')
 
   const badGuy01 = new Character({
     position: {
-      x: 520 + characterRadius + characterRadius / 2,
-      y: 40 + characterRadius + characterRadius / 2,
+      x: 520 + 15 + 15 / 2,
+      y: 40 + 15 + 15 / 2
     },
     velocity: {
       x: 0,
       y: 0
-    }
-  }, 'fuchsia')
+  },
+  imageSrc: smileImg
+  })
 
   const badGuy02 = new Character({
     position: {
-      x: 520 + characterRadius + characterRadius / 2,
-      y: 520 + characterRadius + characterRadius / 2,
+      x: 520 + 15 + 15 / 2,
+      y: 520 + 15 + 15 / 2
     },
     velocity: {
       x: 0,
       y: 0
-    }
-  }, 'indianred')
->>>>>>> upstream/main
+  }, 
+  imageSrc: smileImg
+  })
 
   const pelletRadius = 15
   class Pellet {
@@ -260,7 +228,7 @@ function runCanvas() {
     }
   }
 
-  mapBrick[0].forEach((row, i) => {
+  mapBrick[level].forEach((row, i) => {
     row.forEach((column, j) => {
 
       // wall == *, in the array
@@ -334,14 +302,6 @@ function runCanvas() {
     // render for pellets
     pellets.forEach(pellet => {
       pellet.draw()
-<<<<<<< HEAD
-	// COLLISION DETECTION TEMPLATE
-	    // a^2 + b^2 = c^
-	    // subtract x's and y's to get distance
-	  if (Math.hypot(pellet.positionX - smiles.position.x + pellet.positionY - smiles.position.y < 5)) {
-	    console.log("hit!")
-	    }
-=======
 
       // COLLISION DETECTION TEMPLATE
       // a^2 + b^2 = c^
@@ -356,7 +316,6 @@ function runCanvas() {
         runCanvas(level + 1)
 
       }
->>>>>>> upstream/main
 
     })
 
