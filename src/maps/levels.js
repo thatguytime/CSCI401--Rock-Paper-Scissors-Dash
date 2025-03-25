@@ -46,6 +46,7 @@ function runCanvas(level) {
       y: 0
     }
   }, 'yellow')
+  let userSpeedLimit = 5
 
   const badGuy01 = new Character({
     position: {
@@ -87,6 +88,23 @@ function runCanvas(level) {
     }
 
 
+  }
+
+  class PowerUp {
+    constructor(positionX, positionY) {
+      this.positionX = positionX
+      this.positionY = positionY
+      this.width = 25
+      this.height = 25
+    }
+
+    draw() {
+      ctx.beginPath()
+      ctx.rect(this.positionX, this.positionY, this.width, this.height)
+      ctx.fillStyle = "coral";  // Set fill color for powerup
+      ctx.fill()
+      ctx.closePath()
+    }
   }
 
   let lastKeyPressed = ''
@@ -208,6 +226,7 @@ function runCanvas(level) {
 
   let border = []
   let pellets = []
+  let powerUps = []
 
   // creates each brick, or wall, for the map
   let brickSize = 40
@@ -238,6 +257,9 @@ function runCanvas(level) {
       } else if (column === " ") {
         let testPellet = new Pellet(brickSize * j + (brickSize / 2) - 2.5, brickSize * i + (brickSize / 2) - 2.5) // 2.5: half the pellet sq size
         pellets.push(testPellet)
+      } else if (column === "p") {
+        let testPowerUp = new PowerUp(brickSize * j + (brickSize / 2) - 12.5, brickSize * i + (brickSize / 2) - 12.5) // 
+        powerUps.push(testPowerUp)
       }
 
     })
@@ -258,7 +280,7 @@ function runCanvas(level) {
           smiles.velocity.y = 0;
           break
         } else {
-          smiles.velocity.y = -5
+          smiles.velocity.y = -1 * userSpeedLimit
         }
       }
     } else if (currentlyPressedKeys.s.pressed && lastKeyPressed === 's' ||
@@ -270,7 +292,7 @@ function runCanvas(level) {
           smiles.velocity.y = 0
           break
         } else {
-          smiles.velocity.y = 5
+          smiles.velocity.y = userSpeedLimit
         }
       }
     } else if (currentlyPressedKeys.a.pressed && lastKeyPressed === 'a' ||
@@ -282,7 +304,7 @@ function runCanvas(level) {
           smiles.velocity.x = 0
           break
         } else {
-          smiles.velocity.x = -5
+          smiles.velocity.x = -1 * userSpeedLimit
         }
       }
     } else if (currentlyPressedKeys.d.pressed && lastKeyPressed === 'd' ||
@@ -294,12 +316,35 @@ function runCanvas(level) {
           smiles.velocity.x = 0
           break
         } else {
-          smiles.velocity.x = 5
+          smiles.velocity.x = userSpeedLimit
         }
       }
     }
 
-    // render for pellets
+    // render powerups
+    powerUps.forEach(powerup => {
+      powerup.draw()
+
+      if (Math.hypot(smiles.position.x - powerup.positionX, smiles.position.y - powerup.positionY) < 20) {
+        powerUps.splice(powerUps.indexOf(powerup), 1)
+        console.log('Caught a powerup!')
+
+        userSpeedLimit = 8
+
+        // testing speed powerup
+        setTimeout(function () {
+          console.log("END OF POWER-UP");
+
+          // return to standard speed
+          userSpeedLimit = 5
+        }, 10000);
+
+
+      }
+
+    })
+
+    // render pellets
     pellets.forEach(pellet => {
       pellet.draw()
 
@@ -308,6 +353,8 @@ function runCanvas(level) {
       // subtract x's and y's to get distance
       if (Math.hypot(smiles.position.x - pellet.positionX, smiles.position.y - pellet.positionY) < 10) {
         pellets.splice(pellets.indexOf(pellet), 1)
+        // score gets updated here
+
       }
 
       // triggers next level if you collect all the pellets

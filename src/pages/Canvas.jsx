@@ -19,6 +19,7 @@ export default function Canvas(props) {
     return (
         <>
             <div id="timer"></div>
+            <div id="score"></div>
             <canvas id="myCanvas" width="600" height="600"></canvas>
 
             <br />
