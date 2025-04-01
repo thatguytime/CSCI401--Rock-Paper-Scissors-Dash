@@ -1,5 +1,6 @@
 import mapBrick from './moreLevels.js'
 // import Character from "../maps/characters.js"
+import score from './score.js'
 import paperImg from './Paper0.png'
 import rockImg from './Rock0.png'
 import scissorsImg from './Scissors0.png'
@@ -395,14 +396,5 @@ function characterMeetsBrick({ circle, rectangle }) {
     circle.position.x - circle.radius + circle.velocity.x <= rectangle.x + rectangle.width + padding
   )
 }
-
-// keep track of score
-let playerScore = 0
-function score(points) {
-  playerScore += points
-  console.log("Current Points: " + playerScore)
-}
-
-
 
 export default runCanvas
