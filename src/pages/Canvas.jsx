@@ -18,6 +18,8 @@ export default function Canvas(props) {
         runCanvas(props.level)
     }, [])
 
+
+
     return (
         <>
             <div className="game-stats">
