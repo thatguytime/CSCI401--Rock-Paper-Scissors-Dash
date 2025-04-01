@@ -247,9 +247,13 @@ h1 {
     overflow: hidden;
 }
 
-/* body {
+body:has(canvas) {
     overflow: hidden;
-} */
+}
+
+body:not(:has(canvas)) {
+    overflow: auto;
+}
 
 canvas {
     margin: 0;
