@@ -1,9 +1,10 @@
+let countDownTime = 100; 
 function clock() {
-    let countDownTime = 10; // 5 seconds
+    
 
-    let timerElement = document.getElementById("timer"); //display it
+    let timerElement = document.getElementById("clock"); //display it
 
-    console.log(timerElement)
+        console.log(timerElement)
 
     function updateTimer() {//update
         timerElement.innerHTML = countDownTime; //show time left
@@ -17,7 +18,7 @@ function clock() {
     }
     let timerInterval = setInterval(updateTimer, 1000); //update every 1000 millisec
 
-    updateTimer();//initialize the timer
+    updateTimer();
 }
 
 export default clock

@@ -2,16 +2,17 @@ import mapBrick from './moreLevels.js'
 // import Character from "../maps/characters.js"
 import smileImg from './smiles.png'
 
-function runCanvas() {
+function runCanvas(level) {
   const canvas = document.getElementById("myCanvas");
   const ctx = canvas.getContext("2d");  /// Store the 2D rendering context // context
 
   const characterRadius = 15
   class Character {
-    constructor({ position, velocity }) {
+    constructor({ position, velocity }, color) {
       this.position = position
       this.velocity = velocity
       this.radius = 15
+      this.color = color
     }
 
     draw() {
@@ -23,7 +24,7 @@ function runCanvas() {
         0,
         Math.PI * 2,
       )
-      ctx.fillStyle = 'yellow'
+      ctx.fillStyle = this.color
       ctx.fill()
       ctx.closePath()
     }
@@ -44,7 +45,29 @@ function runCanvas() {
       x: 0,
       y: 0
     }
-  })
+  }, 'yellow')
+
+  const badGuy01 = new Character({
+    position: {
+      x: 520 + characterRadius + characterRadius / 2,
+      y: 40 + characterRadius + characterRadius / 2,
+    },
+    velocity: {
+      x: 0,
+      y: 0
+    }
+  }, 'fuchsia')
+
+  const badGuy02 = new Character({
+    position: {
+      x: 520 + characterRadius + characterRadius / 2,
+      y: 520 + characterRadius + characterRadius / 2,
+    },
+    velocity: {
+      x: 0,
+      y: 0
+    }
+  }, 'indianred')
 
   const pelletRadius = 15
   class Pellet {
@@ -144,6 +167,45 @@ function runCanvas() {
     }
   })
 
+  // add everthing here, then try to put in into other file
+  // add in button press for touchscreen here!
+  // just plug in the keys for when a touch event occurs
+  const up = document.getElementById('move-up')
+  const down = document.getElementById('move-down')
+  const left = document.getElementById('move-left')
+  const right = document.getElementById('move-right')
+
+  up.addEventListener('touchstart', () => {
+    currentlyPressedKeys.ArrowUp.pressed = true
+    lastKeyPressed = 'ArrowUp'
+  })
+  down.addEventListener('touchstart', () => {
+    currentlyPressedKeys.ArrowDown.pressed = true
+    lastKeyPressed = 'ArrowDown'
+  })
+  left.addEventListener('touchstart', () => {
+    currentlyPressedKeys.ArrowLeft.pressed = true
+    lastKeyPressed = 'ArrowLeft'
+  })
+  right.addEventListener('touchstart', () => {
+    currentlyPressedKeys.ArrowRight.pressed = true
+    lastKeyPressed = 'ArrowRight'
+  })
+
+  up.addEventListener('touchend', () => {
+    currentlyPressedKeys.ArrowUp.pressed = false
+    console.log('unpress up')
+  })
+  down.addEventListener('touchend', () => {
+    currentlyPressedKeys.ArrowDown.pressed = false
+  })
+  left.addEventListener('touchend', () => {
+    currentlyPressedKeys.ArrowLeft.pressed = false
+  })
+  right.addEventListener('touchend', () => {
+    currentlyPressedKeys.ArrowRight.pressed = false
+  })
+
   let border = []
   let pellets = []
 
@@ -166,7 +228,7 @@ function runCanvas() {
     }
   }
 
-  mapBrick[0].forEach((row, i) => {
+  mapBrick[level].forEach((row, i) => {
     row.forEach((column, j) => {
 
       // wall == *, in the array
@@ -236,16 +298,30 @@ function runCanvas() {
         }
       }
     }
-
+    // score math
+    let score = 0 
+    let points = 1;
+      
     // render for pellets
     pellets.forEach(pellet => {
       pellet.draw()
-
+      
       // COLLISION DETECTION TEMPLATE
       // a^2 + b^2 = c^
       // subtract x's and y's to get distance
-      if (Math.hypot(pellet.positionX - smiles.position.x + pellet.positionY - smiles.position.y < 5)) {
-        console.log("hit!")
+      if (Math.hypot(smiles.position.x - pellet.positionX, smiles.position.y - pellet.positionY) < 10) {
+        pellets.splice(pellets.indexOf(pellet), 1)
+        // score code will be here
+        score += points;
+        console.log("Score: " + score)
+        
+      }
+
+      // triggers next level if you collect all the pellets
+      if (pellets.length === 0) {
+        console.log('no more pellets!')
+        runCanvas(level + 1)
+
       }
 
     })
@@ -277,6 +353,8 @@ function runCanvas() {
 
     })
     smiles.move()
+    badGuy01.move()
+    badGuy02.move()
 
   }
 

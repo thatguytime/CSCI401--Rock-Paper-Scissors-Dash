@@ -3,6 +3,6 @@ function score(){
     //     if(CHARACTER TOUCHES PALLET)
     //         score +=1
 }
-
+export default score
 
 
