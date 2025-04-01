@@ -16,19 +16,28 @@ function runCanvas(level) {
       this.radius = 15
       this.image = new Image()
       this.image.src = imageSrc
+	  this.angle = 0;
     }
 
     draw() {
+      ctx.save();
+	  ctx.translate(this.position.x, this.position.y);
+	  ctx.rotate(this.angle);
       ctx.drawImage(
         this.image,
-        this.position.x - this.radius,
-        this.position.y - this.radius,
+        - this.radius,
+        - this.radius,
         this.radius * 2,
         this.radius * 2
       );
+	  ctx.restore();
     }
 
     move() {
+	  if (this.velocity.x > 0) this.angle = 0; // Moving right
+      if (this.velocity.x < 0) this.angle = Math.PI; // Moving left
+	  if (this.velocity.y > 0) this.angle = Math.PI / 2; // Moving down
+	  if (this.velocity.y < 0) this.angle = -Math.PI / 2; // Moving up
       this.draw()
       this.position.x += this.velocity.x
       this.position.y += this.velocity.y
@@ -267,13 +276,13 @@ function runCanvas(level) {
           paper.velocity.y = 0;
           break
         } else {
-          paper.velocity.y = -1 * userSpeedLimit
+          paper.velocity.y = -userSpeedLimit
         }
       }
     } else if (currentlyPressedKeys.s.pressed && lastKeyPressed === 's' ||
       currentlyPressedKeys.ArrowDown.pressed && lastKeyPressed === 'ArrowDown'
     ) {
-      for (let i = 0; i < border.length; i++) {
+	  for (let i = 0; i < border.length; i++) {
         const brickPart = border[i]
         if (characterMeetsBrick({ circle: { ...paper, velocity: { x: 0, y: 5 } }, rectangle: brickPart })) {
           paper.velocity.y = 0
@@ -285,19 +294,19 @@ function runCanvas(level) {
     } else if (currentlyPressedKeys.a.pressed && lastKeyPressed === 'a' ||
       currentlyPressedKeys.ArrowLeft.pressed && lastKeyPressed === 'ArrowLeft'
     ) {
-      for (let i = 0; i < border.length; i++) {
+	  for (let i = 0; i < border.length; i++) {
         const brickPart = border[i]
         if (characterMeetsBrick({ circle: { ...paper, velocity: { x: -5, y: 0 } }, rectangle: brickPart })) {
           paper.velocity.x = 0
           break
         } else {
-          paper.velocity.x = -1 * userSpeedLimit
+          paper.velocity.x = -userSpeedLimit
         }
       }
     } else if (currentlyPressedKeys.d.pressed && lastKeyPressed === 'd' ||
       currentlyPressedKeys.ArrowRight.pressed && lastKeyPressed === 'ArrowRight'
     ) {
-      for (let i = 0; i < border.length; i++) {
+	  for (let i = 0; i < border.length; i++) {
         const brickPart = border[i]
         if (characterMeetsBrick({ circle: { ...paper, velocity: { x: 5, y: 0 } }, rectangle: brickPart })) {
           paper.velocity.x = 0
