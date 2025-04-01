@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 import runCanvas from '../maps/levels.js'
 import clock from '../maps/clock.js'
-import score from '../maps/score.js'
 // import LevelSelect from '../maps/LevelSelect.jsx'
 import { Link } from 'react-router-dom'
 
@@ -14,17 +13,13 @@ export default function Canvas(props) {
 
     useEffect(() => {
         clock()
-        score(0)
         runCanvas(props.level)
     }, [])
 
     return (
         <>
-            <div className="game-stats">
-                <div id="timer">Time Left: <span id="time-left"></span></div>
-                <div id="score">Total Score: <span id="total-score"></span></div>
-            </div>
-
+            <div id="timer">Time Left: <span id="time-left"></span></div>
+            <div id="score"></div>
             <canvas id="myCanvas" width="600" height="600"></canvas>
 
             <br />
