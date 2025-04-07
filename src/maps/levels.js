@@ -1,9 +1,13 @@
 import mapBrick from './moreLevels.js'
 import score from './score.js'
 // import Character from "../maps/characters.js"
-import paperImg from './Paper0.png'
-import rockImg from './Rock0.png'
-import scissorsImg from './Scissors0.png'
+import paperImg0 from './Sprites/Paper0.png'
+import paperImg1 from './Sprites/Paper1.png'
+import paperImg2 from './Sprites/Paper2.png'
+import paperImg3 from './Sprites/Paper3.png'
+import rockImg0 from './Sprites/Rock0.png'
+import scissorsImg0 from './Sprites/Scissors0.png'
+import scissorsImg2 from './Sprites/Scissors2.png'
 
 function runCanvas(level) {
   const canvas = document.getElementById("myCanvas");
@@ -14,10 +18,18 @@ function runCanvas(level) {
     constructor({ position, velocity, imageSrc }) {
       this.position = position
       this.velocity = velocity
+	  this.imageSrc = imageSrc
       this.radius = 15
       this.image = new Image()
-      this.image.src = imageSrc
-	  this.angle = 0;
+      this.image.src = this.imageSrc[0]
+	  this.frameindex = 0
+	  this.angle = 0
+	  
+	  setInterval(() => {
+		if (this.velocity.x != 0 || this.velocity.y != 0){
+		this.frameindex = (this.frameindex + 1) % this.imageSrc.length
+		this.image.src = this.imageSrc[this.frameindex]
+	  }}, 250)
     }
 
     draw() {
@@ -54,7 +66,7 @@ function runCanvas(level) {
       x: 0,
       y: 0
     },
-    imageSrc: paperImg
+    imageSrc: [paperImg1, paperImg2, paperImg1, paperImg3]
   })
   let userSpeedLimit = 5
 
@@ -67,7 +79,7 @@ function runCanvas(level) {
       x: 0,
       y: 0
     },
-    imageSrc: rockImg
+    imageSrc: [rockImg0]
   })
 
   const scissors = new Character({
@@ -79,7 +91,7 @@ function runCanvas(level) {
       x: 0,
       y: 0
     },
-    imageSrc: scissorsImg
+    imageSrc: [scissorsImg0, scissorsImg2]
   })
 
   const pelletRadius = 15
