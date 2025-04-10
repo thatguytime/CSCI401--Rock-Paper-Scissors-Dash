@@ -5,7 +5,7 @@ function clock() {
 
     let timerElement = document.getElementById("time-left"); //display it
 
-    // console.log(timerElement)
+    console.log(timerElement)
 
     function updateTimer() {//update
         timerElement.innerHTML = countDownTime; //show time left
