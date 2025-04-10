@@ -1,10 +1,11 @@
-let countDownTime = 100; 
+let countDownTime = 100; // how many seconds are left
+
 function clock() {
-    
 
-    let timerElement = document.getElementById("clock"); //display it
 
-        console.log(timerElement)
+    let timerElement = document.getElementById("time-left"); //display it
+
+    // console.log(timerElement)
 
     function updateTimer() {//update
         timerElement.innerHTML = countDownTime; //show time left
@@ -16,7 +17,9 @@ function clock() {
             countDownTime--; //do down
         }
     }
-    let timerInterval = setInterval(updateTimer, 1000); //update every 1000 millisec
+
+    // timer decrements by 1 second
+    let timerInterval = setInterval(updateTimer, 1000);
 
     updateTimer();
 }
