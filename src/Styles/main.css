@@ -260,6 +260,14 @@ canvas {
     padding: 0;
 }
 
+body:has(canvas) {
+    overflow: hidden;
+}
+
+body:not(:has(canvas)) {
+    overflow: auto;
+}
+
 .d-pad {
     /* padding: 5px;
     display: flex;
@@ -333,3 +341,6 @@ canvas {
         visibility: visible;
     }
 }
+/* ***************************** C L O C K ******************************** */
+
+/* ***************************** S C O R E ******************************** */
