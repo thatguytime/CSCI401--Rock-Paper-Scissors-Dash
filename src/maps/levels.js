@@ -17,13 +17,15 @@ function runCanvas(level) {
       this.radius = 15
       this.image = new Image()
       this.image.src = imageSrc
-	  this.angle = 0;
+      this.angle = 0;
+
+      this.prevCollisions = [] // for badguy's AI
     }
 
     draw() {
       ctx.save();
-	  ctx.translate(this.position.x, this.position.y);
-	  ctx.rotate(this.angle);
+      ctx.translate(this.position.x, this.position.y);
+      ctx.rotate(this.angle);
       ctx.drawImage(
         this.image,
         - this.radius,
@@ -31,14 +33,14 @@ function runCanvas(level) {
         this.radius * 2,
         this.radius * 2
       );
-	  ctx.restore();
+      ctx.restore();
     }
 
     move() {
-	  if (this.velocity.x > 0) this.angle = 0; // Moving right
+      if (this.velocity.x > 0) this.angle = 0; // Moving right
       if (this.velocity.x < 0) this.angle = Math.PI; // Moving left
-	  if (this.velocity.y > 0) this.angle = Math.PI / 2; // Moving down
-	  if (this.velocity.y < 0) this.angle = -Math.PI / 2; // Moving up
+      if (this.velocity.y > 0) this.angle = Math.PI / 2; // Moving down
+      if (this.velocity.y < 0) this.angle = -Math.PI / 2; // Moving up
       this.draw()
       this.position.x += this.velocity.x
       this.position.y += this.velocity.y
@@ -64,23 +66,26 @@ function runCanvas(level) {
       y: 40 + 15 + 15 / 2
     },
     velocity: {
-      x: 0,
+      x: -1,
       y: 0
     },
     imageSrc: rockImg
   })
 
-  const scissors = new Character({
-    position: {
-      x: 520 + 15 + 15 / 2,
-      y: 520 + 15 + 15 / 2
-    },
-    velocity: {
-      x: 0,
-      y: 0
-    },
-    imageSrc: scissorsImg
-  })
+  // const scissors = new Character({
+  //   position: {
+  //     x: 520 + 15 + 15 / 2,
+  //     y: 520 + 15 + 15 / 2
+  //   },
+  //   velocity: {
+  //     x: -1,
+  //     y: 0
+  //   },
+  //   imageSrc: scissorsImg
+  // })
+
+  let badGuySpeed = 1
+  const badGuys = [rock]
 
   const pelletRadius = 15
   class Pellet {
@@ -283,7 +288,7 @@ function runCanvas(level) {
     } else if (currentlyPressedKeys.s.pressed && lastKeyPressed === 's' ||
       currentlyPressedKeys.ArrowDown.pressed && lastKeyPressed === 'ArrowDown'
     ) {
-	  for (let i = 0; i < border.length; i++) {
+      for (let i = 0; i < border.length; i++) {
         const brickPart = border[i]
         if (characterMeetsBrick({ circle: { ...paper, velocity: { x: 0, y: 5 } }, rectangle: brickPart })) {
           paper.velocity.y = 0
@@ -295,7 +300,7 @@ function runCanvas(level) {
     } else if (currentlyPressedKeys.a.pressed && lastKeyPressed === 'a' ||
       currentlyPressedKeys.ArrowLeft.pressed && lastKeyPressed === 'ArrowLeft'
     ) {
-	  for (let i = 0; i < border.length; i++) {
+      for (let i = 0; i < border.length; i++) {
         const brickPart = border[i]
         if (characterMeetsBrick({ circle: { ...paper, velocity: { x: -5, y: 0 } }, rectangle: brickPart })) {
           paper.velocity.x = 0
@@ -307,7 +312,7 @@ function runCanvas(level) {
     } else if (currentlyPressedKeys.d.pressed && lastKeyPressed === 'd' ||
       currentlyPressedKeys.ArrowRight.pressed && lastKeyPressed === 'ArrowRight'
     ) {
-	  for (let i = 0; i < border.length; i++) {
+      for (let i = 0; i < border.length; i++) {
         const brickPart = border[i]
         if (characterMeetsBrick({ circle: { ...paper, velocity: { x: 5, y: 0 } }, rectangle: brickPart })) {
           paper.velocity.x = 0
@@ -343,7 +348,7 @@ function runCanvas(level) {
     // render pellets
     pellets.forEach(pellet => {
       pellet.draw()
-      
+
       // COLLISION DETECTION TEMPLATE
       // a^2 + b^2 = c^
       // subtract x's and y's to get distance
@@ -386,18 +391,112 @@ function runCanvas(level) {
       }
     })
     paper.move()
-    rock.move()
-    scissors.move()
+    // rock.move()
+    // scissors.move()
 
+    // Badguy AI
+    // how do you make the AI characters move?
+    // collision detection: track bad guy collisions at any point in time
+    badGuys.forEach(dude => {
+      dude.move()
+
+      const collisions = []
+      border.forEach(wall => {
+
+        // keeps track of the direction character is moving in and what it can possibly collisde with
+        if (!collisions.includes('right') && characterMeetsBrick({ circle: { ...dude, velocity: { x: badGuySpeed, y: 0 } }, rectangle: wall })) {
+          collisions.push('right')
+
+          console.log('hit right')
+        }
+        if (!collisions.includes('left') && characterMeetsBrick({ circle: { ...dude, velocity: { x: -1 * badGuySpeed, y: 0 } }, rectangle: wall })) {
+          collisions.push('left')
+
+          console.log('hit left')
+        }
+        if (!collisions.includes('up') && characterMeetsBrick({ circle: { ...dude, velocity: { x: 0, y: -1 * badGuySpeed } }, rectangle: wall })) {
+          collisions.push('up')
+
+          console.log('hit top')
+        }
+        if (!collisions.includes('down') && characterMeetsBrick({ circle: { ...dude, velocity: { x: 0, y: badGuySpeed } }, rectangle: wall })) {
+          collisions.push('down')
+
+          console.log('hit bottom')
+        }
+      })
+
+      if (collisions.length > dude.prevCollisions.length) {
+        dude.prevCollisions = [...collisions]
+      }
+
+
+
+      // console.log(collisions)
+      if (JSON.stringify(collisions) !== JSON.stringify(dude.prevCollisions)) {
+
+
+        if (dude.velocity.x > 0)
+          dude.prevCollisions.push('right')
+        else if (dude.velocity.x < 0)
+          dude.prevCollisions.push('left')
+        else if (dude.velocity.y > 0)
+          dude.prevCollisions.push('down')
+        else if (dude.velocity.y < 0)
+          dude.prevCollisions.push('up')
+
+        // finds the path that is open
+        const pathways = dude.prevCollisions.filter(collision => !collisions.includes(collision))
+
+        // algorithm that chooses which direction for the bad guys to go
+        const direction = pathways[Math.floor(Math.random() * pathways.length)]
+
+        switch (direction) {
+          case 'down':
+            dude.velocity.x = 0
+            dude.velocity.y = badGuySpeed
+            break
+          case 'up':
+            dude.velocity.x = 0
+            dude.velocity.y = -1 * badGuySpeed
+            break
+          case 'right':
+            dude.velocity.x = badGuySpeed
+            dude.velocity.y = 0
+            break
+          case 'left':
+            dude.velocity.x = -1 * badGuySpeed
+            dude.velocity.y = 0
+            break
+        }
+
+        dude.prevCollisions = []
+      }
+    })
 
   }
 
   animate()
 }
 
+function iDontKnow(entity, wall) {
+  return ((entity.velocity.y < 0 && // moving up
+    entity.position.y - entity.radius + entity.velocity.y <= wall.y + wall.height &&
+    entity.position.y - entity.radius + entity.velocity.y > wall.y) ||
+    (entity.velocity.y > 0 && // moving down
+      entity.position.y + entity.radius + entity.velocity.y >= wall.y &&
+      entity.position.y + entity.radius + entity.velocity.y < wall.y + wall.height) ||
+    (entity.velocity.x < 0 && // moving left
+      entity.position.x - entity.radius + entity.velocity.x <= wall.x + wall.width &&
+      entity.position.x - entity.radius + entity.velocity.x > wall.x) ||
+    (entity.velocity.x > 0 && // moving right
+      entity.position.x + entity.radius + entity.velocity.x >= wall.x &&
+      entity.position.x + entity.radius + entity.velocity.x < wall.x + wall.width))
+}
+
 // Check if the character is about to collide with the brick from any direction
 function characterMeetsBrick({ circle, rectangle }) {
-  const padding = 2;
+  const padding = 1;
   return (
     circle.position.y - circle.radius + circle.velocity.y <= rectangle.y + rectangle.height + padding &&
     circle.position.x + circle.radius + circle.velocity.x >= rectangle.x - padding &&
@@ -405,14 +504,5 @@ function characterMeetsBrick({ circle, rectangle }) {
     circle.position.x - circle.radius + circle.velocity.x <= rectangle.x + rectangle.width + padding
   )
 }
-
-// keep track of score
-// let playerScore = 0
-// function score(points) {
-//   playerScore += points
-//   console.log("Current Points: " + playerScore)
-// }
-
-
 
 export default runCanvas
