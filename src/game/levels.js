@@ -58,19 +58,19 @@ function runCanvas(level) {
     imageSrc: rockImg
   }, ctx)
 
-  // const scissors = new Character({
-  //   position: {
-  //     x: 520 + 15 + 15 / 2,
-  //     y: 520 + 15 + 15 / 2
-  //   },
-  //   velocity: {
-  //     x: -1,
-  //     y: 0
-  //   },
-  //   imageSrc: scissorsImg
-  // }, ctx)
+  const scissors = new Character({
+    position: {
+      x: 520 + 15 + 15 / 2,
+      y: 520 + 15 + 15 / 2
+    },
+    velocity: {
+      x: -1,
+      y: 0
+    },
+    imageSrc: scissorsImg
+  }, ctx)
 
-  const badGuys = [rock]
+  const badGuys = [rock, scissors]
 
   mapBrick[level].forEach((row, i) => {
     row.forEach((column, j) => {
@@ -203,69 +203,152 @@ function runCanvas(level) {
     // Badguy AI
     // how do you make the AI characters move?
     // collision detection: track bad guy collisions at any point in time
+    // let bad guy move in a direction that is open
+    // if border appears, check for opening
+    // move that way
     badGuys.forEach(dude => {
-      dude.move()
 
       const collisions = []
-      border.forEach(wall => {
+      const openPath = []
+      let direction
 
-        // keeps track of the direction character is moving in and what it can possibly collisde with
-        if (!collisions.includes('right') && characterMeetsBrick({ circle: { ...dude, velocity: { x: badGuySpeed, y: 0 } }, rectangle: wall })) {
-          collisions.push('right')
-        }
-        if (!collisions.includes('left') && characterMeetsBrick({ circle: { ...dude, velocity: { x: -1 * badGuySpeed, y: 0 } }, rectangle: wall })) {
-          collisions.push('left')
-        }
-        if (!collisions.includes('up') && characterMeetsBrick({ circle: { ...dude, velocity: { x: 0, y: -1 * badGuySpeed } }, rectangle: wall })) {
-          collisions.push('up')
-        }
-        if (!collisions.includes('down') && characterMeetsBrick({ circle: { ...dude, velocity: { x: 0, y: badGuySpeed } }, rectangle: wall })) {
-          collisions.push('down')
-        }
-      })
+      // bad guy goes up
+      if (dude.velocity.y < 0) {
+        for (let i = 0; i < border.length; i++) {
+          const brickPart = border[i]
+          if (characterMeetsBrick({ circle: { ...dude, velocity: { x: 0, y: -5 } }, rectangle: brickPart })) {
 
-      if (collisions.length > dude.prevCollisions.length) {
-        dude.prevCollisions = [...collisions]
+            openPath.push('down', 'right', 'left')
+
+            direction = openPath[Math.floor(Math.random() * 3)]
+            console.log(openPath)
+
+            switch (direction) {
+              case 'down':
+                dude.velocity.x = 0
+                dude.velocity.y = badGuySpeed
+                break
+              case 'up':
+                dude.velocity.x = 0
+                dude.velocity.y = -1 * badGuySpeed
+                break
+              case 'right':
+                dude.velocity.x = badGuySpeed
+                dude.velocity.y = 0
+                break
+              case 'left':
+                dude.velocity.x = -1 * badGuySpeed
+                dude.velocity.y = 0
+                break
+            }
+
+            openPath.splice(0, 3)
+          }
+        }
+
+
+        // bad guy goes down
+      } else if (dude.velocity.y > 0) {
+        for (let i = 0; i < border.length; i++) {
+          const brickPart = border[i]
+          if (characterMeetsBrick({ circle: { ...dude, velocity: { x: 0, y: 5 } }, rectangle: brickPart })) {
+
+            openPath.push('up', 'right', 'left')
+
+            direction = openPath[Math.floor(Math.random() * 3)]
+            console.log(openPath)
+            switch (direction) {
+              case 'down':
+                dude.velocity.x = 0
+                dude.velocity.y = badGuySpeed
+                break
+              case 'up':
+                dude.velocity.x = 0
+                dude.velocity.y = -1 * badGuySpeed
+                break
+              case 'right':
+                dude.velocity.x = badGuySpeed
+                dude.velocity.y = 0
+                break
+              case 'left':
+                dude.velocity.x = -1 * badGuySpeed
+                dude.velocity.y = 0
+                break
+            }
+
+            openPath.splice(0, 3)
+          }
+        }
+
+        // bad guy goes left
+      } else if (dude.velocity.x < 0) {
+        for (let i = 0; i < border.length; i++) {
+          const brickPart = border[i]
+          if (characterMeetsBrick({ circle: { ...dude, velocity: { x: -5, y: 0 } }, rectangle: brickPart })) {
+
+            openPath.push('up', 'right', 'down')
+
+            direction = openPath[Math.floor(Math.random() * 3)]
+            console.log(openPath)
+            switch (direction) {
+              case 'down':
+                dude.velocity.x = 0
+                dude.velocity.y = badGuySpeed
+                break
+              case 'up':
+                dude.velocity.x = 0
+                dude.velocity.y = -1 * badGuySpeed
+                break
+              case 'right':
+                dude.velocity.x = badGuySpeed
+                dude.velocity.y = 0
+                break
+              case 'left':
+                dude.velocity.x = -1 * badGuySpeed
+                dude.velocity.y = 0
+                break
+            }
+
+            openPath.splice(0, 3)
+          }
+        }
+
+        // bad guy goes right
+      } else if (dude.velocity.x > 0) {
+        for (let i = 0; i < border.length; i++) {
+          const brickPart = border[i]
+
+          if (characterMeetsBrick({ circle: { ...dude, velocity: { x: 5, y: 0 } }, rectangle: brickPart })) {
+
+            openPath.push('up', 'down', 'left')
+
+            direction = openPath[Math.floor(Math.random() * 3)]
+            console.log(openPath)
+            switch (direction) {
+              case 'down':
+                dude.velocity.x = 0
+                dude.velocity.y = badGuySpeed
+                break
+              case 'up':
+                dude.velocity.x = 0
+                dude.velocity.y = -1 * badGuySpeed
+                break
+              case 'right':
+                dude.velocity.x = badGuySpeed
+                dude.velocity.y = 0
+                break
+              case 'left':
+                dude.velocity.x = -1 * badGuySpeed
+                dude.velocity.y = 0
+                break
+            }
+
+            openPath.splice(0, 3)
+          }
+        }
       }
 
-      if (JSON.stringify(collisions) !== JSON.stringify(dude.prevCollisions)) {
-
-        if (dude.velocity.x > 0)
-          dude.prevCollisions.push('right')
-        else if (dude.velocity.x < 0)
-          dude.prevCollisions.push('left')
-        else if (dude.velocity.y > 0)
-          dude.prevCollisions.push('down')
-        else if (dude.velocity.y < 0)
-          dude.prevCollisions.push('up')
-
-        // finds the path that is open
-        const pathways = dude.prevCollisions.filter(collision => !collisions.includes(collision))
-
-        // algorithm that chooses which direction for the bad guys to go
-        const direction = pathways[Math.floor(Math.random() * pathways.length)]
-
-        switch (direction) {
-          case 'down':
-            dude.velocity.x = 0
-            dude.velocity.y = badGuySpeed
-            break
-          case 'up':
-            dude.velocity.x = 0
-            dude.velocity.y = -1 * badGuySpeed
-            break
-          case 'right':
-            dude.velocity.x = badGuySpeed
-            dude.velocity.y = 0
-            break
-          case 'left':
-            dude.velocity.x = -1 * badGuySpeed
-            dude.velocity.y = 0
-            break
-        }
-
-        dude.prevCollisions = []
-      }
+      dude.move()
     })
 
   }
