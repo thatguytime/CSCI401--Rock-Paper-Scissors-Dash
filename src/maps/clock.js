@@ -21,7 +21,7 @@ function clock() {
     // timer decrements by 1 second
     let timerInterval = setInterval(updateTimer, 1000);
 
-    updateTimer();//initialize the timer
+    updateTimer();
 }
 
 export default clock

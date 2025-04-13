@@ -7,3 +7,4 @@ function score(points) {
 }
 
 export default score
+

@@ -5,6 +5,7 @@ import score from '../maps/score.js'
 // import LevelSelect from '../maps/LevelSelect.jsx'
 import { Link } from 'react-router-dom'
 
+
 export default function Canvas(props) {
 
     // useRef: avoids re-render
@@ -17,6 +18,8 @@ export default function Canvas(props) {
         score(0)
         runCanvas(props.level)
     }, [])
+
+
 
     return (
         <>
