@@ -39,7 +39,7 @@ function App() {
         <Route path='/main-menu' element={<MainMenu />} />
         <Route path='/login-screen' element={<LoginScreen />} />
         <Route path='/canvas' element={<Canvas level={0} />} />
-		<Route path='/CharacterScreen' element={<CharacterScreen />} />
+        <Route path='/CharacterScreen' element={<CharacterScreen />} />
       </Routes>
     </>
   )

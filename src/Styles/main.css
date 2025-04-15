@@ -140,10 +140,10 @@ h1 {
 /*************************** C H A R A C T E R | S E L E C T ***************************/
 
 .character-border {
-	border-radius: 20px;
-	display: flex;
-	flex-direction: row;
-	padding: 1px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    padding: 1px;
     background-color: #202020;
     box-shadow: rgba(255, 255, 0, 0.25) 0px 50px 100px -20px,
         rgba(255, 255, 0, 0.3) 0px 30px 60px -30px,
@@ -152,7 +152,7 @@ h1 {
 }
 
 .character-button {
-	box-sizing: border-box;
+    box-sizing: border-box;
     border: 6px solid #1919A6;
     border-radius: 20px;
     text-transform: uppercase;
@@ -170,10 +170,12 @@ h1 {
     cursor: pointer;
     transition: 1s ease-out;
 }
+
 .character-button:hover {
     transform: scale(1.5);
     transition-duration: 1s ease-out;
 }
+
 /********************************** M A I N | M E N U **********************************/
 
 .main-menu-button {
@@ -378,6 +380,7 @@ body:not(:has(canvas)) {
         visibility: visible;
     }
 }
+
 /* ***************************** C L O C K ******************************** */
 
 /* ***************************** S C O R E ******************************** */

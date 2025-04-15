@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react"
-import runCanvas from '../maps/levels.js'
-import clock from '../maps/clock.js'
-import score from '../maps/score.js'
-// import LevelSelect from '../maps/LevelSelect.jsx'
+import runCanvas from '../game/levels.js'
+import clock from '../game/clock.js'
+import score from '../game/score.js'
+// import LevelSelect from '../game/LevelSelect.jsx'
 import { Link } from 'react-router-dom'
 
 
