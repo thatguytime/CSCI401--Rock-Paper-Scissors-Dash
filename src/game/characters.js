@@ -2,14 +2,23 @@ class Character {
     constructor({ position, velocity, imageSrc }, ctx) {
         this.position = position
         this.velocity = velocity
+		this.imageSrc = imageSrc
         this.radius = 15
         this.image = new Image()
-        this.image.src = imageSrc
+        this.image.src = this.imageSrc[0]
+		this.frameindex = 0
         this.angle = 0;
         this.ctx = ctx
         this.state = 'active'
-
-        this.prevCollisions = [] // for badguy's AI
+		this.prevCollisions = [] // for badguy's AI
+		
+		setInterval(() => {
+				if (this.velocity.x != 0 || this.velocity.y != 0){
+				this.frameindex = (this.frameindex + 1) % this.imageSrc.length
+				this.image.src = this.imageSrc[this.frameindex]
+			  }}, 250)
+		
+        
     }
 
     draw() {
