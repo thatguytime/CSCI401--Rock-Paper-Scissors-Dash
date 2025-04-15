@@ -3,9 +3,13 @@ import mapBrick from './moreLevels.js'
 import score from './score.js'
 
 // Character sprites
-import paperImg from './Paper0.png'
-import rockImg from './Rock0.png'
-import scissorsImg from './Scissors0.png'
+import paper0 from './Sprites/Paper0.png'
+import rock0 from './Sprites/Rock0.png'
+import scissors0 from './Sprites/Scissors0.png'
+import paper1 from './Sprites/Paper1.png'
+import paper2 from './Sprites/Paper2.png'
+import paper3 from './Sprites/Paper3.png'
+import scissors2 from './Sprites/Scissors2.png'
 
 // classes
 import PowerUp from './powerup.js'
@@ -43,7 +47,7 @@ function runCanvas(level) {
       x: 0,
       y: 0
     },
-    imageSrc: paperImg
+    imageSrc: [paper1, paper2, paper1, paper3]
   }, ctx)
 
   const rock = new Character({
@@ -52,10 +56,10 @@ function runCanvas(level) {
       y: 40 + 15 + 15 / 2
     },
     velocity: {
-      x: -1,
+      x: 0,
       y: 0
     },
-    imageSrc: rockImg
+    imageSrc: [rock0, rock0, rock0]
   }, ctx)
 
   const scissors = new Character({
@@ -64,10 +68,10 @@ function runCanvas(level) {
       y: 520 + 15 + 15 / 2
     },
     velocity: {
-      x: -1,
+      x: 0,
       y: 0
     },
-    imageSrc: scissorsImg
+    imageSrc: [scissors0, scissors2]
   }, ctx)
 
   const badGuys = [rock, scissors]
