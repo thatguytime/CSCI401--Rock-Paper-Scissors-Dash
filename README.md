@@ -202,3 +202,13 @@ Need to look into security, *especially* with password field in database
 # To Do
 
 - the project
+
+--- 
+
+How the backend talks to the browser
+
+```
+[Browser] ←→ [React App] ←→ [Axios] ←→ [Express Server] ←→ [MongoDB]
+                ^             ^               ^                 ^
+         npm run dev      POST req       node server.js    Mongoose
+```
