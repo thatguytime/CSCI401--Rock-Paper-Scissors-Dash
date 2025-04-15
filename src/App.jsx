@@ -10,6 +10,7 @@ import {
   Route
 } from "react-router-dom"
 import Canvas from './pages/Canvas'
+import Register from './pages/Register'
 
 // for temp background
 import { useLocation } from 'react-router-dom';
@@ -40,6 +41,7 @@ function App() {
         <Route path='/login-screen' element={<LoginScreen />} />
         <Route path='/canvas' element={<Canvas level={0} />} />
         <Route path='/CharacterScreen' element={<CharacterScreen />} />
+        <Route path='/Register' element={<Register />} />
       </Routes>
     </>
   )

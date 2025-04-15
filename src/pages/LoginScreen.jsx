@@ -5,7 +5,6 @@ import axios from 'axios'
 export default function LoginScreen() {
     const [formData, setFormData] = useState({
         email: '',
-        username: '',
         password: ''
     })
 
@@ -21,48 +20,52 @@ export default function LoginScreen() {
         //prevents page from reloading when submitting form
         e.preventDefault()
 
-        try {
-            const res = await axios.post('http://localhost:5000/api/register', formData)
-            console.log('res: ' + res.data.message)
-        } catch (err) {
-            console.log('No can do buckaroo: ' + err.response.data.error)
-        }
-
-        // console.log("Form submitted!")
-
-        // const formData = new FormData(e.currentTarget)
-        // const username = formData.get("name")
-        // const password = formData.get("password")
-        // const email = formData.get("email")
+        const res = await fetch('http://localhost:5000/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
     }
 
     return (
         <div className="universal-border pacman-font">
             <h1>Rock Paper Scissors Dash</h1>
 
-            <h2>Login / sign up</h2>
+            <h2>Login</h2>
 
             <form onSubmit={handleSubmit}>
-                <div className='inputField'>
-                    <label htmlFor='username'>Username:</label>
-                    <input type="text" aria-label='user name' name="username" placeholder='DrummerGuy123' onChange={handleChange}></input>
+
+                <div className="inputField">
+                    <label htmlFor='email'>Email:</label>
+                    <input
+                        type="email"
+                        aria-label='email'
+                        name="email"
+                        placeholder='joeschmo@aol.com'
+                        onChange={handleChange}
+                        value={formData.email}
+                        required
+                    ></input>
                 </div>
 
                 <div className="inputField">
                     <label htmlFor='password'>Password:</label>
-                    <input type="text" aria-label='password' name="password" placeholder='********' onChange={handleChange}></input>
+                    <input
+                        type="password"
+                        aria-label='password'
+                        name="password"
+                        placeholder='********'
+                        onChange={handleChange}
+                        value={formData.password}
+                        required
+                    ></input>
                 </div>
-
-                <div className="inputField">
-                    <label htmlFor='email'>Email (optional):</label>
-                    <input type="email" aria-label='email' name="email" placeholder='joeschmo@aol.com' onChange={handleChange}></input>
-                </div>
-
 
                 <button className='submit-form'>submit</button><br />
-                <button className='submit-form'>Don't log me in</button>
             </form>
 
+            <Link to="/Register">First time? Sign up</Link>
+            <Link to="/">I want to try the game first</Link>
             <Link to="/">Back to previous page</Link>
         </div>
     )
