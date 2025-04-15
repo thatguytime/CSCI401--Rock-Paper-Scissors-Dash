@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import rock from '../game/Rock0.png'
-import paper from '../game/Paper0.png'
-import scissors from '../game/Scissors0.png'
+import rock from '../game/Sprites/Rock0.png'
+import paper from '../game/Sprites/Paper0.png'
+import scissors from '../game/Sprites/Scissors0.png'
 
 export default function CharacterScreen() {
     const characters = [
