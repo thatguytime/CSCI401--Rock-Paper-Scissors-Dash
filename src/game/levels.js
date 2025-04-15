@@ -56,7 +56,7 @@ function runCanvas(level) {
       y: 40 + 15 + 15 / 2
     },
     velocity: {
-      x: 0,
+      x: -1,
       y: 0
     },
     imageSrc: [rock0, rock0, rock0]
@@ -68,7 +68,7 @@ function runCanvas(level) {
       y: 520 + 15 + 15 / 2
     },
     velocity: {
-      x: 0,
+      x: -1,
       y: 0
     },
     imageSrc: [scissors0, scissors2]
