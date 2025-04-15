@@ -247,11 +247,19 @@ h1 {
 
 /******************************* L O G I N | S C R E E N *******************************/
 
+form {
+    margin: auto;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #fff;
+}
+
 .inputField {
     display: flex;
     text-align: center;
     margin: 10px;
-    justify-content: center;
+    justify-content: space-between;
+    max-width: 400px;
 }
 
 .submit-form {
