@@ -19,12 +19,8 @@ export default function LoginScreen() {
 
         //prevents page from reloading when submitting form
         e.preventDefault()
+        axios.get('/')
 
-        const res = await fetch('http://localhost:5000/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        })
     }
 
     return (
@@ -42,10 +38,10 @@ export default function LoginScreen() {
                         aria-label='email'
                         name="email"
                         placeholder='joeschmo@aol.com'
-                        onChange={handleChange}
                         value={formData.email}
+                        onChange={e => { setFormData({ ...formData, email: e.target.value }) }}
                         required
-                    ></input>
+                    />
                 </div>
 
                 <div className="inputField">
@@ -55,10 +51,10 @@ export default function LoginScreen() {
                         aria-label='password'
                         name="password"
                         placeholder='********'
-                        onChange={handleChange}
                         value={formData.password}
+                        onChange={e => { setFormData({ ...formData, password: e.target.value }) }}
                         required
-                    ></input>
+                    />
                 </div>
 
                 <button className='submit-form'>submit</button><br />

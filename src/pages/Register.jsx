@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import axios from 'axios'
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -19,12 +20,8 @@ export default function Register() {
 
         //prevents page from reloading when submitting form
         e.preventDefault()
+        axios.get('/')
 
-        const res = await fetch('http://localhost:5000/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        })
 
     }
 
@@ -42,10 +39,10 @@ export default function Register() {
                         aria-label='user name'
                         name="username"
                         placeholder='DrummerGuy123'
-                        onChange={(e) => { setData({ ...formData, username: e.target.value }) }}
                         value={formData.username}
+                        onChange={e => { setFormData({ ...formData, username: e.target.value }) }}
                         required
-                    ></input>
+                    />
                 </div>
 
                 <div className="inputField">
@@ -55,10 +52,10 @@ export default function Register() {
                         aria-label='email'
                         name="email"
                         placeholder='joeschmo@aol.com'
-                        onChange={(e) => { setData({ ...formData, email: e.target.value }) }}
                         value={formData.email}
+                        onChange={e => { setFormData({ ...formData, email: e.target.value }) }}
                         required
-                    ></input>
+                    />
                 </div>
 
                 <div className="inputField">
@@ -68,10 +65,10 @@ export default function Register() {
                         aria-label='password'
                         name="password"
                         placeholder='********'
-                        onChange={(e) => { setData({ ...formData, password: e.target.value }) }}
                         value={formData.password}
+                        onChange={e => { setFormData({ ...formData, password: e.target.value }) }}
                         required
-                    ></input>
+                    />
                 </div>
 
                 <button className='submit-form'>Submit</button><br />

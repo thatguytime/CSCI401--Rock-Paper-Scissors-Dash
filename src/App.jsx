@@ -11,10 +11,14 @@ import {
 } from "react-router-dom"
 import Canvas from './pages/Canvas'
 import Register from './pages/Register'
+import axios from 'axios'
 
 // for temp background
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+
+axios.defaults.baseURL = 'http://localhost:5050'
+axios.defaults.withCredentials = true
 
 function App() {
   const [count, setCount] = useState(0)
