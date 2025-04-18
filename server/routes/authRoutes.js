@@ -1,7 +1,7 @@
 // creates API endpoints
 import cors from 'cors'
 import express from 'express'
-import { test } from '../controllers/authController.js'
+import { test, registerUser } from '../controllers/authController.js'
 const router = express.Router()
 
 // middleware
@@ -13,6 +13,6 @@ router.use(
 )
 
 router.get('/', test)
-router.post('/register', registerUsers)
+router.post('/register', registerUser)
 
 export default router
