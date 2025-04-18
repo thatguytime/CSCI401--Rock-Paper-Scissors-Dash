@@ -12,12 +12,13 @@ import {
 import Canvas from './pages/Canvas'
 import Register from './pages/Register'
 import axios from 'axios'
+import { Toaster } from 'react-hot-toast'
 
 // for temp background
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
-axios.defaults.baseURL = 'http://localhost:5050'
+axios.defaults.baseURL = 'http://localhost:8000'
 axios.defaults.withCredentials = true
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
 
   return (
     <>
+      <Toaster position='bottom-right' toastOptions={{ duration: 4000 }} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/technical-design" element={<TechnicalDesign />} />
