@@ -36,3 +36,33 @@ export const sendThankYouForVerificationEmail = async (email, username) => {
         throw new Error("Error sending thank you email")
     }
 }
+
+export const sendPasswordResetEmail = async (email, resetURL) => {
+    try {
+        const { data, error } = await resend.emails.send({
+            from: "noreply@rockpaperscissorsdash.com",
+            to: [email],
+            subject: "Reset password",
+            html: `Click <a href="${resetURL}">here</a> to reset your password`
+
+        })
+    } catch (error) {
+        console.log("error sending thank you email", error)
+        throw new Error("Error sending thank you email")
+    }
+}
+
+export const sendResetSuccessEmail = async (email, username) => {
+    try {
+        const { data, error } = await resend.emails.send({
+            from: "noreply@rockpaperscissorsdash.com",
+            to: [email],
+            subject: "Password reset was successful",
+            html: `Hey ${username}, your password has been reset. Happy gaming!`
+
+        })
+    } catch (error) {
+        console.log("error sending password reset successful email", error)
+        throw new Error("Error sending password reset successful email")
+    }
+}

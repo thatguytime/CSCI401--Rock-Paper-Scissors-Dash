@@ -2,7 +2,8 @@ import { User } from '../model/user.js'
 import bcrypt from 'bcryptjs'
 import { generateVerificationToken } from '../utils/generateVerificationToken.js'
 import { generateJWTToken } from '../utils/generateJWTToken.js'
-import { sendVerificationEmail, sendThankYouForVerificationEmail } from "../resend/email.js"
+import { sendVerificationEmail, sendThankYouForVerificationEmail, sendPasswordResetEmail, sendResetSuccessEmail } from "../resend/email.js"
+import crypto from 'crypto'
 
 export const signup = async (req, res) => {
     const { username, email, password } = req.body
@@ -115,6 +116,59 @@ export const verifyEmail = async (req, res) => {
         res.status(200).json({ success: true, message: "Thank you for verifying email sent successfully" })
     } catch (error) {
         console.log("error verifying email\n", error)
+        res.status(400).json({ success: false, message: error.message })
+    }
+}
+
+export const forgotPassword = async (req, res) => {
+    const { email } = req.body
+    try {
+        const user = await User.findOne({ email })
+
+        if (!user) {
+            return res.status(400).json({ success: false, message: "User not found" })
+        }
+
+        const resetPasswordToken = crypto.randomBytes(32).toString("hex")
+        const resetPasswordExpiresAt = Date.now() + 24 * 60 * 60 * 1000 // 1 hour
+
+        user.resetPasswordToken = resetPasswordToken
+        user.resetPasswordExpiresAt = resetPasswordExpiresAt
+
+        await user.save()
+        await sendPasswordResetEmail(user.email, `${process.env.CLIENT_URL}/reset-password/${resetPasswordToken}`)
+
+        res.status(200).json({ success: true, message: "Password reset email sent successfully!" })
+    } catch (error) {
+        res.status(400).json({ success: false, message: error.message })
+    }
+}
+
+export const resetPassword = async (req, res) => {
+    try {
+        const { token } = req.params // from the URL params
+        const { password } = req.body
+        const user = await User.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpiresAt: { $gt: Date.now() }
+        })
+
+        if (!user) {
+            return res.status(400).json({ success: false, message: "Your token is either invalid or expired" })
+        }
+
+        // everything checks out
+        // hash new password and reset token data
+        const hashedPassword = await bcrypt.hash(password, 10)
+        user.password = hashedPassword
+        user.resetPasswordToken = undefined
+        user.resetPasswordExpiresAt = undefined
+        await user.save()
+
+        await sendResetSuccessEmail(user.email, user.username)
+        res.status(200).json({ success: true, message: "Password reset successfully" })
+    } catch (error) {
+        console.log("error resetting password, no can do buckaroo...\n", error)
         res.status(400).json({ success: false, message: error.message })
     }
 }
