@@ -3,54 +3,23 @@ import { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../store/authStore.js'
 
 export default function Register() {
     const navigate = useNavigate()
-    const [formData, setFormData] = useState({
-        email: '',
-        username: '',
-        password: ''
-    })
-
-    function updateForm(value) {
-        return setFormData(prev => {
-            return { ...prev, ...value }
-        })
-    }
+    const [username, setUserame] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const { signup } = useAuthStore()
 
     async function handleSubmit(e) {
 
         //prevents page from reloading when submitting form
         e.preventDefault()
 
-        const { username, email, password } = formData
-        console.log("HERE" + username)
+        await signup(username, email, password)
 
-        try {
-            const { data } = await axios.post('/register', {
-                username, email, password
-            })
-
-            if (data.error) {
-                toast.error(data.error)
-
-            } else {
-                setFormData({
-                    email: '',
-                    username: '',
-                    password: ''
-                })
-                toast.success('Registration successful. Welcome!')
-                // navigate('/login')
-            }
-        } catch (err) {
-            console.log("The error: \n" + err)
-            toast.error('Registration failed. Try again later')
-        }
-
-        //axios.get('/')
-
-
+        navigate('/verify-email')
     }
 
     return (
@@ -67,8 +36,8 @@ export default function Register() {
                         aria-label='username'
                         name="username"
                         placeholder='DrummerGuy123'
-                        value={formData.username}
-                        onChange={(e) => updateForm({ username: e.target.value })}
+                        value={username}
+                        onChange={(e) => setUserame(e.target.value)}
                         required
                     />
                 </div>
@@ -80,8 +49,8 @@ export default function Register() {
                         aria-label='email'
                         name="email"
                         placeholder='joeschmo@aol.com'
-                        value={formData.email}
-                        onChange={(e) => updateForm({ email: e.target.value })}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </div>
@@ -93,8 +62,8 @@ export default function Register() {
                         aria-label='password'
                         name="password"
                         placeholder='********'
-                        value={formData.password}
-                        onChange={(e) => updateForm({ password: e.target.value })}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </div>
