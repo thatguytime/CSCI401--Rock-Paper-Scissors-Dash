@@ -366,19 +366,6 @@ body:not(:has(canvas)) {
     transform: translateY(-50%);
 }
 
-/* * {
-    box-sizing: border-box;
-}
-
-body {
-    background: #1e1e1e;
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-
 #joystick-container {
     width: 200px;
     height: 200px;

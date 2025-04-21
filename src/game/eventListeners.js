@@ -1,5 +1,3 @@
-import joystick from "./joystick"
-
 ///////////////////////// K E Y B O A R D | C O N T R O L S /////////////////////////
 
 export let lastKeyPressed = ''
@@ -69,46 +67,6 @@ addEventListener('keyup', ({ key }) => {
 // just plug in the keys for when a touch event occurs
 let up, down, left, right
 
-
-// export function mobileControls() {
-//     up = document.getElementById('move-up')
-//     down = document.getElementById('move-down')
-//     left = document.getElementById('move-left')
-//     right = document.getElementById('move-right')
-
-//     up.addEventListener('touchstart', () => {
-//         currentlyPressedKeys.ArrowUp.pressed = true
-//         lastKeyPressed = 'ArrowUp'
-//     })
-//     down.addEventListener('touchstart', () => {
-//         currentlyPressedKeys.ArrowDown.pressed = true
-//         lastKeyPressed = 'ArrowDown'
-//     })
-//     left.addEventListener('touchstart', () => {
-//         currentlyPressedKeys.ArrowLeft.pressed = true
-//         lastKeyPressed = 'ArrowLeft'
-//     })
-//     right.addEventListener('touchstart', () => {
-//         currentlyPressedKeys.ArrowRight.pressed = true
-//         lastKeyPressed = 'ArrowRight'
-//     })
-
-//     up.addEventListener('touchend', () => {
-//         currentlyPressedKeys.ArrowUp.pressed = false
-//     })
-//     down.addEventListener('touchend', () => {
-//         currentlyPressedKeys.ArrowDown.pressed = false
-//     })
-//     left.addEventListener('touchend', () => {
-//         currentlyPressedKeys.ArrowLeft.pressed = false
-//     })
-//     right.addEventListener('touchend', () => {
-//         currentlyPressedKeys.ArrowRight.pressed = false
-//     })
-
-//     return { up, down, left, right }
-// }
-
 export function mobileControls() {
 
 
@@ -154,10 +112,38 @@ export function mobileControls() {
                 currentlyPressedKeys.ArrowRight.pressed = false
                 lastKeyPressed = 'ArrowUp'
                 break
+            case 'northeast':
+                currentlyPressedKeys.ArrowUp.pressed = true
+                currentlyPressedKeys.ArrowDown.pressed = false
+                currentlyPressedKeys.ArrowLeft.pressed = false
+                currentlyPressedKeys.ArrowRight.pressed = true
+                lastKeyPressed = 'ArrowUp'
+                break
+            case 'northwest':
+                currentlyPressedKeys.ArrowUp.pressed = true
+                currentlyPressedKeys.ArrowDown.pressed = false
+                currentlyPressedKeys.ArrowLeft.pressed = true
+                currentlyPressedKeys.ArrowRight.pressed = false
+                lastKeyPressed = 'ArrowUp'
+                break
             case 'south':
                 currentlyPressedKeys.ArrowUp.pressed = false
                 currentlyPressedKeys.ArrowDown.pressed = true
                 currentlyPressedKeys.ArrowLeft.pressed = false
+                currentlyPressedKeys.ArrowRight.pressed = false
+                lastKeyPressed = 'ArrowDown'
+                break
+            case 'southeast':
+                currentlyPressedKeys.ArrowUp.pressed = false
+                currentlyPressedKeys.ArrowDown.pressed = true
+                currentlyPressedKeys.ArrowLeft.pressed = false
+                currentlyPressedKeys.ArrowRight.pressed = true
+                lastKeyPressed = 'ArrowDown'
+                break
+            case 'southwest':
+                currentlyPressedKeys.ArrowUp.pressed = false
+                currentlyPressedKeys.ArrowDown.pressed = true
+                currentlyPressedKeys.ArrowLeft.pressed = true
                 currentlyPressedKeys.ArrowRight.pressed = false
                 lastKeyPressed = 'ArrowDown'
                 break
@@ -232,7 +218,6 @@ export function mobileControls() {
         return "Center"
     }
 
-    console.log(moveCharacter)
     //   return moveCharacter
 
 }

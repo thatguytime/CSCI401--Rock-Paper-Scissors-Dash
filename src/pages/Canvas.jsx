@@ -2,9 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import runCanvas from '../game/levels.js'
 import clock from '../game/clock.js'
 import score from '../game/score.js'
-// import LevelSelect from '../game/LevelSelect.jsx'
 import { Link } from 'react-router-dom'
-
 
 export default function Canvas(props) {
 
@@ -19,8 +17,6 @@ export default function Canvas(props) {
         runCanvas(props.level)
     }, [])
 
-
-
     return (
         <>
             <div className="game-stats">
@@ -29,15 +25,6 @@ export default function Canvas(props) {
             </div>
 
             <canvas id="myCanvas" width="600" height="600"></canvas>
-            <br />
-
-            {/* Controller: should only show if screen is small enough */}
-            {/* <div className="d-pad">
-                <button className="d-pad-button" id="move-up">Up</button>
-                <button className="d-pad-button" id="move-left">Left</button>
-                <button className="d-pad-button" id="move-right">Right</button>
-                <button className="d-pad-button" id="move-down">Down</button>
-            </div> */}
 
             <div id="joystick-container">
                 <div id="joystick"></div>
