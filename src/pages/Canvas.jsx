@@ -29,18 +29,22 @@ export default function Canvas(props) {
             </div>
 
             <canvas id="myCanvas" width="600" height="600"></canvas>
-
             <br />
-            <Link to="/">Back to previous page</Link> <br />
 
             {/* Controller: should only show if screen is small enough */}
-            <div className="d-pad">
+            {/* <div className="d-pad">
                 <button className="d-pad-button" id="move-up">Up</button>
                 <button className="d-pad-button" id="move-left">Left</button>
                 <button className="d-pad-button" id="move-right">Right</button>
                 <button className="d-pad-button" id="move-down">Down</button>
+            </div> */}
+
+            <div id="joystick-container">
+                <div id="joystick"></div>
             </div>
 
+            <br />
+            <Link to="/">Back to previous page</Link> <br />
         </>
     )
 }

@@ -1,5 +1,5 @@
-// stores the data from the registration page
-// grabs the state of registration page
+// stores the data from registration, login pages
+// grabs the state 
 
 import { create } from 'zustand'
 

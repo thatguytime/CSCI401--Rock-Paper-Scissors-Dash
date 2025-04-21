@@ -225,7 +225,7 @@ function runCanvas(level) {
             openPath.push('down', 'right', 'left')
 
             direction = openPath[Math.floor(Math.random() * 3)]
-            console.log(openPath)
+            // console.log(openPath)
 
             switch (direction) {
               case 'down':
@@ -260,7 +260,7 @@ function runCanvas(level) {
             openPath.push('up', 'right', 'left')
 
             direction = openPath[Math.floor(Math.random() * 3)]
-            console.log(openPath)
+            // console.log(openPath)
             switch (direction) {
               case 'down':
                 dude.velocity.x = 0
@@ -293,7 +293,7 @@ function runCanvas(level) {
             openPath.push('up', 'right', 'down')
 
             direction = openPath[Math.floor(Math.random() * 3)]
-            console.log(openPath)
+            // console.log(openPath)
             switch (direction) {
               case 'down':
                 dude.velocity.x = 0
@@ -327,7 +327,7 @@ function runCanvas(level) {
             openPath.push('up', 'down', 'left')
 
             direction = openPath[Math.floor(Math.random() * 3)]
-            console.log(openPath)
+            // console.log(openPath)
             switch (direction) {
               case 'down':
                 dude.velocity.x = 0
