@@ -17,8 +17,10 @@ export default function Register() {
         //prevents page from reloading when submitting form
         e.preventDefault()
 
+        // grabs data from form
         await signup(username, email, password)
 
+        // continues to page that varifies email
         navigate('/verify-email')
     }
 

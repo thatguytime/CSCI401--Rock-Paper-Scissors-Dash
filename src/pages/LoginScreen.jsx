@@ -3,23 +3,17 @@ import { useState } from 'react'
 import axios from 'axios'
 
 export default function LoginScreen() {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    })
-
-    const handleChange = e => {
-        setFormData(prev => ({
-            ...prev,
-            [e.target.name]: e.target.value
-        }))
-    }
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     async function handleSubmit(e) {
 
         //prevents page from reloading when submitting form
         e.preventDefault()
-        axios.get('/')
+
+        await login(email, password)
+
+        navigate('/')
 
     }
 
@@ -38,8 +32,8 @@ export default function LoginScreen() {
                         aria-label='email'
                         name="email"
                         placeholder='joeschmo@aol.com'
-                        value={formData.email}
-                        onChange={e => { setFormData({ ...formData, email: e.target.value }) }}
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                         required
                     />
                 </div>
@@ -51,8 +45,8 @@ export default function LoginScreen() {
                         aria-label='password'
                         name="password"
                         placeholder='********'
-                        value={formData.password}
-                        onChange={e => { setFormData({ ...formData, password: e.target.value }) }}
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
                         required
                     />
                 </div>

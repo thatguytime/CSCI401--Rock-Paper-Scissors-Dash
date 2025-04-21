@@ -5,6 +5,7 @@ import MainMenu from './pages/MainMenu'
 import LoginScreen from './pages/LoginScreen'
 import TechnicalDesign from './TechnicalDesign'
 import CharacterScreen from './pages/CharacterScreen'
+import VerificationEmailPage from './pages/VerificationEmailPage'
 import {
   Routes,
   Route
@@ -15,8 +16,8 @@ import axios from 'axios'
 import { Toaster } from 'react-hot-toast'
 
 // for temp background
-import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 axios.defaults.baseURL = 'http://localhost:8000'
 axios.defaults.withCredentials = true
@@ -48,6 +49,7 @@ function App() {
         <Route path='/canvas' element={<Canvas level={0} />} />
         <Route path='/CharacterScreen' element={<CharacterScreen />} />
         <Route path='/Register' element={<Register />} />
+        <Route path='/verify-email' element={<VerificationEmailPage />} />
       </Routes>
     </>
   )
