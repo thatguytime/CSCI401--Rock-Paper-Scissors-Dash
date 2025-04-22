@@ -63,18 +63,13 @@ addEventListener('keyup', ({ key }) => {
 })
 
 /////////////////////////// M O B I L E | C O N T R O L S ///////////////////////////
-// add in button press for touchscreen here!
-// just plug in the keys for when a touch event occurs
-let up, down, left, right
+// will delete this after testing joystick is legit
+// let up, down, left, right
 
 export function mobileControls() {
 
-
     const container = document.getElementById("joystick-container")
     const joystick = document.getElementById("joystick")
-
-    // direction character is moving from joystick
-    let moveCharacter = ""
 
     // reference point for all calulations when joystick is moving
     // parent div is 200px x 200px
@@ -88,7 +83,7 @@ export function mobileControls() {
         // continually grabs the relational space for the joystick within its parent element
         const rect = container.getBoundingClientRect()
 
-        // clientX & clientY: x & y locations of where the figure touches the screen
+        // clientX & clientY: x & y locations of where the finger touches the screen
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
@@ -117,14 +112,14 @@ export function mobileControls() {
                 currentlyPressedKeys.ArrowDown.pressed = false
                 currentlyPressedKeys.ArrowLeft.pressed = false
                 currentlyPressedKeys.ArrowRight.pressed = true
-                lastKeyPressed = 'ArrowUp'
+                lastKeyPressed = ''
                 break
             case 'northwest':
                 currentlyPressedKeys.ArrowUp.pressed = true
                 currentlyPressedKeys.ArrowDown.pressed = false
                 currentlyPressedKeys.ArrowLeft.pressed = true
                 currentlyPressedKeys.ArrowRight.pressed = false
-                lastKeyPressed = 'ArrowUp'
+                lastKeyPressed = ''
                 break
             case 'south':
                 currentlyPressedKeys.ArrowUp.pressed = false
@@ -138,14 +133,14 @@ export function mobileControls() {
                 currentlyPressedKeys.ArrowDown.pressed = true
                 currentlyPressedKeys.ArrowLeft.pressed = false
                 currentlyPressedKeys.ArrowRight.pressed = true
-                lastKeyPressed = 'ArrowDown'
+                lastKeyPressed = ''
                 break
             case 'southwest':
                 currentlyPressedKeys.ArrowUp.pressed = false
                 currentlyPressedKeys.ArrowDown.pressed = true
                 currentlyPressedKeys.ArrowLeft.pressed = true
                 currentlyPressedKeys.ArrowRight.pressed = false
-                lastKeyPressed = 'ArrowDown'
+                lastKeyPressed = ''
                 break
             case 'east':
                 currentlyPressedKeys.ArrowUp.pressed = false
