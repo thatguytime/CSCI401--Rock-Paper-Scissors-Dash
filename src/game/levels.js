@@ -50,13 +50,33 @@ function runCanvas(level) {
     imageSrc: [paper1, paper2, paper1, paper3]
   }, ctx)
 
+  function checkPaperLocation() {
+
+
+    console.log(`(x, y): (${paper.position.x}, ${paper.position.y})`)
+
+
+
+    // level 01
+    if (paper.position.x > 57.0 && paper.position.x < 65 && paper.position.y > 600) {
+      console.log('GREATER THAN 600')
+
+      paper.position.x = 542.5
+      paper.position.y = 0
+    } else if (paper.position.x > 540 && paper.position.x < 545 && paper.position.y < 0) {
+      console.log('this should run!')
+      paper.position.x = 62.5
+      paper.position.y = 600
+    }
+  }
+
   const rock = new Character({
     position: {
       x: 520 + 15 + 15 / 2,
       y: 40 + 15 + 15 / 2
     },
     velocity: {
-      x: -1,
+      x: 5,
       y: 0
     },
     imageSrc: [rock0, rock0, rock0]
@@ -68,7 +88,7 @@ function runCanvas(level) {
       y: 520 + 15 + 15 / 2
     },
     velocity: {
-      x: -1,
+      x: 5,
       y: 0
     },
     imageSrc: [scissors0, scissors2]
@@ -100,6 +120,8 @@ function runCanvas(level) {
 
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    checkPaperLocation()
 
     // makes character move depending on the key that is pressed
     if (currentlyPressedKeys.w.pressed && lastKeyPressed === 'w' ||
@@ -225,7 +247,6 @@ function runCanvas(level) {
             openPath.push('down', 'right', 'left')
 
             direction = openPath[Math.floor(Math.random() * 3)]
-            console.log(openPath)
 
             switch (direction) {
               case 'down':
@@ -250,7 +271,6 @@ function runCanvas(level) {
           }
         }
 
-
         // bad guy goes down
       } else if (dude.velocity.y > 0) {
         for (let i = 0; i < border.length; i++) {
@@ -260,7 +280,7 @@ function runCanvas(level) {
             openPath.push('up', 'right', 'left')
 
             direction = openPath[Math.floor(Math.random() * 3)]
-            console.log(openPath)
+
             switch (direction) {
               case 'down':
                 dude.velocity.x = 0
@@ -293,7 +313,7 @@ function runCanvas(level) {
             openPath.push('up', 'right', 'down')
 
             direction = openPath[Math.floor(Math.random() * 3)]
-            console.log(openPath)
+
             switch (direction) {
               case 'down':
                 dude.velocity.x = 0
@@ -327,7 +347,7 @@ function runCanvas(level) {
             openPath.push('up', 'down', 'left')
 
             direction = openPath[Math.floor(Math.random() * 3)]
-            console.log(openPath)
+
             switch (direction) {
               case 'down':
                 dude.velocity.x = 0

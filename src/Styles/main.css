@@ -247,11 +247,19 @@ h1 {
 
 /******************************* L O G I N | S C R E E N *******************************/
 
+form {
+    margin: auto;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #fff;
+}
+
 .inputField {
     display: flex;
     text-align: center;
     margin: 10px;
-    justify-content: center;
+    justify-content: space-between;
+    max-width: 400px;
 }
 
 .submit-form {
@@ -356,6 +364,26 @@ body:not(:has(canvas)) {
     top: 50%;
     left: 0;
     transform: translateY(-50%);
+}
+
+#joystick-container {
+    width: 200px;
+    height: 200px;
+    background-color: #333;
+    border-radius: 50%;
+    position: relative;
+    touch-action: none;
+}
+
+#joystick {
+    width: 80px;
+    height: 80px;
+    background-color: #ff004c;
+    border-radius: 50%;
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    transition: 0.05s;
 }
 
 @media screen and (max-width: 750px) {

@@ -1,45 +1,61 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import axios from 'axios'
 
 export default function LoginScreen() {
-    function handleSubmit(e) {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    async function handleSubmit(e) {
 
         //prevents page from reloading when submitting form
         e.preventDefault()
-        console.log("Form submitted!")
 
-        const formData = new FormData(e.currentTarget)
-        const username = formData.get("name")
-        const password = formData.get("password")
-        const email = formData.get("email")
+        await login(email, password)
+
+        navigate('/')
+
     }
 
     return (
         <div className="universal-border pacman-font">
             <h1>Rock Paper Scissors Dash</h1>
 
-            <h2>Login / sign up</h2>
+            <h2>Login</h2>
 
             <form onSubmit={handleSubmit}>
-                <div className='inputField'>
-                    <label htmlFor='username'>Username:</label>
-                    <input type="text" aria-label='user name' name="username" placeholder='DrummerGuy123'></input>
+
+                <div className="inputField">
+                    <label htmlFor='email'>Email:</label>
+                    <input
+                        type="email"
+                        aria-label='email'
+                        name="email"
+                        placeholder='joeschmo@aol.com'
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        required
+                    />
                 </div>
 
                 <div className="inputField">
                     <label htmlFor='password'>Password:</label>
-                    <input type="text" aria-label='password' name="password" placeholder='********'></input>
+                    <input
+                        type="password"
+                        aria-label='password'
+                        name="password"
+                        placeholder='********'
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        required
+                    />
                 </div>
 
-                <div className="inputField">
-                    <label htmlFor='email'>Email (optional):</label>
-                    <input type="email" aria-label='email' name="email" placeholder='joeschmo@aol.com'></input>
-                </div>
-
-
-                <button className='submit-form'>submit</button>
+                <button className='submit-form'>submit</button><br />
             </form>
 
-            <p>💀 🚨 👷‍♂️ 🔧 UNDER CONSTRUCTION 🚫 🚧 ⚠️ 🔥 </p>
+            <Link to="/Register">First time? Sign up</Link>
+            <Link to="/">I want to try the game first</Link>
             <Link to="/">Back to previous page</Link>
         </div>
     )
