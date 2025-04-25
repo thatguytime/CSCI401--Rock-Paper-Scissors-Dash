@@ -112,16 +112,16 @@ function runCanvas(level) {
 	      }
   }
   
-  function checkCharacterLocation(character) {
+  function checkCharacterLocation(character, tunnel) {
 	if(!character.tunnelCooldown){
-    	if (character.position.x > tunnel1[0].x-(brickSize /2) && character.position.x < tunnel1[0].x+(brickSize/2) && character.position.y > tunnel1[0].y-(brickSize /2) && character.position.y < tunnel1[0].y+(brickSize /2)) {
-      		character.position.x = tunnel1[1].x
-      		character.position.y = tunnel1[1].y
+    	if (character.position.x > tunnel[0].x-(brickSize /2) && character.position.x < tunnel[0].x+(brickSize/2) && character.position.y > tunnel[0].y-(brickSize /2) && character.position.y < tunnel[0].y+(brickSize /2)) {
+      		character.position.x = tunnel[1].x
+      		character.position.y = tunnel[1].y
 			character.tunnelCooldown = true;
 			setTimeout(() => character.tunnelCooldown = false, 100);
-    	} else if (character.position.x > tunnel1[1].x-(brickSize /2) && character.position.x < tunnel1[1].x+(brickSize /2) && character.position.y > tunnel1[1].y-(brickSize /2) && character.position.y < tunnel1[1].y+(brickSize /2)) {
-	  		character.position.x = tunnel1[0].x
-	  		character.position.y = tunnel1[0].y
+    	} else if (character.position.x > tunnel[1].x-(brickSize /2) && character.position.x < tunnel[1].x+(brickSize /2) && character.position.y > tunnel[1].y-(brickSize /2) && character.position.y < tunnel[1].y+(brickSize /2)) {
+	  		character.position.x = tunnel[0].x
+	  		character.position.y = tunnel[0].y
 			character.tunnelCooldown = true;
             setTimeout(() => character.tunnelCooldown = false, 100);
 		}  
@@ -153,11 +153,11 @@ function runCanvas(level) {
 		tunnel1.push(testTunnel)
 	  }
 	  else if (column === "o2") {
-	    let testTunnel = new Tunnel(brickSize * j, brickSize * i)
+	    let testTunne2 = new Tunnel(brickSize * j + (brickSize / 2), brickSize * i + (brickSize / 2))	
 	    tunnel2.push(testTunnel)
 	  }
 	  else if (column === "o3") {
-	  	let testTunnel = new Tunnel(brickSize * j, brickSize * i)
+	  	let testTunne2 = new Tunnel(brickSize * j + (brickSize / 2), brickSize * i + (brickSize / 2))	
 	    tunnel3.push(testTunnel)
 	  }
 	  	  
@@ -171,10 +171,19 @@ function runCanvas(level) {
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    checkCharacterLocation(paper)
-	checkCharacterLocation(rock)
-	checkCharacterLocation(scissors)
+    checkCharacterLocation(paper, tunnel1)
+	checkCharacterLocation(rock, tunnel1)
+	checkCharacterLocation(scissors, tunnel1)
 
+
+	checkCharacterLocation(paper, tunnel2)
+	checkCharacterLocation(rock, tunnel2)
+	checkCharacterLocation(scissors, tunnel2)
+	
+
+	checkCharacterLocation(paper, tunnel3)
+	checkCharacterLocation(rock, tunnel3)
+	checkCharacterLocation(scissors, tunnel3)
     // makes character move depending on the key that is pressed
     if (currentlyPressedKeys.w.pressed && lastKeyPressed === 'w' ||
       currentlyPressedKeys.ArrowUp.pressed && lastKeyPressed === 'ArrowUp'
