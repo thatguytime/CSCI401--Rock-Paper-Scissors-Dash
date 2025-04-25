@@ -10,6 +10,7 @@ class Character {
         this.angle = 0;
         this.ctx = ctx
         this.state = 'active'
+		this.tunnelCooldown = false;
         this.prevCollisions = [] // for badguy's AI
 
         setInterval(() => {
