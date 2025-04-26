@@ -27,6 +27,8 @@ function runCanvas(level) {
   const canvas = document.getElementById("myCanvas");
   const ctx = canvas.getContext("2d");  /// Store the 2D rendering context
 
+  console.log(level)
+
   // game setup
   let userSpeedLimit = 5
   let badGuySpeed = 1
@@ -51,23 +53,54 @@ function runCanvas(level) {
   }, ctx)
 
   function checkPaperLocation() {
+    // console.log(`(x, y): (${paper.position.x}, ${paper.position.y})`)
+    // levels are 0-index based
 
+    // level 01 - top/bottom
+    if (level === 0) {
+      if (paper.position.x > 57.0 && paper.position.x < 65 && paper.position.y > 600) {
+        console.log('GREATER THAN 600')
 
-    console.log(`(x, y): (${paper.position.x}, ${paper.position.y})`)
-
-
-
-    // level 01
-    if (paper.position.x > 57.0 && paper.position.x < 65 && paper.position.y > 600) {
-      console.log('GREATER THAN 600')
-
-      paper.position.x = 542.5
-      paper.position.y = 0
-    } else if (paper.position.x > 540 && paper.position.x < 545 && paper.position.y < 0) {
-      console.log('this should run!')
-      paper.position.x = 62.5
-      paper.position.y = 600
+        paper.position.x = 542.5
+        paper.position.y = 0
+      } else if (paper.position.x > 540 && paper.position.x < 545 && paper.position.y < 0) {
+        console.log('this should run!')
+        paper.position.x = 62.5
+        paper.position.y = 600
+      }
     }
+
+    // level 02 - top/bottom
+    if (level === 1) {
+      if (paper.position.x > 210 && paper.position.x < 227 && paper.position.y < 0) {
+        paper.position.x = 297
+        paper.position.y = 600
+      } else if (paper.position.x > 290 && paper.position.x < 307 && paper.position.y > 600) {
+        paper.position.x = 217
+        paper.position.y = 0
+      }
+    }
+
+    // level 03 - left/right
+    if (paper.position.y > 55 && paper.position.y && paper.position.x < 0) {
+      paper.position.x = 600
+      paper.position.y = 542.5
+    } else if (paper.position.y > 535 && paper.position.y < 547 && paper.position.x > 600) {
+      paper.position.x = 0
+      paper.position.y = 62.5
+    }
+  }
+
+  // level 04 - top/bottom
+  if (paper.position.x > 57.0 && paper.position.x < 65 && paper.position.y > 600) {
+    console.log('GREATER THAN 600')
+
+    paper.position.x = 542.5
+    paper.position.y = 0
+  } else if (paper.position.x > 540 && paper.position.x < 545 && paper.position.y < 0) {
+    console.log('this should run!')
+    paper.position.x = 62.5
+    paper.position.y = 600
   }
 
   const rock = new Character({
