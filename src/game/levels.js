@@ -17,7 +17,6 @@ import Pellet from './pellet.js'
 import Character from './characters.js'
 import Brick from './brick.js'
 import Tunnel from './tunnel.js'
-import selected from '../pages/CharacterScreen.jsx'
 
 // functions
 import { checkCharacterDirection, characterMeetsBrick } from './utilityFunctions.js'
@@ -42,7 +41,7 @@ function runCanvas(level) {
   let tunnel2 = []
   let tunnel3 = []
   mobileControls()
-  const selected = getSelectedCharacter()
+  let selected = getSelectedCharacter()
   
   let imageSrc;
 
@@ -153,16 +152,13 @@ function runCanvas(level) {
 		tunnel1.push(testTunnel)
 	  }
 	  else if (column === "o2") {
-	    let testTunne2 = new Tunnel(brickSize * j + (brickSize / 2), brickSize * i + (brickSize / 2))	
+	    let testTunnel = new Tunnel(brickSize * j + (brickSize / 2), brickSize * i + (brickSize / 2))	
 	    tunnel2.push(testTunnel)
 	  }
 	  else if (column === "o3") {
-	  	let testTunne2 = new Tunnel(brickSize * j + (brickSize / 2), brickSize * i + (brickSize / 2))	
+	  	let testTunnel = new Tunnel(brickSize * j + (brickSize / 2), brickSize * i + (brickSize / 2))	
 	    tunnel3.push(testTunnel)
 	  }
-	  	  
-	  	  
-
     })
   })
 
@@ -170,20 +166,23 @@ function runCanvas(level) {
 
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+	if (tunnel1.length > 0) {
+		checkCharacterLocation(paper, tunnel1);
+		checkCharacterLocation(rock, tunnel1);
+		checkCharacterLocation(scissors, tunnel1);
+	}
 
-    checkCharacterLocation(paper, tunnel1)
-	checkCharacterLocation(rock, tunnel1)
-	checkCharacterLocation(scissors, tunnel1)
+	if (tunnel2.length > 0) {
+		checkCharacterLocation(paper, tunnel2);
+		checkCharacterLocation(rock, tunnel2);
+		checkCharacterLocation(scissors, tunnel2);
+	}
 
-
-	checkCharacterLocation(paper, tunnel2)
-	checkCharacterLocation(rock, tunnel2)
-	checkCharacterLocation(scissors, tunnel2)
-	
-
-	checkCharacterLocation(paper, tunnel3)
-	checkCharacterLocation(rock, tunnel3)
-	checkCharacterLocation(scissors, tunnel3)
+	if (tunnel3.length > 0) {
+		checkCharacterLocation(paper, tunnel3);
+		checkCharacterLocation(rock, tunnel3);
+		checkCharacterLocation(scissors, tunnel3);
+	}
     // makes character move depending on the key that is pressed
     if (currentlyPressedKeys.w.pressed && lastKeyPressed === 'w' ||
       currentlyPressedKeys.ArrowUp.pressed && lastKeyPressed === 'ArrowUp'

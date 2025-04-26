@@ -1,4 +1,4 @@
-let selected = "Paper";
+let selected = null;
 
 export function setSelectedCharacter(char) {
   selected = char;
