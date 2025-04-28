@@ -91,7 +91,7 @@ export const login = async (req, res) => {
 // clears the cookie that is used to verify user during their session
 export const logout = async (req, res) => {
     res.clearCookie("token")
-    res.status(200).json({ success: true, message: "Logged out successfully" })
+    res.status(200).json({ success: true, message: "Logged out is a success!" })
 }
 
 export const verifyEmail = async (req, res) => {

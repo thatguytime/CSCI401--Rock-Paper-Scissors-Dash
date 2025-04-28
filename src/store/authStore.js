@@ -82,5 +82,51 @@ export const useAuthStore = create((set) => ({
             console.log(`Here is the error: \n${error}`)
             throw error
         }
+    },
+
+    checkAuth: async () => {
+        set({ isCheckingAuth: true, error: null })
+
+        try {
+            const response = await fetch(`${API_URL}/check-auth`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include", // passes cookies over
+            })
+            const data = await response.json()
+
+            if (data.user) {
+                set({ isCheckingAuth: false, isAuthenticated: true, user: data.user })
+            } else {
+                set({ isCheckingAuth: false, isAuthenticated: false, user: null })
+            }
+
+        } catch (error) {
+            set({ isCheckingAuth: false, isAuthenticated: false, user: null })
+            console.log(`You have an error homie...\n${error}`)
+        }
+    },
+
+    logout: async () => {
+        set({ isLoading: true, error: null })
+
+        try {
+            const response = await fetch(`${API_URL}/logout`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include", // passes cookies over
+            })
+            const data = await response.json()
+
+            set({ isCheckingAuth: false, isAuthenticated: false, user: null })
+        } catch (error) {
+            set({ isLoading: false, error: error.message })
+            console.log(`You have an error homie...`)
+            throw error
+        }
     }
 }))

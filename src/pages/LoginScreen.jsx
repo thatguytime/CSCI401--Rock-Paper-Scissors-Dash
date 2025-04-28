@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
+import { useAuthStore } from '../store/authStore'
+import { useNavigate } from 'react-router-dom'
 
 export default function LoginScreen() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const { login, isLoading, error } = useAuthStore()
+    const navigate = useNavigate()
 
     async function handleSubmit(e) {
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Styles/main.css'
 import Home from './Home'
 import MainMenu from './pages/MainMenu'
@@ -14,29 +14,32 @@ import Canvas from './pages/Canvas'
 import Register from './pages/Register'
 import axios from 'axios'
 import { Toaster } from 'react-hot-toast'
+import { useAuthStore } from './store/authStore'
 
 // for temp background
 import { useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
 
 axios.defaults.baseURL = 'http://localhost:8000'
 axios.defaults.withCredentials = true
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { isCheckingAuth, checkAuth, logout, user } = useAuthStore()
 
-  const location = useLocation();
+  const location = useLocation()
 
   // This is temp. Will eventually just set body {background-color: #202020;}
   useEffect(() => {
     if (location.pathname === '/main-menu') {
-      document.body.style.backgroundColor = '#202020';
+      document.body.style.backgroundColor = '#202020'
     }
 
     return () => {
-      document.body.style.backgroundColor = '';
-    };
-  }, [location]);
+      document.body.style.backgroundColor = ''
+    }
+  }, [location])
+
+
+
 
   return (
     <>
