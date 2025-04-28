@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import axios from 'axios'
 import { useAuthStore } from '../store/authStore'
 import { useNavigate } from 'react-router-dom'
 
@@ -60,7 +59,7 @@ export default function LoginScreen() {
 
             <Link to="/Register">First time? Sign up</Link>
             <Link to="/">I want to try the game first</Link>
-            <Link to="/">Back to previous page</Link>
+            <Link to="/main-menu">Back to previous page</Link>
         </div>
     )
 }

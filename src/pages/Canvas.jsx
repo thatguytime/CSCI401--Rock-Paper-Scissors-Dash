@@ -1,13 +1,15 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import runCanvas from '../game/levels.js'
 import clock from '../game/clock.js'
 import score from '../game/score.js'
 import { Link } from 'react-router-dom'
+import { useAuthStore } from '../store/authStore.js'
 
 export default function Canvas(props) {
 
-    // useRef: avoids re-render
-    // const canvasRef = useRef(0)
+    const { user } = useAuthStore()
+
+    console.log(user)
 
     const [mapIdx, setMapIdx] = useState(0)
 
@@ -22,6 +24,8 @@ export default function Canvas(props) {
             <div className="game-stats">
                 <div id="timer">Time Left: <span id="time-left"></span></div>
                 <div id="score">Total Score: <span id="total-score"></span></div>
+                {user.username !== undefined ? <div id="name">Let's go {user.username}! <span id="total-score"></span></div> : <div id="name">Sign-up to save high score</div>}
+
             </div>
 
             <canvas id="myCanvas" width="600" height="600"></canvas>

@@ -22,7 +22,21 @@ const userSchema = new mongoose.Schema({
     resetPasswordToken: String,
     resetPasswordExpiresAt: Date,
     verificationToken: String,
-    verificationTokenExpiresAt: Date
+    verificationTokenExpiresAt: Date,
+    singlePlayer: {
+        highScore: {
+            type: Number,
+            default: 0
+        },
+        totalScore: {
+            type: Number,
+            default: 0
+        },
+        totalGamesPlayed: {
+            type: Number,
+            default: 0
+        }
+    }
 })
 
 export const User = mongoose.model("User", userSchema) 
