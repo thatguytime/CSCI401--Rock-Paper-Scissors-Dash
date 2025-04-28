@@ -73,8 +73,8 @@ function runCanvas(level) {
   
   const rock = new Character({
       position: {
-        x: 520 + 15 + 15 / 2,
-        y: 40 + 15 + 15 / 2
+        x: 542.5,
+        y: 62.5
       },
       velocity: {
         x: 5,
@@ -91,8 +91,8 @@ function runCanvas(level) {
 	  	}	
     const scissors = new Character({
       position: {
-        x: 520 + 15 + 15 / 2,
-        y: 520 + 15 + 15 / 2
+        x: 542.5,
+        y: 542.5
       },
       velocity: {
         x: 5,
@@ -114,16 +114,21 @@ function runCanvas(level) {
   function checkCharacterLocation(character, tunnel) {
 	if(!character.tunnelCooldown){
     	if (character.position.x > tunnel[0].x-(brickSize /2) && character.position.x < tunnel[0].x+(brickSize/2) && character.position.y > tunnel[0].y-(brickSize /2) && character.position.y < tunnel[0].y+(brickSize /2)) {
-      		character.position.x = tunnel[1].x
-      		character.position.y = tunnel[1].y
+      		character.position.x = tunnel[1].x+2.5
+      		character.position.y = tunnel[1].y+2.5
 			character.tunnelCooldown = true;
 			setTimeout(() => character.tunnelCooldown = false, 100);
     	} else if (character.position.x > tunnel[1].x-(brickSize /2) && character.position.x < tunnel[1].x+(brickSize /2) && character.position.y > tunnel[1].y-(brickSize /2) && character.position.y < tunnel[1].y+(brickSize /2)) {
-	  		character.position.x = tunnel[0].x
-	  		character.position.y = tunnel[0].y
+	  		character.position.x = tunnel[0].x+2.5
+	  		character.position.y = tunnel[0].y+2.5
 			character.tunnelCooldown = true;
             setTimeout(() => character.tunnelCooldown = false, 100);
 		}  
+	if(character.position.x < 0 || character.position.x > 600 || character.position.y < 0 || character.position.y > 600)
+		{
+		character.position.x = 62.5
+		character.position.y = 62.5
+		}
   	}
   }
 
@@ -247,7 +252,7 @@ function runCanvas(level) {
         setTimeout(function () {
 
           // return to standard speed
-          userSpeedLimit = 5
+          userSpeedLimit = 4
         }, 10000);
       }
     })
