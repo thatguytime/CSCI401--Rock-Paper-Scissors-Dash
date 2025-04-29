@@ -1,7 +1,8 @@
+// this will become the new about
 import githubLogo from './assets/github-logo.webp'
 import { Link } from 'react-router-dom'
 
-export default function Home() {
+export default function About() {
     return (
         <>
             <h1>Rock {`->`} Paper {`->`} Scissor {`->`} Dash</h1>
@@ -24,7 +25,7 @@ export default function Home() {
                 <div className="under-construction universal-border">
                     <h3>Current Pages Under Construction</h3>
                     <ul>
-                        <li><Link to="/main-menu">Main Menu</Link></li>
+                        <li><Link to="/">Main Menu</Link></li>
                         <li><Link to="/login-screen">Login Screen</Link></li>
                         <li><Link to="/canvas">Demo level</Link></li>
                     </ul>
