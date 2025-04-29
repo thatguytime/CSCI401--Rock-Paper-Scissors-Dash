@@ -103,11 +103,11 @@ function runCanvas(level) {
     imageSrc: imageSrc
   }, ctx)
 
-  function pelletCollision(character, pellet, s) {
+  function pelletCollision(character, pellet, userScored) {
     if (Math.hypot(character.position.x - pellet.positionX, character.position.y - pellet.positionY) < 10) {
       pellets.splice(pellets.indexOf(pellet), 1)
       // score gets updated here
-      if (s == 1) {
+      if (userScored) {
         score(10)
       }
     }
@@ -266,9 +266,9 @@ function runCanvas(level) {
       // COLLISION DETECTION TEMPLATE
       // a^2 + b^2 = c^
       // subtract x's and y's to get distance
-      pelletCollision(paper, pellet, 1)
-      pelletCollision(rock, pellet, 0)
-      pelletCollision(scissors, pellet, 0)
+      pelletCollision(paper, pellet, true)
+      pelletCollision(rock, pellet, false)
+      pelletCollision(scissors, pellet, false)
 
 
 
@@ -451,8 +451,8 @@ function runCanvas(level) {
         paper.position.x = 62.5
         paper.position.y = 62.5
 
-        dude.position.x = 600
-        dude.position.y = 600
+        // dude.position.x = 600
+        // dude.position.y = 600
 
         youDied('../death-screen')
 
