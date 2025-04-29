@@ -4,6 +4,8 @@ import clock from '../game/clock.js'
 import score from '../game/score.js'
 import { Link } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore.js'
+import { setNavigate } from '../navigate/navigate.js';
+import { useNavigate } from 'react-router-dom'
 
 export default function Canvas(props) {
 
@@ -12,6 +14,12 @@ export default function Canvas(props) {
     console.log(user)
 
     const [mapIdx, setMapIdx] = useState(0)
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        setNavigate(navigate); // expose navigation to global game logic
+    }, [navigate]);
 
     useEffect(() => {
         clock()

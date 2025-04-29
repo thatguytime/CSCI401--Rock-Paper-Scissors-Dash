@@ -23,6 +23,8 @@ import { checkCharacterDirection, characterMeetsBrick } from './utilityFunctions
 // events
 import { lastKeyPressed, currentlyPressedKeys, mobileControls } from './eventListeners.js'
 
+import { youDied } from '../navigate/navigate.js'
+
 function runCanvas(level) {
   const canvas = document.getElementById("myCanvas");
   const ctx = canvas.getContext("2d");  /// Store the 2D rendering context
@@ -225,6 +227,7 @@ function runCanvas(level) {
       }
     })
 
+
     // render pellets
     pellets.forEach(pellet => {
       pellet.draw()
@@ -244,6 +247,8 @@ function runCanvas(level) {
         runCanvas(level + 1)
       }
 
+
+
     })
 
     border.forEach(brick => {
@@ -260,7 +265,6 @@ function runCanvas(level) {
     paper.move()
 
     // Badguy AI
-    // how do you make the AI characters move?
     // collision detection: track bad guy collisions at any point in time
     // let bad guy move in a direction that is open
     // if border appears, check for opening
@@ -405,9 +409,19 @@ function runCanvas(level) {
         }
       }
 
+      // collision with user
+      if (Math.hypot(paper.position.x - dude.position.x, paper.position.y - dude.position.y) < 20) {
+
+        // link to DeathScreen
+        // send over current score
+
+
+        youDied('../death-screen')
+
+      }
+
       dude.move()
     })
-
   }
 
   animate()

@@ -6,6 +6,7 @@ import LoginScreen from './pages/LoginScreen'
 import TechnicalDesign from './TechnicalDesign'
 import CharacterScreen from './pages/CharacterScreen'
 import VerificationEmailPage from './pages/VerificationEmailPage'
+import DeathScreen from './DeathScreen'
 import {
   Routes,
   Route
@@ -51,6 +52,7 @@ function App() {
         <Route path='/CharacterScreen' element={<CharacterScreen />} />
         <Route path='/Register' element={<Register />} />
         <Route path='/verify-email' element={<VerificationEmailPage />} />
+        <Route path='/death-screen' element={<DeathScreen />} />
       </Routes>
     </>
   )
