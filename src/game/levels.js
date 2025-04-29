@@ -268,7 +268,6 @@ function runCanvas(level) {
 	  pelletCollision(rock, pellet, 0)
 	  pelletCollision(scissors, pellet, 0)
 
-      
 	  
 
       // triggers next level if you collect all the pellets
@@ -308,7 +307,7 @@ function runCanvas(level) {
       if (dude.velocity.y < 0) {
         for (let i = 0; i < border.length; i++) {
           const brickPart = border[i]
-          if (characterMeetsBrick({ circle: { ...dude, velocity: { x: 0, y: -5 } }, rectangle: brickPart })) {
+          if (characterMeetsBrick({ circle: { ...dude}, rectangle: brickPart })) {
 
             openPath.push('down', 'right', 'left')
 
@@ -321,14 +320,14 @@ function runCanvas(level) {
                 break
               case 'up':
                 dude.velocity.x = 0
-                dude.velocity.y = -1 * badGuySpeed
+                dude.velocity.y = -badGuySpeed
                 break
               case 'right':
                 dude.velocity.x = badGuySpeed
                 dude.velocity.y = 0
                 break
               case 'left':
-                dude.velocity.x = -1 * badGuySpeed
+                dude.velocity.x = -badGuySpeed
                 dude.velocity.y = 0
                 break
             }

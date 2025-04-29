@@ -27,9 +27,9 @@ export function checkCharacterDirection(entity, wall) {
 export function characterMeetsBrick({ circle, rectangle }) {
     const padding = 1;
     return (
-        circle.position.y - circle.radius + circle.velocity.y <= rectangle.y + rectangle.height + padding &&
-        circle.position.x + circle.radius + circle.velocity.x >= rectangle.x - padding &&
-        circle.position.y + circle.radius + circle.velocity.y >= rectangle.y - padding &&
-        circle.position.x - circle.radius + circle.velocity.x <= rectangle.x + rectangle.width + padding
+        circle.position.y - circle.radius + circle.velocity.y < rectangle.y + rectangle.height &&
+        circle.position.x + circle.radius + circle.velocity.x > rectangle.x &&
+        circle.position.y + circle.radius + circle.velocity.y > rectangle.y &&
+        circle.position.x - circle.radius + circle.velocity.x < rectangle.x + rectangle.width
     )
 }
