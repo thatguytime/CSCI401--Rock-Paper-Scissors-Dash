@@ -20,7 +20,7 @@ export default function MainMenu() {
         <div className="universal-border pacman-font">
             {user ? <h1>Hello {user.username}!</h1> : <h1>Rock Paper Scissors Dash</h1>}
             {/* <Link to="/CharacterScreen"><button className="main-menu-button pacman-font">Single Player</button></Link> */}
-            <Link to="/canvas"><button className="main-menu-button pacman-font">Single Player</button></Link>
+            <Link to="/CharacterScreen"><button className="main-menu-button pacman-font">Single Player</button></Link>
             {/* Did not complete multiplayer in time */}
             {/* <Link to="/"><button className="main-menu-button pacman-font">Multiplayer</button></Link> */}
             {user && <button onClick={handleLogout} className="main-menu-button pacman-font">Logout</button>}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import rock from '../game/Sprites/Rock0.png'
 import paper from '../game/Sprites/Paper0.png'
 import scissors from '../game/Sprites/Scissors0.png'
+import { setSelectedCharacter } from '../game/selectedCharacter.js'
 
 export default function CharacterScreen() {
     const characters = [
@@ -23,11 +24,12 @@ export default function CharacterScreen() {
                         key={char.name}
                         className={`character-button universal-border pacman-font`}
                         onClick={() => setSelected(char.name)}>
-                        <img
+                        <div> <img
                             src={char.image}
                             alt={char.name}
                             style={{ width: '200px', height: '200px', objectFit: 'contain' }}
                         />
+						</div>
                         <span>{char.name}</span>
                     </button>
                 ))}
@@ -35,13 +37,15 @@ export default function CharacterScreen() {
 
             {/* Confirm and Back buttons */}
             <div>
+			<Link to= "/canvas">
                 <button //Testing button; Will be replaced to link to first level w/ passalong of character selection
                     className="main-menu-button pacman-font "
                     disabled={!selected}
-                    onClick={() => alert(`You selected: ${selected}`)}
+                    onClick={() => setSelectedCharacter(selected)}
                 >
                     Confirm Selection
                 </button>
+				</Link>
 
                 <Link to="/">
                     <button className="main-menu-button pacman-font ">Back to Main Menu</button>
