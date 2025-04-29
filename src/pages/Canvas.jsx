@@ -32,7 +32,7 @@ export default function Canvas(props) {
             <div className="game-stats">
                 <div id="timer">Time Left: <span id="time-left"></span></div>
                 <div id="score">Total Score: <span id="total-score"></span></div>
-                {user.username !== undefined ? <div id="name">Let's go {user.username}! <span id="total-score"></span></div> : <div id="name">Sign-up to save high score</div>}
+                {user && user.username !== undefined ? <div id="name">Let's go {user.username}! <span id="total-score"></span></div> : <div id="name">Sign-up to save high score</div>}
 
             </div>
 
