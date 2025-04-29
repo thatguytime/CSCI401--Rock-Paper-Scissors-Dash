@@ -58,8 +58,8 @@ export default function LoginScreen() {
             </form>
 
             <Link to="/Register">First time? Sign up</Link>
-            <Link to="/">I want to try the game first</Link>
-            <Link to="/main-menu">Back to previous page</Link>
+            {/* <Link to="/">I want to try the game first</Link> */}
+            <Link to="/">Back to previous page</Link>
         </div>
     )
 }
