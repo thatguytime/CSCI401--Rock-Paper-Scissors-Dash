@@ -26,6 +26,7 @@ export default function MainMenu() {
             {user && <button onClick={handleLogout} className="main-menu-button pacman-font">Logout</button>}
             {!user && <Link to="/login-screen"><button className="main-menu-button pacman-font">Login / Signup</button></Link>}
             <Link to="/"><button className="main-menu-button pacman-font">High Scores</button></Link>
+            <Link to="/how-to-play"><button className="main-menu-button pacman-font">How To Play</button></Link>
             <Link to="/about"><button className="main-menu-button pacman-font">About Us</button></Link>
         </div>
     )

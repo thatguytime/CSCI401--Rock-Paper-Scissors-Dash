@@ -7,6 +7,7 @@ import TechnicalDesign from './TechnicalDesign'
 import CharacterScreen from './pages/CharacterScreen'
 import VerificationEmailPage from './pages/VerificationEmailPage'
 import DeathScreen from './DeathScreen'
+import HowToPlay from './pages/HowToPlay'
 import {
   Routes,
   Route
@@ -53,6 +54,7 @@ function App() {
         <Route path='/Register' element={<Register />} />
         <Route path='/verify-email' element={<VerificationEmailPage />} />
         <Route path='/death-screen' element={<DeathScreen />} />
+        <Route path='/how-to-play' element={<HowToPlay />} />
       </Routes>
     </>
   )
