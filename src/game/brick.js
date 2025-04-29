@@ -12,7 +12,7 @@ class Brick {
     drawBrick() {
         this.ctx.beginPath()
         this.ctx.rect(this.x, this.y, this.width, this.height) //need to add the this. because theyre tied to the class
-        this.ctx.fillStyle = "lightgreen";  // Set fill color for bricks
+        this.ctx.fillStyle = "lime";  // Set fill color for bricks
         this.ctx.fill()
         this.ctx.closePath()
     }
