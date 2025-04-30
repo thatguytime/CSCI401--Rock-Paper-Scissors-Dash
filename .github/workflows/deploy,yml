@@ -5,8 +5,8 @@ on:
     branches:
       - main  # Change this if your default branch is different
 
-# permissions:
-#   contents: write
+permissions:
+  contents: write
 
 jobs:
   deploy:
@@ -21,34 +21,21 @@ jobs:
           node-version: 18
           cache: 'npm'
 
+      - name: Inject environment variables
+        run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+          echo "VITE_OTHER_VAR=${{ secrets.VITE_OTHER_VAR }}" >> .env
+          echo "VITE_LOGIN_ENDPOINT=${{ secrets.VITE_LOGIN_ENDPOINT }}" >> .env
+          echo "VITE_REGISTER_ENDPOINT=${{ secrets.VITE_REGISTER_ENDPOINT }}" >> .env
+
       - name: Install dependencies
         run: npm install
 
-      # - name: Build the project
-      #   run: npm run build  # Creates the dist/ folder
+      - name: Build the project
+        run: npm run build  # Creates the dist/ folder
 
-      - name: Build with production env
-        run: |
-          cp .env.production .env
-          npm run build
-
-
-      # - name: Deploy to GitHub Pages
-      #   uses: JamesIves/github-pages-deploy-action@v4
-      #   with:
-      #     branch: gh-pages
-      #     folder: dist  # Deploys the built files
-
-      - name: Deploy to Render
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-
-     
-
-      # - name: Deploy to Render
-      #   env:
-      #     RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}  # Store Render API key in GitHub Secrets
-      #   run: |
-      #     curl -X POST https://api.render.com/deploy/SERVICE_ID  
-          
-        # Trigger deployment (replace SERVICE_ID with your service ID)
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist  # Deploys the built files
