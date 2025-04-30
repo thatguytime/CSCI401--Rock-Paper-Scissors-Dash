@@ -24,8 +24,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build the project
-        run: npm run build  # Creates the dist/ folder
+      # - name: Build the project
+      #   run: npm run build  # Creates the dist/ folder
+
+      - name: Build with production env
+        run: |
+          cp .env.production .env
+          npm run build
+
 
       # - name: Deploy to GitHub Pages
       #   uses: JamesIves/github-pages-deploy-action@v4
@@ -34,7 +40,15 @@ jobs:
       #     folder: dist  # Deploys the built files
 
       - name: Deploy to Render
-        env:
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}  # Store Render API key in GitHub Secrets
         run: |
-          curl -X POST https://api.render.com/deploy/SERVICE_ID  # Trigger deployment (replace SERVICE_ID with your service ID)
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+
+     
+
+      # - name: Deploy to Render
+      #   env:
+      #     RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}  # Store Render API key in GitHub Secrets
+      #   run: |
+      #     curl -X POST https://api.render.com/deploy/SERVICE_ID  
+          
+        # Trigger deployment (replace SERVICE_ID with your service ID)
