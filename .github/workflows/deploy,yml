@@ -5,8 +5,8 @@ on:
     branches:
       - main  # Change this if your default branch is different
 
-permissions:
-  contents: write
+# permissions:
+#   contents: write
 
 jobs:
   deploy:
@@ -27,8 +27,14 @@ jobs:
       - name: Build the project
         run: npm run build  # Creates the dist/ folder
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: dist  # Deploys the built files
+      # - name: Deploy to GitHub Pages
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     branch: gh-pages
+      #     folder: dist  # Deploys the built files
+
+      - name: Deploy to Render
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}  # Store Render API key in GitHub Secrets
+        run: |
+          curl -X POST https://api.render.com/deploy/SERVICE_ID  # Trigger deployment (replace SERVICE_ID with your service ID)
