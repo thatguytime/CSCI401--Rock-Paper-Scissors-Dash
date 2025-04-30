@@ -23,10 +23,12 @@ jobs:
 
       - name: Inject environment variables
         run: |
+          echo "CLIENT_URL=${{ secrets.CLIENT_URL }}" >> .env
+          echo "CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+          echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
+          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .env
           echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
-          echo "VITE_OTHER_VAR=${{ secrets.VITE_OTHER_VAR }}" >> .env
-          echo "VITE_LOGIN_ENDPOINT=${{ secrets.VITE_LOGIN_ENDPOINT }}" >> .env
-          echo "VITE_REGISTER_ENDPOINT=${{ secrets.VITE_REGISTER_ENDPOINT }}" >> .env
 
       - name: Install dependencies
         run: npm install
