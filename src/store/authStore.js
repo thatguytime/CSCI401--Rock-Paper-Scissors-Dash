@@ -3,7 +3,9 @@
 
 import { create } from 'zustand'
 
-const API_URL = 'http://localhost:3000/api/auth'
+const API_URL = import.meta.env.VITE_API_URL
+
+//const API_URL = 'http://localhost:3000'
 export const useAuthStore = create((set) => ({
 
     // sets initial state
@@ -39,7 +41,7 @@ export const useAuthStore = create((set) => ({
     verifyEmail: async (code) => {
         set({ isLoading: true, error: null })
         try {
-            const response = await fetch(`${API_URL}/verify-email`, {
+            const response = await fetch(`${API_URL}/api/auth/verify-email`, {
                 method: "POST",
                 headers: {
                     "Content-Type": 'application/json',
@@ -65,7 +67,7 @@ export const useAuthStore = create((set) => ({
     login: async (email, password) => {
         set({ isLoading: true, error: null })
         try {
-            const response = await fetch(`${API_URL}/login`, {
+            const response = await fetch(`${API_URL}/api/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -88,7 +90,7 @@ export const useAuthStore = create((set) => ({
         set({ isCheckingAuth: true, error: null })
 
         try {
-            const response = await fetch(`${API_URL}/check-auth`, {
+            const response = await fetch(`${API_URL}/api/auth/check-auth`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -113,7 +115,7 @@ export const useAuthStore = create((set) => ({
         set({ isLoading: true, error: null })
 
         try {
-            const response = await fetch(`${API_URL}/logout`, {
+            const response = await fetch(`${API_URL}/api/auth/logout`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

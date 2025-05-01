@@ -21,6 +21,15 @@ jobs:
           node-version: 18
           cache: 'npm'
 
+      - name: Inject environment variables
+        run: |
+          echo "CLIENT_URL=${{ secrets.CLIENT_URL }}" >> .env
+          echo "CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+          echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
+          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .env
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+
       - name: Install dependencies
         run: npm install
 

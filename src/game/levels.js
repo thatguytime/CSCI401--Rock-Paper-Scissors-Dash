@@ -44,16 +44,16 @@ function runCanvas(level) {
   let tunnel3 = []
   mobileControls()
   let selected = getSelectedCharacter()
-  
+
   let imageSrc;
 
-   if (selected === "Paper") {
-     imageSrc = [paper1, paper2, paper1, paper3];
-   } else if (selected === "Rock") {
-     imageSrc = [rock0];
-   } else if (selected === "Scissors") {
-     imageSrc = [scissors0, scissors2];
-   }
+  if (selected === "Paper") {
+    imageSrc = [paper1, paper2, paper1, paper3];
+  } else if (selected === "Rock") {
+    imageSrc = [rock0];
+  } else if (selected === "Scissors") {
+    imageSrc = [scissors0, scissors2];
+  }
   const paper = new Character({
     position: {
       x: 62.5,
@@ -63,78 +63,77 @@ function runCanvas(level) {
       x: 0,
       y: 0
     },
-	imageSrc: imageSrc
+    imageSrc: imageSrc
   }, ctx)
-  
-  if(selected !== "Rock"){
-        imageSrc = [rock0];
-    	}
-    	else{
-    	imageSrc = [paper1, paper2, paper1, paper3];
-    	}
-  
+
+  if (selected !== "Rock") {
+    imageSrc = [rock0];
+  }
+  else {
+    imageSrc = [paper1, paper2, paper1, paper3];
+  }
+
   const rock = new Character({
-      position: {
-        x: 542.5,
-        y: 62.5
-      },
-      velocity: {
-        x: 5,
-        y: 0
-      },
-  	imageSrc: imageSrc
-    }, ctx)
+    position: {
+      x: 542.5,
+      y: 62.5
+    },
+    velocity: {
+      x: 5,
+      y: 0
+    },
+    imageSrc: imageSrc
+  }, ctx)
 
-	if (selected !== "Scissors"){
-	      	imageSrc = [scissors0, scissors2];
-	  	}
-	  	else{
-			imageSrc = [paper1, paper2, paper1, paper3];
-	  	}	
-    const scissors = new Character({
-      position: {
-        x: 542.5,
-        y: 542.5
-      },
-      velocity: {
-        x: 5,
-        y: 0
-      },
-  	  imageSrc: imageSrc
-    }, ctx)
-
-  function pelletCollision(character, pellet, s) {
-	if (Math.hypot(character.position.x - pellet.positionX, character.position.y - pellet.positionY) < 10) {
-	        pellets.splice(pellets.indexOf(pellet), 1)
-	        // score gets updated here
-			if (s == 1){
-	        	score(10)
-			}
-	      }
+  if (selected !== "Scissors") {
+    imageSrc = [scissors0, scissors2];
   }
-  
+  else {
+    imageSrc = [paper1, paper2, paper1, paper3];
+  }
+  const scissors = new Character({
+    position: {
+      x: 542.5,
+      y: 542.5
+    },
+    velocity: {
+      x: 5,
+      y: 0
+    },
+    imageSrc: imageSrc
+  }, ctx)
+
+  function pelletCollision(character, pellet, userScored) {
+    if (Math.hypot(character.position.x - pellet.positionX, character.position.y - pellet.positionY) < 10) {
+      pellets.splice(pellets.indexOf(pellet), 1)
+      // score gets updated here
+      if (userScored) {
+        score(10)
+      }
+    }
+  }
+
   function checkCharacterLocation(character, tunnel) {
-	if(!character.tunnelCooldown){
-    	if (character.position.x > tunnel[0].x-(brickSize /2) && character.position.x < tunnel[0].x+(brickSize/2) && character.position.y > tunnel[0].y-(brickSize /2) && character.position.y < tunnel[0].y+(brickSize /2)) {
-      		character.position.x = tunnel[1].x+2.5
-      		character.position.y = tunnel[1].y+2.5
-			character.tunnelCooldown = true;
-			setTimeout(() => character.tunnelCooldown = false, 100);
-    	} else if (character.position.x > tunnel[1].x-(brickSize /2) && character.position.x < tunnel[1].x+(brickSize /2) && character.position.y > tunnel[1].y-(brickSize /2) && character.position.y < tunnel[1].y+(brickSize /2)) {
-	  		character.position.x = tunnel[0].x+2.5
-	  		character.position.y = tunnel[0].y+2.5
-			character.tunnelCooldown = true;
-            setTimeout(() => character.tunnelCooldown = false, 100);
-		}  
-	if(character.position.x < 0 || character.position.x > 600 || character.position.y < 0 || character.position.y > 600)
-		{
-		character.position.x = 62.5
-		character.position.y = 62.5
-		}
-  	}
+    if (!character.tunnelCooldown) {
+      if (character.position.x > tunnel[0].x - (brickSize / 2) && character.position.x < tunnel[0].x + (brickSize / 2) && character.position.y > tunnel[0].y - (brickSize / 2) && character.position.y < tunnel[0].y + (brickSize / 2)) {
+        character.position.x = tunnel[1].x + 2.5
+        character.position.y = tunnel[1].y + 2.5
+        character.tunnelCooldown = true;
+        setTimeout(() => character.tunnelCooldown = false, 100);
+      } else if (character.position.x > tunnel[1].x - (brickSize / 2) && character.position.x < tunnel[1].x + (brickSize / 2) && character.position.y > tunnel[1].y - (brickSize / 2) && character.position.y < tunnel[1].y + (brickSize / 2)) {
+        character.position.x = tunnel[0].x + 2.5
+        character.position.y = tunnel[0].y + 2.5
+        character.tunnelCooldown = true;
+        setTimeout(() => character.tunnelCooldown = false, 100);
+      }
+      if (character.position.x < 0 || character.position.x > 600 || character.position.y < 0 || character.position.y > 600) {
+        character.position.x = 62.5
+        character.position.y = 62.5
+      }
+    }
   }
 
-  
+
 
   const badGuys = [rock, scissors]
 
@@ -154,18 +153,18 @@ function runCanvas(level) {
         let testPowerUp = new PowerUp(brickSize * j + (brickSize / 2) - 12.5, brickSize * i + (brickSize / 2) - 12.5, ctx) // 12.5: half the powerup sq size
         powerUps.push(testPowerUp)
       }
-	  else if (column === "o1") {
-		let testTunnel = new Tunnel(brickSize * j + (brickSize / 2), brickSize * i + (brickSize / 2))				
-		tunnel1.push(testTunnel)
-	  }
-	  else if (column === "o2") {
-	    let testTunnel = new Tunnel(brickSize * j + (brickSize / 2), brickSize * i + (brickSize / 2))	
-	    tunnel2.push(testTunnel)
-	  }
-	  else if (column === "o3") {
-	  	let testTunnel = new Tunnel(brickSize * j + (brickSize / 2), brickSize * i + (brickSize / 2))	
-	    tunnel3.push(testTunnel)
-	  }
+      else if (column === "o1") {
+        let testTunnel = new Tunnel(brickSize * j + (brickSize / 2), brickSize * i + (brickSize / 2))
+        tunnel1.push(testTunnel)
+      }
+      else if (column === "o2") {
+        let testTunnel = new Tunnel(brickSize * j + (brickSize / 2), brickSize * i + (brickSize / 2))
+        tunnel2.push(testTunnel)
+      }
+      else if (column === "o3") {
+        let testTunnel = new Tunnel(brickSize * j + (brickSize / 2), brickSize * i + (brickSize / 2))
+        tunnel3.push(testTunnel)
+      }
     })
   })
 
@@ -173,23 +172,23 @@ function runCanvas(level) {
 
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-	if (tunnel1.length > 0) {
-		checkCharacterLocation(paper, tunnel1);
-		checkCharacterLocation(rock, tunnel1);
-		checkCharacterLocation(scissors, tunnel1);
-	}
+    if (tunnel1.length > 0) {
+      checkCharacterLocation(paper, tunnel1);
+      checkCharacterLocation(rock, tunnel1);
+      checkCharacterLocation(scissors, tunnel1);
+    }
 
-	if (tunnel2.length > 0) {
-		checkCharacterLocation(paper, tunnel2);
-		checkCharacterLocation(rock, tunnel2);
-		checkCharacterLocation(scissors, tunnel2);
-	}
+    if (tunnel2.length > 0) {
+      checkCharacterLocation(paper, tunnel2);
+      checkCharacterLocation(rock, tunnel2);
+      checkCharacterLocation(scissors, tunnel2);
+    }
 
-	if (tunnel3.length > 0) {
-		checkCharacterLocation(paper, tunnel3);
-		checkCharacterLocation(rock, tunnel3);
-		checkCharacterLocation(scissors, tunnel3);
-	}
+    if (tunnel3.length > 0) {
+      checkCharacterLocation(paper, tunnel3);
+      checkCharacterLocation(rock, tunnel3);
+      checkCharacterLocation(scissors, tunnel3);
+    }
     // makes character move depending on the key that is pressed
     if (currentlyPressedKeys.w.pressed && lastKeyPressed === 'w' ||
       currentlyPressedKeys.ArrowUp.pressed && lastKeyPressed === 'ArrowUp'
@@ -267,11 +266,11 @@ function runCanvas(level) {
       // COLLISION DETECTION TEMPLATE
       // a^2 + b^2 = c^
       // subtract x's and y's to get distance
-	  pelletCollision(paper, pellet, 1)
-	  pelletCollision(rock, pellet, 0)
-	  pelletCollision(scissors, pellet, 0)
+      pelletCollision(paper, pellet, true)
+      pelletCollision(rock, pellet, false)
+      pelletCollision(scissors, pellet, false)
 
-	  
+
 
       // triggers next level if you collect all the pellets
       if (pellets.length === 0) {
@@ -311,7 +310,7 @@ function runCanvas(level) {
       if (dude.velocity.y < 0) {
         for (let i = 0; i < border.length; i++) {
           const brickPart = border[i]
-          if (characterMeetsBrick({ circle: { ...dude}, rectangle: brickPart })) {
+          if (characterMeetsBrick({ circle: { ...dude }, rectangle: brickPart })) {
 
             openPath.push('down', 'right', 'left')
 
@@ -446,16 +445,21 @@ function runCanvas(level) {
 
         // link to DeathScreen
         // send over current score
+        // reset characters and score
+        paper.velocity.x = 0
+        paper.velocity.y = 0
+        paper.position.x = 62.5
+        paper.position.y = 62.5
 
+        // dude.position.x = 600
+        // dude.position.y = 600
 
         youDied('../death-screen')
 
       }
-
       dude.move()
     })
   }
-
   animate()
 }
 
