@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function HowToPlay() {
     return (
-        <div>
+        <div className='how-to-play'>
             <h1> Game Manual: Rock Paper Scissors Dash </h1>
 <p> Welcome to Rock Paper Scissors Dash– a fast-paced arcade game inspired by the classic Pac-Man, with the gameplay of PacMan, for the ultimate playground showdown: Rock beats Scissors, Scissors beats Paper, and Paper beats Rock. Choose your character and outsmart your opponents before time runs out!
 </p>
@@ -43,6 +43,7 @@ export default function HowToPlay() {
       <th>Can Be Defeated By</th>
     </tr>
   </thead>
+  
   <tbody>
     <tr>
       <td>Rock</td>

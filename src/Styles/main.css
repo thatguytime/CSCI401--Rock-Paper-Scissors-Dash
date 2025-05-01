@@ -409,6 +409,19 @@ body:not(:has(canvas)) {
     }
 }
 
-/* ***************************** C L O C K ******************************** */
-
-/* ***************************** S C O R E ******************************** */
+/* ***************************** HOW TO PLAY ******************************** */
+.how-to-play{
+    text-align: left;
+    font-size: 15px;
+}
+.how-to-play>h1{
+    color: pink;
+    font-size: 30px;
+    
+}
+.how-to-play>p>strong{
+    color: plum;
+}
+th{
+    color: #ff004c;
+}
