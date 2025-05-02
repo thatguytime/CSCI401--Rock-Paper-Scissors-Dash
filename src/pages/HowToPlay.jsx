@@ -104,6 +104,7 @@ export default function HowToPlay() {
   <li>Stay alert — just like in real rock-paper-scissors, it's all about strategy and timing!</li>
 </ul>
 
+
             <Link to="/">Back to previous page</Link>
         </div>
     )

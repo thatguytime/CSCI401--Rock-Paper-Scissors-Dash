@@ -421,7 +421,19 @@ body:not(:has(canvas)) {
 }
 .how-to-play>p>strong{
     color: plum;
+    font-family: Arial, sans-serif;
 }
 th{
     color: #ff004c;
 }
+/* ***************************** ABOUT US ******************************** */
+.about-us{
+    text-align: left;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+.about-us>h2{
+    color: red;
+    font-size: 30px;
+}
+
