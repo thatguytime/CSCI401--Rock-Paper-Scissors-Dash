@@ -54,9 +54,7 @@ export default function About() {
                 </div>
             </div>
 
-            {/* <p className="read-the-docs">
-
-            </p> */}
+            <Link to="/" className='pacman-font back-to-main-link'>Back to previous page</Link>
         </div>
     )
 }

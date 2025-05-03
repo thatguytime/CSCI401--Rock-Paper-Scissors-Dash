@@ -78,21 +78,6 @@ h1 {
     text-decoration: none;
 }
 
-/* github logo */
-#github-logo {
-    width: 100px;
-    padding: 10px;
-    border: none;
-    border-radius: 30%;
-    transition: ease-in-out 0.5s;
-}
-
-#github-logo:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-    transition: ease-in-out 0.5s;
-}
-
 @media (max-width: 885px) {
     .under-construction>ul {
         width: 40%;
@@ -492,4 +477,17 @@ a>img:hover {
 #rpsd-logo:hover {
     /* animation: spin 2s linear infinite; */
     transform: rotate(-720deg)
+}
+
+.back-to-main-link {
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 2em;
+    border: 10px solid #551a8b;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.back-to-main-link:hover {
+    border-color: #747bff;
 }
