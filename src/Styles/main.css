@@ -409,31 +409,87 @@ body:not(:has(canvas)) {
     }
 }
 
-/* ***************************** HOW TO PLAY ******************************** */
-.how-to-play{
+/******************************** H O W | T O | P L A Y ********************************/
+
+.how-to-play {
     text-align: left;
     font-size: 15px;
 }
-.how-to-play>h1{
+
+.how-to-play>h1 {
     color: pink;
     font-size: 30px;
-    
+
 }
-.how-to-play>p>strong{
+
+.how-to-play>p>strong {
     color: plum;
     font-family: Arial, sans-serif;
 }
-th{
+
+th {
     color: #ff004c;
 }
-/* ***************************** ABOUT US ******************************** */
-.about-us{
+
+/*********************************** A B O U T | U S ***********************************/
+
+/* .about-us {
     text-align: left;
     font-size: 15px;
     font-family: Arial, sans-serif;
 }
-.about-us>h2{
+
+.about-us>h2 {
     color: red;
     font-size: 30px;
+} */
+
+.creators {
+    max-width: 700px;
+    margin: auto;
+    margin-bottom: 50px;
 }
 
+.creator {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.creators>.creator>img {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+a>img {
+    width: 150px;
+    transition: 2s;
+}
+
+a>img:hover {
+    transform: scale(1.3);
+    transition: 2s;
+    color: rgba(255, 255, 0, 0.35);
+}
+
+/* Links in about page */
+#paul {
+    transition: transform 4s cubic-bezier(0.1, 0.9, 0.3, 1);
+}
+
+#paul:hover {
+    /* animation: spin 2s linear infinite; */
+    transform: rotate(720deg)
+}
+
+#rpsd-logo {
+    transition: transform 3.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+#rpsd-logo:hover {
+    /* animation: spin 2s linear infinite; */
+    transform: rotate(-720deg)
+}

@@ -1,4 +1,4 @@
-// stores the data from registration, login pages
+// stores the data from registration & login pages
 // grabs the state 
 
 import { create } from 'zustand'
@@ -19,7 +19,7 @@ export const useAuthStore = create((set) => ({
         set({ isLoading: true, error: null })
 
         try {
-            const response = await fetch(`${API_URL}/signup`, {
+            const response = await fetch(`${API_URL}/api/auth/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -10,7 +10,7 @@ class Character {
         this.angle = 0;
         this.ctx = ctx
         this.state = 'active'
-		this.tunnelCooldown = false;
+        this.tunnelCooldown = false;
         this.prevCollisions = [] // for badguy's AI
 
         setInterval(() => {
@@ -19,8 +19,6 @@ class Character {
                 this.image.src = this.imageSrc[this.frameindex]
             }
         }, 250)
-
-
     }
 
     draw() {
@@ -47,9 +45,7 @@ class Character {
         this.position.y += this.velocity.y
     }
 
-    // need to add collision detection between players first
     update() {
-
         switch (this.state) {
             case 'alive':
                 break
