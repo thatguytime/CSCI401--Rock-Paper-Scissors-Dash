@@ -15,41 +15,38 @@ export default function CharacterScreen() {
     const [selected, setSelected] = useState(null)
 
     return (
-        <div className="pacman-font">
+        <div className="pacman-font universal-border">
 
             <h1 className="">Select Your Character</h1>
             <div className="character-border">
                 {characters.map((char) => (
                     <button //Character Buttons, aranged in a side by side row
                         key={char.name}
-                        className={`character-button universal-border pacman-font`}
+                        className={`character-button pacman-font`}
                         onClick={() => setSelected(char.name)}>
                         <div> <img
                             src={char.image}
                             alt={char.name}
                             style={{ width: '200px', height: '200px', objectFit: 'contain' }}
                         />
-						</div>
+                        </div>
                         <span>{char.name}</span>
                     </button>
                 ))}
             </div>
 
-            {/* Confirm and Back buttons */}
-            <div>
-			<Link to= "/canvas">
-                <button //Testing button; Will be replaced to link to first level w/ passalong of character selection
-                    className="main-menu-button pacman-font "
-                    disabled={!selected}
-                    onClick={() => setSelectedCharacter(selected)}
-                >
-                    Confirm Selection
-                </button>
-				</Link>
+            <div className='confirm-and-back-buttons'>
 
-                <Link to="/">
-                    <button className="main-menu-button pacman-font ">Back to Main Menu</button>
+                {/* // Testing button; Will be replaced to link to first level w/ passalong of character selection */}
+                <Link to="/canvas" className="back-to-main-link pacman-font confirm-and-back-button"
+                    disabled={!selected}
+                    onClick={() => setSelectedCharacter(selected)}>
+                    Confirm Selection
                 </Link>
+
+
+
+                <Link to="/" className='pacman-font back-to-main-link confirm-and-back-button'>Back to main menu</Link>
             </div>
         </div>
     )

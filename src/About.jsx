@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 
 export default function About() {
     return (
-        <div>
+        <div className='about'>
             <h1>Rock {`->`} Paper {`->`} Scissor {`->`} Dash</h1>
 
             <div>

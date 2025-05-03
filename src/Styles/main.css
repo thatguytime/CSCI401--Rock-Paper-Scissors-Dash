@@ -130,10 +130,8 @@ h1 {
     flex-direction: row;
     padding: 1px;
     background-color: #202020;
-    box-shadow: rgba(255, 255, 0, 0.25) 0px 50px 100px -20px,
-        rgba(255, 255, 0, 0.3) 0px 30px 60px -30px,
-        rgba(255, 255, 0, 0.35) 0px -2px 6px 0px inset;
     text-transform: uppercase;
+    margin-bottom: 10px;
 }
 
 .character-button {
@@ -148,7 +146,7 @@ h1 {
     margin: 20px;
     margin: 20px auto;
     padding: 7px;
-    width: 40%;
+    width: 30%;
     display: block;
     color: #fff;
     background-color: black;
@@ -157,8 +155,24 @@ h1 {
 }
 
 .character-button:hover {
-    transform: scale(1.5);
+    transform: scale(1.15);
     transition-duration: 1s ease-out;
+}
+
+/* Add box-shadow to selected character */
+.selected-character {
+    box-shadow: rgba(255, 255, 0, 0.25) 0px 50px 100px -20px,
+        rgba(255, 255, 0, 0.3) 0px 30px 60px -30px,
+        rgba(255, 255, 0, 0.35) 0px -2px 6px 0px inset;
+}
+
+.confirm-and-back-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.confirm-and-back-button {
+    margin: 10px;
 }
 
 /********************************** M A I N | M E N U **********************************/
@@ -443,6 +457,10 @@ th {
 }
 
 /*********************************** A B O U T | U S ***********************************/
+
+.about {
+    max-width: 800px;
+}
 
 .creators {
     max-width: 700px;
