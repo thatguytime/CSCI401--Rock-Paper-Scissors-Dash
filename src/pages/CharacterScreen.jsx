@@ -22,7 +22,7 @@ export default function CharacterScreen() {
                 {characters.map((char) => (
                     <button //Character Buttons, aranged in a side by side row
                         key={char.name}
-                        className={`character-button pacman-font`}
+                        className={`character-button pacman-font ${selected === char.name ? 'selected-character' : ''}`}
                         onClick={() => setSelected(char.name)}>
                         <div> <img
                             src={char.image}
@@ -35,6 +35,8 @@ export default function CharacterScreen() {
                 ))}
             </div>
 
+            {/* Need to add selected-character class to what the user */}
+
             <div className='confirm-and-back-buttons'>
 
                 {/* // Testing button; Will be replaced to link to first level w/ passalong of character selection */}
@@ -43,8 +45,6 @@ export default function CharacterScreen() {
                     onClick={() => setSelectedCharacter(selected)}>
                     Confirm Selection
                 </Link>
-
-
 
                 <Link to="/" className='pacman-font back-to-main-link confirm-and-back-button'>Back to main menu</Link>
             </div>
