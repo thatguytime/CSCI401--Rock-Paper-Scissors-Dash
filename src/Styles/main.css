@@ -399,35 +399,50 @@ body:not(:has(canvas)) {
 .how-to-play {
     text-align: left;
     font-size: 15px;
+    max-width: 700px;
 }
 
 .how-to-play>h1 {
     color: pink;
-    font-size: 30px;
+}
 
+.how-to-play>p {
+    font-size: 1.5em;
 }
 
 .how-to-play>p>strong {
     color: plum;
     font-family: Arial, sans-serif;
+    font-size: 1.6em;
+}
+
+.how-to-play>ul>li {
+    list-style-type: "🕹️";
+    font-size: 1.3em;
+}
+
+th,
+td {
+    font-size: 1.3em;
+    text-align: center;
+}
+
+td {
+    border-right: 1px solid pink;
+}
+
+table {
+    margin: auto;
+    border: 3px solid pink;
 }
 
 th {
     color: #ff004c;
+    border-bottom: 1px solid pink;
+    padding: 13px;
 }
 
 /*********************************** A B O U T | U S ***********************************/
-
-/* .about-us {
-    text-align: left;
-    font-size: 15px;
-    font-family: Arial, sans-serif;
-}
-
-.about-us>h2 {
-    color: red;
-    font-size: 30px;
-} */
 
 .creators {
     max-width: 700px;
