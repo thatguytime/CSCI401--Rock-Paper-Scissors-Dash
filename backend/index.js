@@ -9,7 +9,7 @@ dotenv.config()
 
 console.log("*****************************")
 
-//const corsOrigin = process.env.CORS_ORIGIN || 'http://127.0.0.1:5173'
+//const corsOrigin = process.env.CORS_ORIGIN
 
 const app = express()
 
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 // .use => adds the router to the middleware handling path
 app.use(cors({
-    origin: "http://localhost:5173", //process.env.CORS_ORIGIN,
+    origin: process.env.CORS_ORIGIN, // "http://localhost:5173", //
     credentials: true
 }))
 app.use(express.json())
