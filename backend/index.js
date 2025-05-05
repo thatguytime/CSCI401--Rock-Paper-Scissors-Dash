@@ -37,6 +37,8 @@ connectionToDatabase()
 // this will prefix every endpoint we define on the inside of a route
 app.use('/api/auth', authRoutes)
 
-app.listen(3000, () => {
+const PORT = process.env.PORT
+
+app.listen(PORT, () => {
     console.log(`Server is running on port 3000`)
 })
