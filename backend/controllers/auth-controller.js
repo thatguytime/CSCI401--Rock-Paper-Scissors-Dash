@@ -64,16 +64,16 @@ export const login = async (req, res) => {
             return res.status(400).json({ success: false, message: "Invalid credentials" })
         }
 
-        // compares the password user pust in vs password from database
+        // compares the password user puts in vs password from database
         const isPasswordValid = await bcrypt.compare(password, user.password)
         if (!isPasswordValid) {
-            return res.status(400).json({ success: false, message: "Invalid credentials" })
+            return res.status(400).json({ success: false, message: "Invalid credentials, input does not match password!" })
         }
 
         const isVerified = user.isVerified
 
         if (!isVerified) {
-            return res.status(400).json({ success: false, message: "Email not verified" })
+            return res.status(400).json({ success: false, message: "Email not verified foo..." })
         }
 
         generateJWTToken(res, user._id)
@@ -83,8 +83,8 @@ export const login = async (req, res) => {
             message: "Login successful"
         })
     } catch (error) {
-        console.log("error loggin in", error)
-        res.status(400).json({ succcess: false, message: error.message })
+        console.log("Yo foo, you have a login error!\n", error)
+        res.status(400).json({ succcess: false, message: `Yo you have an error foo...\n${error.message}` })
     }
 }
 

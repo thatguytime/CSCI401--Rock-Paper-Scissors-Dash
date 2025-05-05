@@ -1,30 +1,21 @@
 import { useState, useEffect } from "react"
 import runCanvas from '../game/levels.js'
 import clock from '../game/clock.js'
-import score from '../game/score.js'
+// import Score from '../game/score.js'
 import { Link } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore.js'
-import { setNavigate } from '../navigate/navigate.js';
 import { useNavigate } from 'react-router-dom'
+
 
 export default function Canvas(props) {
 
     const { user } = useAuthStore()
-
-    console.log(user)
-
-    const [mapIdx, setMapIdx] = useState(0)
-
+    //const [mapIdx, setMapIdx] = useState(0)
     const navigate = useNavigate()
 
     useEffect(() => {
-        setNavigate(navigate); // expose navigation to global game logic
-    }, [navigate]);
-
-    useEffect(() => {
         clock()
-        score(0)
-        runCanvas(props.level)
+        runCanvas(props.level, () => { navigate('/death-screen') }, 0)
     }, [])
 
     return (

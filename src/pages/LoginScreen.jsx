@@ -14,6 +14,8 @@ export default function LoginScreen() {
         //prevents page from reloading when submitting form
         e.preventDefault()
 
+        console.log(`email entered: ${email}`)
+        console.log(`password entered: ${password}`)
         await login(email, password)
 
         navigate('/')

@@ -1,20 +1,33 @@
 import express from 'express'
-import { connectionToDatabase } from './database/connectionToDatabase.js'
 import dotenv from 'dotenv'
 import authRoutes from './routes/auth-route.js'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import { connectionToDatabase } from './database/connectionToDatabase.js'
+
 
 dotenv.config()
 
 console.log("*****************************")
-console.log(process.env.CORS_ORIGIN)
+
+//const corsOrigin = process.env.CORS_ORIGIN || 'http://127.0.0.1:5173'
 
 const app = express()
 
-app.use(cors({ origin: true, credentials: true }))
+// get => request data from a server, is read only
+// this is the server, the web browser is the client
+app.get('/', (req, res) => {
+    res.send('Hello World!!')
+})
+
+app.use(cors({
+    origin: "http://127.0.0.1:5173", //process.env.CORS_ORIGIN,
+    credentials: true
+}))
 app.use(express.json())
 app.use(cookieParser())
+
+app.options('*', cors())
 
 
 
