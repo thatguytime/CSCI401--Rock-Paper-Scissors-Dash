@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import { connectionToDatabase } from './database/connectionToDatabase.js'
 
-
 dotenv.config()
 
 console.log("*****************************")
@@ -15,19 +14,20 @@ console.log("*****************************")
 const app = express()
 
 // get => request data from a server, is read only
-// this is the server, the web browser is the client
+// the terminal is the server, the web browser is the client
 app.get('/', (req, res) => {
     res.send('Hello World!!')
 })
 
+// .use => adds the router to the middleware handling path
 app.use(cors({
-    origin: "http://127.0.0.1:5173", //process.env.CORS_ORIGIN,
+    origin: "http://localhost:5173", //process.env.CORS_ORIGIN,
     credentials: true
 }))
 app.use(express.json())
 app.use(cookieParser())
 
-app.options('*', cors())
+// app.options('*', cors())
 
 
 

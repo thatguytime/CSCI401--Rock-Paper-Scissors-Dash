@@ -1,23 +1,25 @@
 import jwt from 'jsonwebtoken'
 
+// gets the token from the cookie
 export const verifyToken = (req, res, next) => {
     const token = req.cookies.token
 
     if (!token) {
-        return res.status(401).json({ success: false, message: "Unauthorized" })
+        return res.status(401).json({ success: false, message: "Unauthorized, no token in this cookie!" })
     }
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         if (!decoded) {
-            return res.status(401).json({ success: false, message: "Unauthorized" })
+            return res.status(401).json({ success: false, message: "Unauthorized, token was not decoded..." })
         }
 
-        console.log(decoded)
+        console.log(`decoded token: ${decoded}`)
         req.userId = decoded.userId
+
         next()
     } catch (error) {
         console.log(error)
-        return res.status(401).json({ success: false, message: 'Unauthorized' })
+        return res.status(401).json({ success: false, message: 'Unauthorized! There was an error...' })
     }
 }

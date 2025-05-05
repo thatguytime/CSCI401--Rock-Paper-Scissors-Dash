@@ -1,12 +1,12 @@
 // stores the data from registration & login pages
-// grabs the state 
+// defines state and state setters 
 
 // const API_URL = import.meta.env.VITE_API_URL
 import { create } from "zustand"
 
-const API_URL = "http://127.0.0.1:3000/api/auth"
+const API_URL = "http://localhost:3000/api/auth"
 
-export const useAuthStore = create((set) => ({
+export const useAuthStore = create(set => ({
     user: null,
     isLoading: false,
     error: null,
@@ -58,10 +58,10 @@ export const useAuthStore = create((set) => ({
         try {
             const response = await fetch(`${API_URL}/login`, {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                credentials: "include",
                 body: JSON.stringify({ email, password })
             })
             const data = await response.json()
@@ -84,11 +84,13 @@ export const useAuthStore = create((set) => ({
                 credentials: "include"
             })
             const data = await response.json()
+
             if (data.user) {
                 set({ isAuthenticated: true, user: data.user, isCheckingAuth: false })
             } else {
                 set({ isAuthenticated: false, user: null, isCheckingAuth: false })
             }
+
         } catch (error) {
             set({ isCheckingAuth: false, isAuthenticated: false, user: null })
             console.log(error)

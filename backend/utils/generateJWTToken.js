@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 
 export const generateJWTToken = (res, userId) => {
     const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
-        expiresIn: "7d"
+        expiresIn: "1d"
     })
 
     res.cookie('token', token, {
@@ -10,7 +10,7 @@ export const generateJWTToken = (res, userId) => {
         // security
         httpOnly: true, // cookie cannot be accessed by client side scripts
         secure: process.env.NODE_ENV === 'production', // cookie will only be set on https
-        //sameSite: 'strict', // cookie will only be set on the same site
+        sameSite: 'strict', // cookie will only be set on the same site
         maxAge: 7 * 24 * 60 * 60 * 1000 // 24 hours
     })
 

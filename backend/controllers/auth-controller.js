@@ -1,3 +1,4 @@
+// definition of handler functions
 import { User } from '../model/user.js'
 import bcrypt from 'bcryptjs'
 import { generateVerificationToken } from '../utils/generateVerificationToken.js'
@@ -9,7 +10,7 @@ export const signup = async (req, res) => {
     const { username, email, password } = req.body
     try {
         if (!username || !email || !password) {
-            return res.status(400).json({ message: "All fields are required" })
+            return res.status(400).json({ message: "All inputs are required!!" })
         }
 
         const usernameAlreadyExists = await User.findOne({ username })
@@ -31,16 +32,18 @@ export const signup = async (req, res) => {
             email,
             password: hashedPassword,
             verificationToken: verificationToken,
-            verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000 // 24 hours
+            verificationTokenExpiresAt: Date.now() + 86400000 // 24 hours
         })
 
         await user.save()
 
         // generate a JWT
+        // res => response to set a cookie
         generateJWTToken(res, user._id)
 
         await sendVerificationEmail(user.email, user.username, verificationToken)
 
+        // sends success status to the client (browser)
         res.status(201).json({
             success: true,
             message: "User was created successfully",
@@ -61,7 +64,7 @@ export const login = async (req, res) => {
     try {
         const user = await User.findOne({ email })
         if (!user) {
-            return res.status(400).json({ success: false, message: "Invalid credentials" })
+            return res.status(400).json({ success: false, message: "Invalid credentials, user email not in database" })
         }
 
         // compares the password user puts in vs password from database
@@ -76,12 +79,14 @@ export const login = async (req, res) => {
             return res.status(400).json({ success: false, message: "Email not verified foo..." })
         }
 
+        // after 3 checks we create the persistant sign on token
         generateJWTToken(res, user._id)
 
         res.status(200).json({
             success: true,
-            message: "Login successful"
+            message: "Login successful, welcome!"
         })
+
     } catch (error) {
         console.log("Yo foo, you have a login error!\n", error)
         res.status(400).json({ succcess: false, message: `Yo you have an error foo...\n${error.message}` })
@@ -99,7 +104,7 @@ export const verifyEmail = async (req, res) => {
     try {
         const user = await User.findOne({
             verificationToken: code,
-            verificationTokenExpiresAt: { $gt: Date.now() }
+            verificationTokenExpiresAt: { $gt: Date.now() } // greater than current date
         })
 
         if (!user) {
@@ -109,6 +114,8 @@ export const verifyEmail = async (req, res) => {
         user.isVerified = true
         user.verificationToken = undefined
         user.verificationTokenExpiresAt = undefined
+        // undefined will remove property from database
+
         await user.save()
 
         await sendThankYouForVerificationEmail(user.email, user.username)
@@ -176,6 +183,7 @@ export const resetPassword = async (req, res) => {
 export const checkAuth = async (req, res) => {
     try {
         const user = await User.findById(req.userId)
+
         if (!user) {
             return res.status(400).json({ success: false, message: "User not found" })
         }
